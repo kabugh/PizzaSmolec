@@ -1,0 +1,78 @@
+import Vue from "vue";
+import VueRouter, { RouteConfig, Route } from "vue-router";
+import Home from "../views/Home.vue";
+import store from "@/store";
+
+Vue.use(VueRouter);
+
+const overlayGuard = (to: Route, from: Route, next: Function) => {
+  store.commit("setNav", false);
+  next();
+};
+
+const routes: Array<RouteConfig> = [
+  {
+    path: "/",
+    name: "Home",
+    component: Home,
+    beforeEnter: overlayGuard
+  },
+  {
+    path: "/menu",
+    name: "Menu",
+    component: () =>
+      import(/* webpackChunkName: "menu" */ "../views/Menu.vue")
+  },
+  {
+    path: "/nasza-jakosc",
+    name: "OurQuality",
+    component: () =>
+      import(/* webpackChunkName: "ourQuality" */ "../views/OurQuality.vue")
+  },
+  {
+    path: "/nasze-centrum",
+    name: "OurCentrum",
+    component: () =>
+      import(/* webpackChunkName: "ourCentrum" */ "../views/OurCentrum.vue")
+  },
+  {
+    path: "/galeria",
+    name: "Gallery",
+    component: () =>
+      import(/* webpackChunkName: "gallery" */ "../views/Gallery.vue")
+  },
+  {
+    path: "/galeria/:name",
+    name: "GalleryItem",
+    component: () =>
+      import(/* webpackChunkName: "galleryItem" */ "../views/GalleryItem.vue"),
+      props: true
+  },
+  // {
+  //   path: "/dostawa",
+  //   name: "Delivery",
+  //   component: () =>
+  //     import(/* webpackChunkName: "delivery" */ "../views/Delivery.vue")
+  // },
+  // {
+  //   path: "/kontakt",
+  //   name: "Contact",
+  //   component: () =>
+  //     import(/* webpackChunkName: "contact" */ "../views/Contact.vue")
+  // }
+];
+
+const router = new VueRouter({
+  mode: "history",
+  base: process.env.BASE_URL,
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  }
+});
+
+export default router;
