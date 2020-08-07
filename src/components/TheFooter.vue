@@ -65,20 +65,9 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class TheFooter extends Vue {
-  socialsItems = [
-    {
-      icon: "ig.png",
-      link: "https://www.instagram.com/tenisplanet/"
-    },
-    {
-      icon: "fb.png",
-      link: "https://www.facebook.com/tenisplanetsmolec/"
-    },
-    {
-      icon: "yt.png",
-      link: "https://www.youtube.com/channel/UCKD_wDLcAK9FTLmjDOAyHhQ"
-    }
-  ];
+  get socialsItems() {
+    return this.$store.getters.socialsItems;
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -123,6 +112,9 @@ footer {
           text-decoration: none;
           &:hover {
             text-decoration: underline;
+          }
+          &.email {
+            color: $mainColor;
           }
         }
         .socials__container {

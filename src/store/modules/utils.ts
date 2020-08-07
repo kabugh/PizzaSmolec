@@ -2,7 +2,22 @@ const state = {
   isNavOpen: false,
   loading: false,
   error: null,
-  overlayLoading: true
+  overlayLoading: true,
+
+  socialsItems: [
+    {
+      icon: "ig.png",
+      link: "https://www.instagram.com/tenisplanet/"
+    },
+    {
+      icon: "fb.png",
+      link: "https://www.facebook.com/tenisplanetsmolec/"
+    },
+    {
+      icon: "yt.png",
+      link: "https://www.youtube.com/channel/UCKD_wDLcAK9FTLmjDOAyHhQ"
+    }
+  ]
 };
 
 const mutations = {
@@ -35,6 +50,9 @@ const getters = {
   },
   overlayLoading(state: { overlayLoading: boolean }) {
     return state.overlayLoading;
+  },
+  socialsItems(state: { socialsItems: Array<{ icon: string, link: string }> }) {
+    return state.socialsItems;
   }
 };
 

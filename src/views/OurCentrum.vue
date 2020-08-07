@@ -38,6 +38,15 @@ interface CentrumItem {
 
 @Component
 export default class OurCentrum extends Vue {
+  mounted() {
+    this.overlayLoading = false;
+  }
+  get overlayLoading() {
+    return this.$store.getters.overlayLoading;
+  }
+  set overlayLoading(value) {
+    this.$store.commit("setOverlayLoading", value);
+  }
   ourCentrumItems: CentrumItem[] = [
     {
       title: "Witaj w Tenis Planet",

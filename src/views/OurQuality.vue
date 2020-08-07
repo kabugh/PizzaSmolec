@@ -18,7 +18,7 @@
           >
             <path
               d="M50.033 0l-6.117 7.041L37.927.113V.008l-.114.052-.12-.06-6.16 7.032L25.34 0l-6.173 7.041L13.008 0 6.855 7.041 1.41.807 0 2.153 6.849 10l6.146-7.04L19.139 10l6.145-7.04 4.75 5.344L31.525 10l.008-.009.008.009 6.215-6.993L43.86 10l6.145-7.04L56.15 10 63 2.153 61.6.807 56.166 7.04z"
-              fill="#FF4438"
+              fill="#d4dd1f"
               fill-rule="evenodd"
             ></path>
           </svg>
@@ -47,7 +47,7 @@
           >
             <path
               d="M50.033 0l-6.117 7.041L37.927.113V.008l-.114.052-.12-.06-6.16 7.032L25.34 0l-6.173 7.041L13.008 0 6.855 7.041 1.41.807 0 2.153 6.849 10l6.146-7.04L19.139 10l6.145-7.04 4.75 5.344L31.525 10l.008-.009.008.009 6.215-6.993L43.86 10l6.145-7.04L56.15 10 63 2.153 61.6.807 56.166 7.04z"
-              fill="#FF4438"
+              fill="#d4dd1f"
               fill-rule="evenodd"
             ></path>
           </svg>
@@ -111,7 +111,7 @@ export default class OurQuality extends Vue {
       duration: 1.5,
       opacity: 0,
       ease: "power4",
-      y: -100,
+      y: -50,
       delay: initialDelay
     });
     timeline2
@@ -120,7 +120,7 @@ export default class OurQuality extends Vue {
         delay: 1 + initialDelay,
         opacity: 0,
         ease: "power4",
-        y: -100
+        y: -50
       })
       .to(image, { y: 0 });
     timeline1
@@ -210,6 +210,11 @@ export default class OurQuality extends Vue {
   }
 }
 @media (min-width: 1024px) and (min-height: 500px) {
+}
+@media (min-width: 1024px) and (min-height: 500px) and (max-height: 900px) {
+  .ourQuality .ourQuality__container img {
+    max-height: 50vh;
+  }
 }
 @media (min-width: 1280px) and (min-height: 500px) {
 }

@@ -79,6 +79,9 @@ interface IntroductionItem {
 
 @Component
 export default class Home extends Vue {
+  created() {
+    this.overlayLoading = false;
+  }
   introductionItems: IntroductionItem[] = [
     {
       title: "Witaj w naszej restauracji",

@@ -12,7 +12,19 @@
 import { Component, Vue } from "vue-property-decorator";
 
 @Component
-export default class Menu extends Vue {}
+export default class Menu extends Vue {
+  created() {
+    this.overlayLoading = false;
+  }
+
+  get overlayLoading() {
+    return this.$store.getters.overlayLoading;
+  }
+
+  set overlayLoading(value) {
+    this.$store.commit("setOverlayLoading", value);
+  }
+}
 </script>
 
 <style lang="scss">
