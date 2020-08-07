@@ -21,32 +21,37 @@ const routes: Array<RouteConfig> = [
     path: "/menu",
     name: "Menu",
     component: () =>
-      import(/* webpackChunkName: "menu" */ "../views/Menu.vue")
+      import(/* webpackChunkName: "menu" */ "../views/Menu.vue"),
+      beforeEnter: overlayGuard
   },
   {
     path: "/nasza-jakosc",
     name: "OurQuality",
     component: () =>
-      import(/* webpackChunkName: "ourQuality" */ "../views/OurQuality.vue")
+      import(/* webpackChunkName: "ourQuality" */ "../views/OurQuality.vue"),
+      beforeEnter: overlayGuard
   },
   {
     path: "/nasze-centrum",
     name: "OurCentrum",
     component: () =>
-      import(/* webpackChunkName: "ourCentrum" */ "../views/OurCentrum.vue")
+      import(/* webpackChunkName: "ourCentrum" */ "../views/OurCentrum.vue"),
+      beforeEnter: overlayGuard
   },
   {
     path: "/galeria",
     name: "Gallery",
     component: () =>
-      import(/* webpackChunkName: "gallery" */ "../views/Gallery.vue")
+      import(/* webpackChunkName: "gallery" */ "../views/Gallery.vue"),
+      beforeEnter: overlayGuard
   },
   {
     path: "/galeria/:name",
     name: "GalleryItem",
     component: () =>
       import(/* webpackChunkName: "galleryItem" */ "../views/GalleryItem.vue"),
-      props: true
+      props: true,
+      beforeEnter: overlayGuard
   },
   // {
   //   path: "/dostawa",
