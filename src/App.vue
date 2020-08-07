@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <LoadingOverlay />
-    <!-- <TheNavbar /> -->
+    <TheNavbar />
     <transition name="navOverlay">
       <NavOverlay v-if="isNavOpen" />
     </transition>
+    <div class="overlay__mask" :class="{ visible: isNavOpen }"></div>
     <keep-alive include="Home">
       <router-view />
     </keep-alive>
@@ -12,29 +13,41 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Watch, Component } from "vue-property-decorator";
+import { Vue, Component } from "vue-property-decorator";
 import LoadingOverlay from "./components/LoadingOverlay.vue";
-// import TheNavbar from "./components/TheNavbar.vue";
+import TheNavbar from "./components/TheNavbar.vue";
 import NavOverlay from "./components/NavOverlay.vue";
 import TheFooter from "./components/TheFooter.vue";
 
 @Component({
-  components: { LoadingOverlay, NavOverlay, TheFooter }
+  components: { LoadingOverlay, TheNavbar, NavOverlay, TheFooter }
 })
 export default class App extends Vue {
   get isNavOpen(): boolean {
     return this.$store.getters.isNavOpen;
-  }
-
-  @Watch("isNavOpen")
-  blockOverflow() {
-    this.isNavOpen
-      ? (document.body.style.overflow = "hidden")
-      : (document.body.style.overflow = "auto");
   }
 }
 </script>
 
 <style lang="scss">
 @import "@/assets/scss/global.scss";
+@media (min-width: 1280px) and (min-height: 500px) {
+  .overlay__mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 1;
+    transition: background-color 0.3s ease-in-out 0.3s,
+      opacity 0.3s ease-in-out 0.3s;
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  }
+}
 </style>

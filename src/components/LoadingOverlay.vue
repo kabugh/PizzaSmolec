@@ -37,7 +37,9 @@ export default class LoadingOverlay extends Vue {
   }
 
   mounted() {
-    this.overlayLoading = false;
+    if (this.$route.path !== "/") {
+      this.overlayLoading = false;
+    }
   }
 
   @Watch("overlayLoading")
@@ -60,7 +62,7 @@ export default class LoadingOverlay extends Vue {
   background-color: black;
   @include flex;
   flex-direction: row;
-  z-index: 100;
+  z-index: 101;
   .loading__overlay--container {
     @include flex;
     .logo {

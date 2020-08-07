@@ -100,7 +100,7 @@ button {
 section {
   overflow-x: hidden;
   &.topView {
-    padding-top: 12vh;
+    padding-top: 18vh;
     padding-bottom: 6vh;
     width: 100%;
     min-height: 100vh;
@@ -131,7 +131,7 @@ section {
 @media (min-width: 700px) and (min-height: 1024px) {
   section{
     &.topView {
-      padding-top: 6vh;
+      padding-top: 12vh;
     }
   }
 }

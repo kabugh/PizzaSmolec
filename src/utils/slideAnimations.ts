@@ -2,7 +2,7 @@
 import { TweenLite, gsap } from "gsap";
 gsap.registerPlugin(TweenLite);
 
-const DEFAULT_DURATION = 1.5;
+const DEFAULT_DURATION = 2;
 
 export const hideElement = (el: any, speed = DEFAULT_DURATION) => {
   const oldSpacing: any = { height: el.clientHeight };
