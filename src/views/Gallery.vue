@@ -1,7 +1,9 @@
 <template>
   <section class="gallery">
     <div class="gallery__container">
-      <h1>Galeria</h1>
+      <h1 data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+        Galeria
+      </h1>
       <div class="gallery--items__container">
         <PhotoGallery
           v-if="galleries.length > 0"
@@ -53,11 +55,17 @@ export default class OurCentrum extends Vue {
     padding: $verticalPadding * 2 $horizontalPadding / 2 $verticalPadding
       $horizontalPadding / 2;
     @include flex;
+    > h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
     .photoGallery .photoGallery__container {
       padding-left: 0;
       padding-right: 0;
-      .grid {
-        grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+    }
+    @media (min-width: 768px) and (min-height: 500px) {
+      > h1 {
+        font-size: 2.25rem;
       }
     }
   }

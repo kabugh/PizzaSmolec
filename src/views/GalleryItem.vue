@@ -1,7 +1,9 @@
 <template>
   <section class="gallery">
     <div class="gallery__container">
-      <h1>Galeria - {{ $route.params.name }}</h1>
+      <h1 data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+        Galeria - {{ $route.params.name }}
+      </h1>
       <div
         class="gallery--items__container"
         v-if="!currentGallery.nestedGallery"
@@ -20,7 +22,29 @@
           v-for="(item, index) in currentGallery.nestedGalleryItems"
           :key="index"
         >
-          <h1>{{ item.fields.title }}</h1>
+          <div
+            class="title__container"
+            data-aos="fade-up"
+            data-aos-duration="800"
+            data-aos-delay="200"
+          >
+            <h2>
+              {{ item.fields.title }}
+            </h2>
+            <svg
+              width="63"
+              height="10"
+              viewBox="0 0 63 10"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M50.033 0l-6.117 7.041L37.927.113V.008l-.114.052-.12-.06-6.16 7.032L25.34 0l-6.173 7.041L13.008 0 6.855 7.041 1.41.807 0 2.153 6.849 10l6.146-7.04L19.139 10l6.145-7.04 4.75 5.344L31.525 10l.008-.009.008.009 6.215-6.993L43.86 10l6.145-7.04L56.15 10 63 2.153 61.6.807 56.166 7.04z"
+                fill="#d4dd1f"
+                fill-rule="evenodd"
+              ></path>
+            </svg>
+          </div>
+
           <PhotoGallery
             v-if="item.fields.images.length > 0"
             :images="mappedGallery(item.fields.images)"
@@ -28,6 +52,7 @@
             :zoomedPhotos="true"
             :displayOverlay="true"
             :nestedGallery="true"
+            :animationDelay="300"
           />
         </div>
       </div>
@@ -93,13 +118,49 @@ export default class GalleryItem extends Vue {
     padding: $verticalPadding * 2 $horizontalPadding / 2 $verticalPadding
       $horizontalPadding / 2;
     @include flex;
-    @include flex;
+    > h1 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
     .gallery--item__container {
+      @include flex;
+      margin: $verticalPadding * 3 / 4 0;
+      .title__container {
+        @include flex;
+        h2 {
+          font-size: 1.75rem;
+          text-align: center;
+        }
+      }
       .photoGallery .photoGallery__container {
         padding-left: 0;
         padding-right: 0;
-        .grid {
-          grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+      }
+    }
+    @media (min-width: 768px) and (min-height: 500px) {
+      > h1 {
+        font-size: 2.25rem;
+      }
+      .gallery--item__container {
+        .title__container h2 {
+          font-size: 1.75rem;
+        }
+      }
+    }
+    @media (min-width: 1024px) and (min-height: 500px) {
+      > h1 {
+        font-size: 3rem;
+      }
+      .gallery--item__container {
+        .title__container h2 {
+          font-size: 2.25rem;
+        }
+      }
+    }
+    @media (min-width: 1650px) and (min-height: 500px) {
+      .gallery--item__container {
+        .title__container h2 {
+          font-size: 2.5rem;
         }
       }
     }
