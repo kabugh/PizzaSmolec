@@ -1,24 +1,5 @@
-# pizzasmolec
+# 🍕 Web page for [Pizza Smolec](https://pizzasmolec.netlify.app)
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Developed using Vue, Vuex, Vue-Router with Typescript. 
+Dynamic data provided by Headless CMS [Contentful](https://www.contentful.com/)
+Animations created using [GSAP](https://greensock.com/gsap/) & [AOS](https://github.com/michalsnik/aos)
