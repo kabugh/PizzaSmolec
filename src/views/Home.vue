@@ -1,6 +1,6 @@
 <template>
   <section class="home">
-    <header class="hero"></header>
+    <Hero />
     <section class="introduction">
       <div class="introduction__container">
         <div class="introduction__item informative__item">
@@ -69,6 +69,7 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import Hero from "@/components/Hero.vue";
 
 interface IntroductionItem {
   title: string;
@@ -77,7 +78,9 @@ interface IntroductionItem {
   image: string;
 }
 
-@Component
+@Component({
+  components: { Hero }
+})
 export default class Home extends Vue {
   created() {
     this.overlayLoading = false;
@@ -125,12 +128,6 @@ export default class Home extends Vue {
 @import "@/assets/scss/global.scss";
 .home {
   width: 100%;
-  .hero {
-    width: 100%;
-    height: 100vh;
-    background-color: black;
-    display: none;
-  }
   .introduction {
     width: 100%;
     .introduction__container {

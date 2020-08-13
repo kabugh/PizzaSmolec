@@ -181,12 +181,18 @@ footer {
         }
         a {
           color: white;
+          font-size: 0.875rem;
           text-decoration: none;
           &:hover {
             text-decoration: underline;
           }
         }
       }
+    }
+  }
+  @media (min-width: 360px) {
+    .footer__container .footer__details .authors__container a {
+      font-size: 1rem;
     }
   }
   @media (min-width: 500px) and (min-height: 400px) {
@@ -224,6 +230,24 @@ footer {
       .footer__details {
         flex-direction: row;
         text-align: left;
+      }
+    }
+  }
+  @media (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {
+    .footer__container {
+      padding-top: $verticalPadding * 2;
+      padding-bottom: $verticalPadding * 2;
+      .about__details {
+        row-gap: $verticalPadding;
+        .brand__wrapper {
+          max-width: 60%;
+          max-height: 14vh;
+          justify-content: center;
+          img {
+            max-width: 60%;
+            max-height: 100%;
+          }
+        }
       }
     }
   }

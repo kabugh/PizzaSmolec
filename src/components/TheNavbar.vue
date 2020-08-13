@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar">
+  <nav class="navbar" :class="{ hiddenNavbar: !showNavbar && !isNavOpen }">
     <div class="back__wrapper" v-if="$route.path !== '/'">
       <div class="arrow" @click="$router.go(-1)"></div>
       <div class="back" @click="$router.go(-1)">Powrót</div>
@@ -27,6 +27,29 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class TheNavbar extends Vue {
+  offset = 10;
+  lastScrollPosition = 0;
+  scrollValue = 0;
+  showNavbar = false;
+
+  mounted() {
+    this.lastScrollPosition = window.pageYOffset;
+    window.addEventListener("scroll", this.onScroll);
+  }
+
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll);
+  }
+
+  onScroll() {
+    if (window.pageYOffset < 0) return;
+    if (Math.abs(window.pageYOffset - this.lastScrollPosition) < this.offset)
+      return;
+
+    this.showNavbar = window.pageYOffset < this.lastScrollPosition;
+    this.lastScrollPosition = window.pageYOffset;
+  }
+
   get isNavOpen() {
     return this.$store.getters.isNavOpen;
   }
@@ -50,10 +73,12 @@ export default class TheNavbar extends Vue {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  &.hiddenNavbar {
+    transform: translateY(-100%);
+  }
   .logo {
-    width: 12vw;
-    max-width: 20vw;
-    min-height: 6vh;
+    max-width: 40vw;
+    max-height: 8vh;
     color: white;
     @include backgroundDefault;
     @include flex;
@@ -198,6 +223,38 @@ export default class TheNavbar extends Vue {
       -o-transform: rotate(-45deg);
       transform: rotate(-45deg);
       top: 15px;
+    }
+  }
+
+  @media (min-width: 450px) {
+    .logo {
+      max-width: 30vw;
+    }
+  }
+  @media (min-width: 768px) {
+    .logo {
+      max-width: 25vw;
+    }
+  }
+  @media (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {
+    .logo {
+      max-width: 30vw;
+      max-height: 10vh;
+    }
+  }
+  @media (min-width: 1024px) {
+    .logo {
+      max-width: 20vw;
+    }
+  }
+  @media (min-width: 1280px) {
+    .logo {
+      max-width: 15vw;
+    }
+  }
+  @media (min-width: 1650px) {
+    .logo {
+      max-width: 10vw;
     }
   }
 }
