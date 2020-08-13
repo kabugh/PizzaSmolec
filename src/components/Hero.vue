@@ -20,13 +20,14 @@
     </div>
     <div class="moving__items">
       <img
-        v-for="(item, index) in pizzas[0].movingItems"
+        v-for="(item, index) in currentPizza.movingItems"
         :key="index"
-        :src="require(`@/assets/images/funghi/${item.image}`)"
+        :src="require(`@/assets/images/pizzaAssets/${item.image}`)"
         :alt="item.className"
         class="moving__item unselectable"
         :class="[{ rellax: item.isMoving }, item.className]"
-        :data-rellax-speed="6"
+        :data-rellax-speed="3"
+        ref="movingItems"
       />
       <!-- 3 + getRandomInt(0, 3) -->
     </div>
@@ -35,9 +36,11 @@
         class="pizza__description rellax"
         :data-rellax-speed="3 + getRandomInt(0, 3)"
       >
-        <div class="pizza__description--container">
+        <div class="pizza__description--container" ref="desc">
           <div class="title__container">
-            <h1>Pizza <span>Prosciutto e fungi</span></h1>
+            <h1>
+              Pizza <span>{{ currentPizza.title }}</span>
+            </h1>
             <div class="button__container">
               <div class="price__tag">30 zł</div>
               <button type="button" @click="$router.push('/menu')">
@@ -75,7 +78,7 @@
           ref="base"
         />
         <img
-          src="@/assets/images/pizzasmall.png"
+          :src="require(`@/assets/images/${currentPizza.image}`)"
           alt="pizza"
           class="pizza unselectable"
           ref="pizza"
@@ -86,7 +89,7 @@
   </header>
 </template>
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import { TimelineLite } from "gsap";
 import Rellax from "rellax";
 
@@ -100,6 +103,7 @@ interface MovingItem {
 interface Pizza {
   title: string;
   price: number;
+  image: string;
   ingredients: string[];
   movingItems?: MovingItem[];
 }
@@ -119,16 +123,23 @@ interface NavItem {
 
 @Component
 export default class Hero extends Vue {
+  activePizzaIndex = 0;
+
   mounted() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const rellax = new Rellax(".rellax");
-    this.startAnimation(1);
+    this.startAnimation();
+  }
+
+  get currentPizza(): Pizza {
+    return this.pizzas[this.activePizzaIndex];
   }
 
   pizzas: Pizza[] = [
     {
       title: "Prosciutto e fungi",
       price: 25,
+      image: "funghi.png",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
       movingItems: [
         {
@@ -145,7 +156,7 @@ export default class Hero extends Vue {
         },
         {
           image: "basil1.png",
-          className: "basil",
+          className: "basil1",
           isMoving: false,
           direction: "bottom"
         },
@@ -200,14 +211,176 @@ export default class Hero extends Vue {
       ]
     },
     {
-      title: "Prosciutto e fungi",
+      title: "Capresse",
       price: 25,
-      ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"]
+      image: "capresse.png",
+      ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
+      movingItems: [
+        {
+          image: "tomato1.png",
+          className: "tomato1",
+          isMoving: true,
+          direction: "left"
+        },
+        {
+          image: "lamblettuce1.png",
+          className: "lamblettuce1",
+          isMoving: true,
+          direction: "left"
+        },
+        {
+          image: "pepper.png",
+          className: "pepper",
+          isMoving: true,
+          direction: "left"
+        },
+        {
+          image: "tomato2.png",
+          className: "tomato2",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "basil1.png",
+          className: "basil1",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "tomatoes.png",
+          className: "tomatoes",
+          isMoving: false,
+          direction: "top"
+        },
+        {
+          image: "basil3.png",
+          className: "basil3",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "lamblettuce2.png",
+          className: "lamblettuce2",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "pepper1.png",
+          className: "pepper1",
+          isMoving: false,
+          direction: "bottom"
+        },
+        {
+          image: "tomato3.png",
+          className: "tomato3",
+          isMoving: true,
+          direction: "right"
+        },
+        {
+          image: "mozarella1.png",
+          className: "mozarella1",
+          isMoving: true,
+          direction: "right"
+        },
+        {
+          image: "mozarella2.png",
+          className: "mozarella2",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "lamblettuce3.png",
+          className: "lamblettuce3",
+          isMoving: true,
+          direction: "right"
+        },
+        {
+          image: "tomato4.png",
+          className: "tomato4",
+          isMoving: true,
+          direction: "top"
+        },
+        {
+          image: "pepper2.png",
+          className: "pepper2",
+          isMoving: true,
+          direction: "top"
+        }
+      ]
     },
     {
-      title: "Prosciutto e fungi",
+      title: "Parma",
       price: 25,
-      ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"]
+      image: "parma.png",
+      ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
+      movingItems: [
+        {
+          image: "olives.png",
+          className: "olives",
+          isMoving: true,
+          direction: "left"
+        },
+        {
+          image: "cheese1.png",
+          className: "cheese1",
+          isMoving: true,
+          direction: "left"
+        },
+        {
+          image: "desk.png",
+          className: "desk",
+          isMoving: false,
+          direction: "bottom"
+        },
+        {
+          image: "pepper1.png",
+          className: "pepper1",
+          isMoving: false,
+          direction: "bottom"
+        },
+        {
+          image: "rocket1.png",
+          className: "rocket1",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "basil3.png",
+          className: "basil3",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "basil4.png",
+          className: "basil4",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "cheese2.png",
+          className: "cheese2",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "rocket3.png",
+          className: "rocket3",
+          isMoving: true,
+          direction: "right"
+        },
+        {
+          image: "rocket2.png",
+          className: "rocket2",
+          isMoving: true,
+          direction: "right"
+        },
+        {
+          image: "pepper2.png",
+          className: "pepper2",
+          isMoving: true,
+          direction: "right"
+        }
+      ]
     }
   ];
 
@@ -260,30 +433,84 @@ export default class Hero extends Vue {
     }
   ];
 
-  startAnimation(initialDelay: number) {
+  @Watch("activePizzaIndex")
+  startAnimation() {
+    const initialDelay = 1;
+
     const pizza = this.$refs.pizza;
     const base = this.$refs.base;
+    const desc = this.$refs.desc;
+    Vue.nextTick(() => {
+      const movingItems = this.$refs.movingItems;
 
-    const tl = new TimelineLite();
+      const middleIndex = (movingItems as Element[]).length / 2;
+      const firstHalf = (movingItems as Element[]).slice(0, middleIndex);
+      const secondHalf = (movingItems as Element[]).slice(
+        middleIndex,
+        (movingItems as Element[]).length
+      );
 
-    tl.from(base, {
-      duration: 1.5,
-      opacity: 0,
-      ease: "power4",
-      y: -50,
-      delay: initialDelay
-    }).to(base, { y: 0, opacity: 1 });
-    tl.from(
-      pizza,
-      {
-        duration: 2,
-        opacity: 0,
-        ease: "expo",
-        y: -150,
-        rotateZ: -45
-      },
-      "-=1.5"
-    ).to(pizza, { rotate: 0 });
+      console.log((movingItems as Element[]).length, middleIndex);
+
+      const tl1 = new TimelineLite();
+      const tl2 = new TimelineLite();
+
+      tl1
+        .from(base, {
+          duration: 1.5,
+          opacity: 0,
+          ease: "power4",
+          y: -50,
+          delay: initialDelay
+        })
+        .to(base, { y: 0, opacity: 1 });
+      tl1
+        .from(
+          pizza,
+          {
+            duration: 2,
+            opacity: 0,
+            ease: "expo",
+            y: -150,
+            rotateZ: -45
+          },
+          "-=1.5"
+        )
+        .to(pizza, { rotate: 0 });
+
+      tl1.from(
+        desc,
+        {
+          duration: 1.5,
+          opacity: 0,
+          ease: "power4",
+          y: -50
+        },
+        "-=1.5"
+      );
+
+      (firstHalf as Element[]).forEach(item => {
+        tl1
+          .from(item, {
+            duration: 0.5,
+            opacity: 0,
+            ease: "power4",
+            y: -50
+          })
+          .to(item, { y: 0, opacity: 1 }, `-=0.5`);
+      });
+      (secondHalf as Element[]).forEach(item => {
+        tl2
+          .from(item, {
+            duration: 0.5,
+            opacity: 0,
+            ease: "power4",
+            y: -50,
+            delay: secondHalf[0] === item ? 2 : 0
+          })
+          .to(item, { y: 0, opacity: 1 }, `-=0.5`);
+      });
+    });
   }
 
   getRandomInt(min: number, max: number) {
@@ -356,6 +583,7 @@ export default class Hero extends Vue {
       position: absolute;
       max-width: 15vw;
       max-height: 20vw;
+      transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
       &.champ1 {
         left: -4vw;
         top: 35%;
@@ -364,7 +592,7 @@ export default class Hero extends Vue {
         top: 60%;
         left: -4vw;
       }
-      &.basil {
+      &.basil1 {
         bottom: 0;
         left: 10vw;
       }
@@ -406,6 +634,68 @@ export default class Hero extends Vue {
         right: 0;
         top: 0;
         max-width: 5vw;
+      }
+      &.cheese1 {
+        left: 2vw;
+        top: 40%;
+        max-width: 8vw;
+      }
+      &.desk {
+        left: -3vh;
+        bottom: -3vh;
+        max-width: 40vw;
+      }
+      &.rocket2 {
+        bottom: 1vh;
+        left: 45%;
+        max-width: 20vw;
+      }
+      &.basil3 {
+        bottom: 3vh;
+        left: 37.5%;
+      }
+      &.cheese2 {
+        bottom: 2vh;
+        right: 15%;
+      }
+      &.rocket3 {
+        bottom: 16vh;
+        right: -1vh;
+      }
+      &.rocket1 {
+        top: 10vh;
+        right: 8vh;
+      }
+      &.tomato1 {
+        top: 5%;
+        left: 4vh;
+        max-width: 6vw;
+      }
+      &.lamblettuce1 {
+        top: 25%;
+        left: 0;
+      }
+      &.tomato2 {
+        bottom: 1vh;
+        left: 8vh;
+        max-width: 6vw;
+      }
+      &.lamblettuce2 {
+        bottom: -2vh;
+        left: 47%;
+      }
+      &.tomato3 {
+        bottom: -1vh;
+        right: -2vw;
+      }
+      &.lamblettuce3 {
+        right: 10vw;
+        top: 4vh;
+      }
+      &.tomato4 {
+        right: -3vw;
+        top: 30%;
+        max-width: 8vw;
       }
 
       @media (max-width: 767px) {
@@ -467,6 +757,7 @@ export default class Hero extends Vue {
         align-items: center;
 
         .title__container {
+          @include flex;
           h1 {
             font-size: 1.5rem;
             span {
@@ -548,6 +839,7 @@ export default class Hero extends Vue {
         margin-top: -1vh;
         z-index: 5;
         padding-right: 2vh;
+        transform-origin: center;
         &:hover {
           cursor: pointer;
         }
@@ -603,6 +895,7 @@ export default class Hero extends Vue {
         .pizza__description--container {
           align-items: flex-start;
           .title__container {
+            display: block;
             h1 {
               font-size: 2.25rem;
             }
