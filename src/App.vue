@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <LoadingOverlay />
-    <TheNavbar />
+    <TheNavbar v-if="$route.path !== '/'" />
     <transition name="navOverlay">
       <NavOverlay v-if="isNavOpen" />
     </transition>

@@ -27,7 +27,7 @@ import { Component, Vue } from "vue-property-decorator";
 
 @Component
 export default class TheNavbar extends Vue {
-  offset = 10;
+  offset = 5;
   lastScrollPosition = 0;
   scrollValue = 0;
   showNavbar = false;
