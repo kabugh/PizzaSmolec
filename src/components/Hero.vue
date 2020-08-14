@@ -26,10 +26,9 @@
         :alt="item.className"
         class="moving__item unselectable"
         :class="[{ rellax: item.isMoving }, item.className]"
-        :data-rellax-speed="3"
+        :data-rellax-speed="3 + getRandomInt(0, 3)"
         ref="movingItems"
       />
-      <!-- 3 + getRandomInt(0, 3) -->
     </div>
     <div class="hero__container">
       <div
@@ -43,7 +42,7 @@
             </h1>
             <div class="button__container">
               <div class="price__tag">30 zł</div>
-              <button type="button" @click="$router.push('/menu')">
+              <button type="button" @click="changeAnimation">
                 Zamów teraz
               </button>
             </div>
@@ -433,16 +432,149 @@ export default class Hero extends Vue {
     }
   ];
 
-  @Watch("activePizzaIndex")
+  updatePizzaIndex() {
+    if (this.activePizzaIndex < this.pizzas.length - 1) this.activePizzaIndex++;
+    else this.activePizzaIndex = 0;
+  }
+
   startAnimation() {
     const initialDelay = 1;
 
     const pizza = this.$refs.pizza;
     const base = this.$refs.base;
     const desc = this.$refs.desc;
-    Vue.nextTick(() => {
-      const movingItems = this.$refs.movingItems;
+    const movingItems = this.$refs.movingItems;
 
+    const middleIndex = (movingItems as Element[]).length / 2;
+    const firstHalf = (movingItems as Element[]).slice(0, middleIndex);
+    const secondHalf = (movingItems as Element[]).slice(
+      middleIndex,
+      (movingItems as Element[]).length
+    );
+
+    console.log((movingItems as Element[]).length, middleIndex);
+
+    const tl1 = new TimelineLite();
+    const tl2 = new TimelineLite();
+
+    tl1
+      .from(base, {
+        duration: 1.5,
+        opacity: 0,
+        ease: "power4",
+        y: -50,
+        delay: initialDelay
+      })
+      .to(base, { y: 0, opacity: 1 });
+    tl1.from(
+      pizza,
+      {
+        duration: 2,
+        opacity: 0,
+        ease: "expo",
+        y: -150
+      },
+      "-=1.5"
+    );
+
+    tl1.from(
+      desc,
+      {
+        duration: 1.5,
+        opacity: 0,
+        ease: "power4",
+        y: -50
+      },
+      "-=1.5"
+    );
+
+    tl1
+      .from(
+        firstHalf,
+        {
+          duration: 2,
+          opacity: 0,
+          ease: "expo",
+          y: 150
+        },
+        "-=1"
+      )
+      .to(firstHalf, { opacity: 1, y: 0 });
+
+    tl1
+      .from(
+        secondHalf,
+        {
+          duration: 2,
+          opacity: 0,
+          ease: "expo",
+          y: 150
+        },
+        "-=2"
+      )
+      .to(secondHalf, { opacity: 1, y: 0 });
+
+    // (firstHalf as Element[]).forEach(item => {
+    //   tl1
+    //     .from(item, {
+    //       duration: 0.5,
+    //       opacity: 0,
+    //       ease: "power4",
+    //       y: -50
+    //     })
+    //     .to(item, { y: 0, opacity: 1 }, `-=0.5`);
+    // });
+    // (secondHalf as Element[]).forEach(item => {
+    //   tl2
+    //     .from(item, {
+    //       duration: 0.5,
+    //       opacity: 0,
+    //       ease: "power4",
+    //       y: -50,
+    //       delay: secondHalf[0] === item ? 2 : 0
+    //     })
+    //     .to(item, { y: 0, opacity: 1 }, `-=0.5`);
+    // });
+  }
+
+  async changeAnimation() {
+    const pizza = this.$refs.pizza;
+    const movingItems = this.$refs.movingItems;
+
+    const tl1 = new TimelineLite();
+    const tl2 = new TimelineLite();
+
+    tl1
+      .from(
+        pizza,
+        {
+          duration: 2,
+          opacity: 1,
+          ease: "expo",
+          y: 0
+        },
+        "-=1.5"
+      )
+      .to(pizza, { opacity: 0, y: 150 });
+
+    tl2
+      .from(
+        movingItems,
+        {
+          duration: 2,
+          opacity: 1,
+          ease: "expo",
+          y: 0
+        },
+        "-=1.5"
+      )
+      .to(movingItems, {
+        opacity: 0,
+        y: 150,
+        onComplete: () => this.updatePizzaIndex()
+      });
+
+    Vue.nextTick(() => {
       const middleIndex = (movingItems as Element[]).length / 2;
       const firstHalf = (movingItems as Element[]).slice(0, middleIndex);
       const secondHalf = (movingItems as Element[]).slice(
@@ -450,66 +582,45 @@ export default class Hero extends Vue {
         (movingItems as Element[]).length
       );
 
-      console.log((movingItems as Element[]).length, middleIndex);
+      tl1.from(pizza, {
+        duration: 2,
+        opacity: 0,
+        ease: "expo",
+        y: -150,
+        delay: 1
+      });
 
-      const tl1 = new TimelineLite();
-      const tl2 = new TimelineLite();
-
-      tl1
-        .from(base, {
-          duration: 1.5,
-          opacity: 0,
-          ease: "power4",
-          y: -50,
-          delay: initialDelay
-        })
-        .to(base, { y: 0, opacity: 1 });
       tl1
         .from(
-          pizza,
+          firstHalf,
           {
             duration: 2,
             opacity: 0,
             ease: "expo",
-            y: -150,
-            rotateZ: -45
+            y: 150
           },
-          "-=1.5"
+          "-=1"
         )
-        .to(pizza, { rotate: 0 });
+        .to(firstHalf, { opacity: 1, y: 0 });
 
-      tl1.from(
-        desc,
-        {
-          duration: 1.5,
-          opacity: 0,
-          ease: "power4",
-          y: -50
-        },
-        "-=1.5"
-      );
+      tl1
+        .from(
+          secondHalf,
+          {
+            duration: 2,
+            opacity: 0,
+            ease: "expo",
+            y: 150
+          },
+          "-=2"
+        )
+        .to(secondHalf, { opacity: 1, y: 0 });
+    });
+  }
 
-      (firstHalf as Element[]).forEach(item => {
-        tl1
-          .from(item, {
-            duration: 0.5,
-            opacity: 0,
-            ease: "power4",
-            y: -50
-          })
-          .to(item, { y: 0, opacity: 1 }, `-=0.5`);
-      });
-      (secondHalf as Element[]).forEach(item => {
-        tl2
-          .from(item, {
-            duration: 0.5,
-            opacity: 0,
-            ease: "power4",
-            y: -50,
-            delay: secondHalf[0] === item ? 2 : 0
-          })
-          .to(item, { y: 0, opacity: 1 }, `-=0.5`);
-      });
+  wait(timeout: number) {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
     });
   }
 
@@ -583,7 +694,6 @@ export default class Hero extends Vue {
       position: absolute;
       max-width: 15vw;
       max-height: 20vw;
-      transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
       &.champ1 {
         left: -4vw;
         top: 35%;
@@ -920,8 +1030,6 @@ export default class Hero extends Vue {
               img {
                 width: 48px;
                 height: 48px;
-              }
-              .text__container {
               }
             }
           }
