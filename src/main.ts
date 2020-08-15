@@ -6,7 +6,7 @@ import store from "./store";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import VueScrollTo from "vue-scrollto";
-import { gsap, TimelineLite } from "gsap";
+import { gsap, TimelineLite, TimelineMax } from "gsap";
 
 Vue.use(VueScrollTo, {
   easing: [0.86, 0, 0.07, 1],
@@ -20,7 +20,7 @@ AOS.init({
   easing: "ease-in-out-quart"
 });
 
-gsap.registerPlugin(TimelineLite);
+gsap.registerPlugin(TimelineLite, TimelineMax);
 
 Vue.config.productionTip = false;
 
