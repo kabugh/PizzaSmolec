@@ -1,8 +1,35 @@
 <template>
   <header class="hero">
-    <div class="static__container">
+    <div class="moving__items" ref="movingItems">
+      <img
+        v-for="(item, index) in currentPizza.movingItems"
+        :key="index"
+        :src="require(`@/assets/images/pizzaAssets/${item.image}`)"
+        :alt="item.className"
+        class="moving__item unselectable"
+        :class="[{ rellax: item.isMoving }, item.className]"
+        :data-rellax-speed="item.isMoving ? 3 + getRandomInt(0, 3) : 0"
+      />
+    </div>
+    <div class="static__container" ref="staticNav">
+      <div class="burger__container">
+        <div
+          class="nav-mobile"
+          id="nav-icon"
+          :class="{ open: isNavOpen }"
+          @click="isNavOpen = !isNavOpen"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
       <div class="logo__container">
-        <img src="@/assets/images/logo_white.png" alt="logo" class="logo" />
+        <img
+          src="@/assets/images/logo.png"
+          alt="logo"
+          class="logo unselectable"
+        />
       </div>
       <div class="nav__container">
         <div class="contact__details">
@@ -17,17 +44,6 @@
           </ul>
         </nav>
       </div>
-    </div>
-    <div class="moving__items" ref="movingItems">
-      <img
-        v-for="(item, index) in currentPizza.movingItems"
-        :key="index"
-        :src="require(`@/assets/images/pizzaAssets/${item.image}`)"
-        :alt="item.className"
-        class="moving__item unselectable"
-        :class="[{ rellax: item.isMoving }, item.className]"
-        :data-rellax-speed="item.isMoving ? 3 + getRandomInt(0, 3) : 0"
-      />
     </div>
     <div class="hero__container">
       <div
@@ -89,7 +105,7 @@
   </header>
 </template>
 <script lang="ts">
-import { Component, Watch, Vue } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import { TimelineMax } from "gsap";
 import Rellax from "rellax";
 
@@ -124,12 +140,19 @@ interface NavItem {
 @Component
 export default class Hero extends Vue {
   activePizzaIndex = 0;
-  animationFinished = false;
 
   mounted() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const rellax = new Rellax(".rellax");
     this.startAnimation();
+  }
+
+  get isNavOpen() {
+    return this.$store.getters.isNavOpen;
+  }
+
+  set isNavOpen(value) {
+    this.$store.commit("setNav", value);
   }
 
   get currentPizza(): Pizza {
@@ -444,6 +467,7 @@ export default class Hero extends Vue {
     const base = this.$refs.base;
     const desc = this.$refs.desc;
     const movingItems = this.$refs.movingItems;
+    const staticNav = this.$refs.staticNav;
 
     const tl = new TimelineMax();
 
@@ -490,15 +514,28 @@ export default class Hero extends Vue {
       y: 0
     });
 
-    tl.addPause(4 + 4, () => (this.animationFinished = true));
+    tl.from(
+      staticNav,
+      {
+        duration: 2,
+        opacity: 0,
+        ease: "expo",
+        y: 150
+      },
+      "-=2"
+    ).to(staticNav, {
+      opacity: 1,
+      y: 0
+    });
+
+    tl.addPause(6, () => this.changeAnimation());
   }
 
-  @Watch("animationFinished")
   changeAnimation() {
     const pizza = this.$refs.pizza;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const movingItems: any = this.$refs.movingItems;
-    const tl = new TimelineMax({ repeat: -1, repeatDelay: 3 });
+    const tl = new TimelineMax({ repeat: -1, repeatDelay: 8 });
 
     tl.from(
       pizza,
@@ -550,12 +587,6 @@ export default class Hero extends Vue {
     ).to(movingItems, { opacity: 1, y: 0 });
   }
 
-  wait(timeout: number) {
-    return new Promise(resolve => {
-      setTimeout(resolve, timeout);
-    });
-  }
-
   getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -592,15 +623,23 @@ export default class Hero extends Vue {
     right: 0;
     margin: 0 auto;
     z-index: 2;
+    .burger__container {
+      position: absolute;
+      top: 6vh;
+      right: 8vh;
+    }
     .logo__container {
-      max-width: 100%;
+      width: 80%;
+      height: 15vh;
+      margin: 0 auto;
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
       }
     }
     .nav__container {
+      z-index: 1;
       .contact__details {
         @include flex;
 
@@ -900,19 +939,18 @@ export default class Hero extends Vue {
   @media (min-width: 768px) {
     .static__container {
       position: absolute;
-      grid-template-columns: repeat(2, auto);
-      padding: $verticalPadding / 4 $horizontalPadding * 2;
+      padding: $verticalPadding / 4 $horizontalPadding / 4;
+      width: 100%;
+      grid-template-columns: 30vw auto;
 
       .nav__container {
         .contact__details {
           justify-content: flex-end;
-          flex-direction: row;
           h2:first-of-type {
             margin-right: 20px;
           }
         }
         .static__nav {
-          display: block;
           .navItems {
             padding: $verticalPadding / 8 $horizontalPadding / 8;
             display: grid;
@@ -979,6 +1017,59 @@ export default class Hero extends Vue {
         max-width: 70%;
         max-height: 80%;
         padding-right: 2vh;
+      }
+    }
+  }
+
+  @media (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {
+    .static__container {
+      width: 100%;
+      grid-template-columns: 1fr 2fr;
+      padding-top: $verticalPadding / 2;
+      .logo__container {
+        width: 100%;
+        height: 30vh;
+      }
+    }
+    .moving__items {
+      display: none;
+    }
+    .hero__container {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: auto;
+      .pizza__description {
+        grid-row: 1;
+        grid-column: 1;
+        .pizza__description--container .title__container h1 {
+          margin-bottom: $verticalPadding / 2;
+        }
+      }
+      .pizza__container {
+        grid-row: 1;
+        grid-column: 2;
+      }
+    }
+  }
+
+  @media (max-width: 750px) and (max-height: 450px) and (orientation: landscape) {
+  }
+
+  @media (max-width: 650px) and (max-height: 450px) and (orientation: landscape) {
+  }
+
+  @media (min-width: 1024px) {
+    .static__container {
+      grid-template-columns: 30vw auto;
+      .burger__container {
+        display: none;
+      }
+      .nav__container {
+        .contact__details {
+          flex-direction: row;
+        }
+        .static__nav {
+          display: block;
+        }
       }
     }
   }

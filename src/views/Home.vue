@@ -56,7 +56,7 @@
           </div>
           <div class="image__wrapper">
             <img
-              :src="require(`@/assets/images/introduction/${item.image}`)"
+              :src="require(`@/assets/images/${item.image}`)"
               alt="item.image"
               class="unselectable"
             />
@@ -94,7 +94,7 @@ export default class Home extends Vue {
         "Naszą misją jest, aby każdy czuł się jak u siebie w domu. Rodzina odgrywa niezwykle istotną rolę w życiu każdego człowieka. To wśród najbliższych nabywamy podstawową wiedzę i umiejętności niezbędne do funkcjonowania w rzeczywistości społecznej.",
         "Rodzice i krewni stają się przykładem dla dzieci, które, jak wiadomo nie od dziś, najszybciej uczą się poprzez obserwację i naśladownictwo dorosłych."
       ],
-      image: "pizza.jpg"
+      image: "slide1.png"
     },
     {
       title: "Nasze menu na miejscu",
@@ -103,7 +103,7 @@ export default class Home extends Vue {
         "Tradycyjne receptury, przekazywane z pokolenia na pokolenie, staranny dobór składników i kadra kucharzy z pasją, pozwalają częstować naszych klientów daniami o wspaniałym smaku.",
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
-      image: "pizza.jpg"
+      image: "slide1.png"
     },
     {
       title: "Nasze menu na dowóz",
@@ -112,7 +112,7 @@ export default class Home extends Vue {
         "Tradycyjne receptury, przekazywane z pokolenia na pokolenie, staranny dobór składników i kadra kucharzy z pasją, pozwalającą częstować naszych klientów daniami o wspaniałym smaku.",
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
-      image: "pizza.jpg"
+      image: "slide3.png"
     }
   ];
   get overlayLoading() {
@@ -183,6 +183,7 @@ export default class Home extends Vue {
         }
         &.informative__item {
           text-align: left;
+          min-height: 30vh;
           .subItem__container {
             width: 100%;
             height: 100%;
