@@ -936,7 +936,7 @@ export default class Hero extends Vue {
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 768px) and (min-height: 500px) {
     .static__container {
       position: absolute;
       padding: $verticalPadding / 4 $horizontalPadding / 4;
@@ -1040,8 +1040,10 @@ export default class Hero extends Vue {
       .pizza__description {
         grid-row: 1;
         grid-column: 1;
-        .pizza__description--container .title__container h1 {
-          margin-bottom: $verticalPadding / 2;
+        .pizza__description--container {
+          .title__container h1 {
+            margin-bottom: $verticalPadding / 2;
+          }
         }
       }
       .pizza__container {

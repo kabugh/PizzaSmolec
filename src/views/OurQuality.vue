@@ -166,6 +166,7 @@ export default class OurQuality extends Vue {
   .ourQuality__container {
     .illustration {
       max-width: 100%;
+      max-height: 40vh;
       margin-bottom: $verticalPadding;
       @include flex;
     }

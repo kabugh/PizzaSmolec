@@ -51,7 +51,7 @@ const getters = {
   overlayLoading(state: { overlayLoading: boolean }) {
     return state.overlayLoading;
   },
-  socialsItems(state: { socialsItems: Array<{ icon: string, link: string }> }) {
+  socialsItems(state: { socialsItems: Array<{ icon: string; link: string }> }) {
     return state.socialsItems;
   }
 };

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <LoadingOverlay />
-    <TheNavbar v-if="$route.path !== '/'" />
+    <TheNavbar
+      v-if="$route.path !== '/' || ($route.path === '/' && isNavOpen)"
+    />
     <transition name="navOverlay">
       <NavOverlay v-if="isNavOpen" />
     </transition>
@@ -40,7 +42,7 @@ export default class App extends Vue {
     height: 100%;
     opacity: 0;
     visibility: hidden;
-    z-index: 1;
+    z-index: 10;
     transition: background-color 0.3s ease-in-out 0.3s,
       opacity 0.3s ease-in-out 0.3s;
     &.visible {

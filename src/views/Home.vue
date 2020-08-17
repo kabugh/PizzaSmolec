@@ -5,20 +5,19 @@
       <div class="introduction__container">
         <div class="introduction__item informative__item">
           <div
+            v-if="pizzaOfTheMonth"
             class="description__container subItem__container pizzaOfTheMonth"
             :style="{
-              backgroundImage:
-                'url(' + require('@/assets/images/introduction/pizza.jpg') + ')'
+              backgroundImage: `url(${pizzaOfTheMonth.image.fields.file.url})`
             }"
           >
             <div class="description__wrapper">
-              <h1>Pizza sierpnia</h1>
+              <h1>{{ pizzaOfTheMonth.name }}</h1>
               <p>
-                Sos cukiniowo-mietowy, Papryka marynowana w oliwie z czosnkiem,
-                Oliwki, Kalamata, Cebula czerwona, Ser Feta
+                {{ pizzaOfTheMonth.description }}
               </p>
               <div class="button__container">
-                <div class="price__tag">30 zł</div>
+                <div class="price__tag">{{ pizzaOfTheMonth.price }} zł</div>
                 <button type="button" @click="$router.push('/menu')">
                   Zamów teraz
                 </button>
@@ -82,9 +81,23 @@ interface IntroductionItem {
   components: { Hero }
 })
 export default class Home extends Vue {
-  created() {
+  async created() {
+    await this.$store.dispatch("fetchPizzaOfTheMonth");
     this.overlayLoading = false;
   }
+
+  get pizzaOfTheMonth() {
+    return this.$store.getters.pizzaOfTheMonth;
+  }
+
+  set pizzaOfTheMonth(value) {
+    this.$store.commit("setPizzaOfTheMonth", value);
+  }
+
+  get loading() {
+    return this.$store.getters.loading;
+  }
+
   introductionItems: IntroductionItem[] = [
     {
       title: "Witaj w naszej restauracji",

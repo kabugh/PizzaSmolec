@@ -1,4 +1,4 @@
-import GalleryItemInterface from '@/utils/interfaces/GalleryItemInterface'
+import GalleryItemInterface from "@/utils/interfaces/GalleryItemInterface";
 /* eslint-disable @typescript-eslint/no-var-requires */
 const contentful = require("contentful");
 
@@ -16,7 +16,10 @@ const mutations = {
   setGalleries(state: { galleries: GalleryItemInterface[] }, payload: any) {
     state.galleries = payload;
   },
-  setCurrentGallery(state: { currentGallery: GalleryItemInterface }, payload: any) {
+  setCurrentGallery(
+    state: { currentGallery: GalleryItemInterface },
+    payload: any
+  ) {
     state.currentGallery = payload;
   }
 };
@@ -43,9 +46,7 @@ const actions = {
           include: 2 // specified level of references, links
         })
         .then((entries: { items: any[] }) => {
-          const galleries = entries.items.map(
-            (a: any) => a.fields
-          );
+          const galleries = entries.items.map((a: any) => a.fields);
           commit("setGalleries", galleries);
           commit("setLoading", false);
         });

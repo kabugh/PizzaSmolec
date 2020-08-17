@@ -103,14 +103,14 @@ export default class NavOverlay extends Vue {
   bottom: 0;
   height: 100%;
   width: 100%;
-  z-index: 3;
+  z-index: 99;
   .overlay__container {
     height: 100%;
     width: 100%;
     color: white;
     background-color: $secondaryColor;
     .overlay__wrapper {
-      padding: $verticalPadding * 3 4vh 4vh 4vh;
+      padding: $verticalPadding * 2 4vh 4vh 4vh;
       @include flex;
       .navItems {
         padding: $verticalPadding / 2 0;
@@ -162,8 +162,21 @@ export default class NavOverlay extends Vue {
     }
 
     @media (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {
+      .overlay__wrapper {
+        padding-top: $verticalPadding * 4;
+        .navItems {
+          grid-template-columns: repeat(2, 1fr);
+          column-gap: $horizontalPadding;
+          row-gap: $verticalPadding;
+          .item {
+            font-size: 2.25rem;
+          }
+        }
+      }
+    }
+    @media (min-width: 800px) and (max-width: 850px) and (max-height: 400px) and (orientation: landscape) {
       .overlay__wrapper .navItems .item {
-        font-size: 2.25rem;
+        font-size: 1.75rem;
       }
     }
     @media (max-width: 750px) and (max-height: 450px) and (orientation: landscape) {
