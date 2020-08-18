@@ -8,7 +8,13 @@
         :alt="item.className"
         class="moving__item unselectable"
         :class="[{ rellax: item.isMoving }, item.className]"
-        :data-rellax-speed="item.isMoving ? 3 + getRandomInt(0, 3) : 0"
+        :data-rellax-speed="
+          item.isMoving
+            ? item.parallaxSpeed
+              ? item.parallaxSpeed
+              : 1 + getRandomInt(0, 4)
+            : 0
+        "
       />
     </div>
     <div class="static__container" ref="staticNav">
@@ -88,7 +94,7 @@
       </div>
       <div class="pizza__container rellax" data-rellax-speed="5">
         <img
-          src="@/assets/images/base.png"
+          src="@/assets/images/base.webp"
           alt="base"
           class="base unselectable"
           ref="base"
@@ -114,6 +120,7 @@ interface MovingItem {
   className: string;
   isMoving: boolean;
   direction: "top" | "bottom" | "left" | "right";
+  parallaxSpeed?: number;
 }
 
 interface Pizza {
@@ -163,7 +170,7 @@ export default class Hero extends Vue {
     {
       title: "Prosciutto e fungi",
       price: 25,
-      image: "funghi.png",
+      image: "funghi.webp",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
       movingItems: [
         {
@@ -200,7 +207,8 @@ export default class Hero extends Vue {
           image: "olives.png",
           className: "olives",
           isMoving: true,
-          direction: "left"
+          direction: "left",
+          parallaxSpeed: 10
         },
         {
           image: "pepper1.png",
@@ -224,7 +232,8 @@ export default class Hero extends Vue {
           image: "basil4.png",
           className: "basil4",
           isMoving: true,
-          direction: "bottom"
+          direction: "bottom",
+          parallaxSpeed: 10
         },
         {
           image: "pepper2.png",
@@ -237,7 +246,7 @@ export default class Hero extends Vue {
     {
       title: "Capresse",
       price: 25,
-      image: "capresse.png",
+      image: "capresse.webp",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
       movingItems: [
         {
@@ -335,14 +344,15 @@ export default class Hero extends Vue {
     {
       title: "Parma",
       price: 25,
-      image: "parma.png",
+      image: "parma.webp",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
       movingItems: [
         {
           image: "olives.png",
           className: "olives",
           isMoving: true,
-          direction: "left"
+          direction: "left",
+          parallaxSpeed: 10
         },
         {
           image: "cheese1.png",
@@ -372,13 +382,15 @@ export default class Hero extends Vue {
           image: "basil3.png",
           className: "basil3",
           isMoving: true,
-          direction: "bottom"
+          direction: "bottom",
+          parallaxSpeed: 10
         },
         {
           image: "basil4.png",
           className: "basil4",
           isMoving: true,
-          direction: "bottom"
+          direction: "bottom",
+          parallaxSpeed: 10
         },
         {
           image: "cheese2.png",
@@ -608,7 +620,7 @@ export default class Hero extends Vue {
   width: 100%;
   height: 100vh;
   @include backgroundDefault;
-  background-image: url("../assets/images/bg.png");
+  background-image: url("../assets/images/bg.jpg");
   position: relative;
   .static__container {
     position: static;

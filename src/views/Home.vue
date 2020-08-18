@@ -3,13 +3,19 @@
     <Hero />
     <section class="introduction">
       <div class="introduction__container">
-        <div class="introduction__item informative__item">
+        <div
+          class="introduction__item informative__item"
+          v-if="pizzaOfTheMonth.image"
+        >
+          <div class="image__wrapper">
+            <img
+              :src="pizzaOfTheMonth.image.fields.file.url"
+              alt="item.image"
+              class="unselectable"
+            />
+          </div>
           <div
-            v-if="pizzaOfTheMonth"
             class="description__container subItem__container pizzaOfTheMonth"
-            :style="{
-              backgroundImage: `url(${pizzaOfTheMonth.image.fields.file.url})`
-            }"
           >
             <div class="description__wrapper">
               <h1>{{ pizzaOfTheMonth.name }}</h1>
@@ -22,20 +28,6 @@
                   Zamów teraz
                 </button>
               </div>
-            </div>
-          </div>
-          <div
-            class="description__container subItem__container"
-            :style="{
-              backgroundImage:
-                'url(' + require('@/assets/images/introduction/pizza.jpg') + ')'
-            }"
-          >
-            <div class="description__wrapper">
-              <h1>Nadal pracujemy!</h1>
-              <p>
-                Zamów i opłać online. Odbierz bez kontaktu z kurierem!
-              </p>
             </div>
           </div>
         </div>
@@ -107,7 +99,7 @@ export default class Home extends Vue {
         "Naszą misją jest, aby każdy czuł się jak u siebie w domu. Rodzina odgrywa niezwykle istotną rolę w życiu każdego człowieka. To wśród najbliższych nabywamy podstawową wiedzę i umiejętności niezbędne do funkcjonowania w rzeczywistości społecznej.",
         "Rodzice i krewni stają się przykładem dla dzieci, które, jak wiadomo nie od dziś, najszybciej uczą się poprzez obserwację i naśladownictwo dorosłych."
       ],
-      image: "slide1.png"
+      image: "slide1.jpg"
     },
     {
       title: "Nasze menu na miejscu",
@@ -116,7 +108,7 @@ export default class Home extends Vue {
         "Tradycyjne receptury, przekazywane z pokolenia na pokolenie, staranny dobór składników i kadra kucharzy z pasją, pozwalają częstować naszych klientów daniami o wspaniałym smaku.",
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
-      image: "slide1.png"
+      image: "slide2.jpg"
     },
     {
       title: "Nasze menu na dowóz",
@@ -125,7 +117,7 @@ export default class Home extends Vue {
         "Tradycyjne receptury, przekazywane z pokolenia na pokolenie, staranny dobór składników i kadra kucharzy z pasją, pozwalającą częstować naszych klientów daniami o wspaniałym smaku.",
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
-      image: "slide3.png"
+      image: "slide3.jpg"
     }
   ];
   get overlayLoading() {
@@ -231,6 +223,14 @@ export default class Home extends Vue {
     }
   }
   @media (min-width: 360px) and (min-height: 650px) {
+    .introduction .introduction__container .introduction__item {
+      .description__container {
+        .description__wrapper {
+          padding-top: $verticalPadding * 3 / 4;
+          padding-bottom: $verticalPadding * 3 / 4;
+        }
+      }
+    }
   }
   @media (min-width: 450px) and (min-height: 500px) {
   }
@@ -307,6 +307,16 @@ export default class Home extends Vue {
       }
     }
   }
+  @media (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {
+    .introduction .introduction__container .introduction__item {
+      .description__container {
+        .description__wrapper {
+          padding-top: $verticalPadding;
+          padding-bottom: $verticalPadding;
+        }
+      }
+    }
+  }
   @media (min-width: 1024px) and (min-height: 500px) {
     .introduction .introduction__container .introduction__item {
       .description__container {
@@ -353,10 +363,16 @@ export default class Home extends Vue {
       .description__wrapper {
       padding: $verticalPadding / 4 $horizontalPadding * 3 / 4;
       h1 {
-        font-size: 3rem;
+        font-size: 2.75rem;
       }
       h2 {
         font-size: 2rem;
+      }
+      @media (max-height: 900px) {
+        padding: $verticalPadding / 2 $horizontalPadding * 3 / 4;
+        h1 {
+          font-size: 2.75rem;
+        }
       }
     }
   }
