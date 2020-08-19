@@ -28,9 +28,6 @@
             data-aos-duration="800"
             data-aos-delay="200"
           >
-            <h2>
-              {{ item.fields.title }}
-            </h2>
             <svg
               width="63"
               height="10"
@@ -43,6 +40,9 @@
                 fill-rule="evenodd"
               ></path>
             </svg>
+            <h2>
+              {{ item.fields.title }}
+            </h2>
           </div>
 
           <PhotoGallery
@@ -146,6 +146,9 @@ export default class GalleryItem extends Vue {
           font-size: 1.75rem;
         }
       }
+    }
+    @media (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {
+      padding-top: $verticalPadding * 4;
     }
     @media (min-width: 1024px) and (min-height: 500px) {
       > h1 {

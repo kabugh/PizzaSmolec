@@ -161,6 +161,7 @@ export default class OurQuality extends Vue {
 @import "@/assets/scss/global.scss";
 
 .ourQuality {
+  padding-top: $verticalPadding;
   width: 100%;
   color: black;
   .ourQuality__container {

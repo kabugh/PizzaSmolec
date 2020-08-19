@@ -51,19 +51,21 @@ const routes: Array<RouteConfig> = [
       import(/* webpackChunkName: "galleryItem" */ "../views/GalleryItem.vue"),
     props: true,
     beforeEnter: overlayGuard
+  },
+  {
+    path: "/dostawa",
+    name: "Delivery",
+    component: () =>
+      import(/* webpackChunkName: "delivery" */ "../views/Delivery.vue"),
+    beforeEnter: overlayGuard
+  },
+  {
+    path: "/kontakt",
+    name: "Contact",
+    component: () =>
+      import(/* webpackChunkName: "contact" */ "../views/Contact.vue"),
+    beforeEnter: overlayGuard
   }
-  // {
-  //   path: "/dostawa",
-  //   name: "Delivery",
-  //   component: () =>
-  //     import(/* webpackChunkName: "delivery" */ "../views/Delivery.vue")
-  // },
-  // {
-  //   path: "/kontakt",
-  //   name: "Contact",
-  //   component: () =>
-  //     import(/* webpackChunkName: "contact" */ "../views/Contact.vue")
-  // }
 ];
 
 const router = new VueRouter({

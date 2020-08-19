@@ -68,6 +68,9 @@ export default class OurCentrum extends Vue {
         font-size: 2.25rem;
       }
     }
+    @media (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {
+      padding-top: $verticalPadding * 4;
+    }
   }
 }
 </style>

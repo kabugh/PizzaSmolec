@@ -224,7 +224,7 @@ export default class PhotoGallery extends Vue {
         }
       }
       .grid {
-        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
       }
     }
     @media (min-width: 1024px) {
