@@ -1,5 +1,10 @@
 <template>
-  <nav class="navbar" :class="{ hiddenNavbar: !showNavbar && !isNavOpen }">
+  <nav
+    class="navbar"
+    :class="{
+      hiddenNavbar: !showNavbar && (!isNavOpen || !$route.meta.initialNav)
+    }"
+  >
     <div class="back__wrapper" v-if="$route.path !== '/'">
       <div class="arrow" @click="$router.go(-1)"></div>
       <div class="back" @click="$router.go(-1)">Powrót</div>

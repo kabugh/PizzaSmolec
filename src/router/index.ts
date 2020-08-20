@@ -15,34 +15,49 @@ const routes: Array<RouteConfig> = [
     path: "/",
     name: "Home",
     component: Home,
-    beforeEnter: overlayGuard
+    beforeEnter: overlayGuard,
+    meta: {
+      initialNav: false
+    }
   },
   {
     path: "/menu",
     name: "Menu",
     component: () => import(/* webpackChunkName: "menu" */ "../views/Menu.vue"),
-    beforeEnter: overlayGuard
+    beforeEnter: overlayGuard,
+    meta: {
+      initialNav: true
+    }
   },
   {
     path: "/nasza-jakosc",
     name: "OurQuality",
     component: () =>
       import(/* webpackChunkName: "ourQuality" */ "../views/OurQuality.vue"),
-    beforeEnter: overlayGuard
+    beforeEnter: overlayGuard,
+    meta: {
+      initialNav: true
+    }
   },
   {
     path: "/nasze-centrum",
     name: "OurCentrum",
     component: () =>
       import(/* webpackChunkName: "ourCentrum" */ "../views/OurCentrum.vue"),
-    beforeEnter: overlayGuard
+    beforeEnter: overlayGuard,
+    meta: {
+      initialNav: false
+    }
   },
   {
     path: "/galeria",
     name: "Gallery",
     component: () =>
       import(/* webpackChunkName: "gallery" */ "../views/Gallery.vue"),
-    beforeEnter: overlayGuard
+    beforeEnter: overlayGuard,
+    meta: {
+      initialNav: true
+    }
   },
   {
     path: "/galeria/:name",
@@ -50,21 +65,30 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import(/* webpackChunkName: "galleryItem" */ "../views/GalleryItem.vue"),
     props: true,
-    beforeEnter: overlayGuard
+    beforeEnter: overlayGuard,
+    meta: {
+      initialNav: true
+    }
   },
   {
     path: "/dostawa",
     name: "Delivery",
     component: () =>
       import(/* webpackChunkName: "delivery" */ "../views/Delivery.vue"),
-    beforeEnter: overlayGuard
+    beforeEnter: overlayGuard,
+    meta: {
+      initialNav: true
+    }
   },
   {
     path: "/kontakt",
     name: "Contact",
     component: () =>
       import(/* webpackChunkName: "contact" */ "../views/Contact.vue"),
-    beforeEnter: overlayGuard
+    beforeEnter: overlayGuard,
+    meta: {
+      initialNav: true
+    }
   }
 ];
 
