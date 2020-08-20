@@ -1,21 +1,27 @@
 <template>
   <header class="hero">
     <div class="moving__items" ref="movingItems">
-      <img
+      <div
+        class="moving__item--container"
         v-for="(item, index) in currentPizza.movingItems"
         :key="index"
-        :src="require(`@/assets/images/pizzaAssets/${item.image}`)"
-        :alt="item.className"
-        class="moving__item unselectable"
-        :class="[{ rellax: item.isMoving }, item.className]"
-        :data-rellax-speed="
-          item.isMoving
-            ? item.parallaxSpeed
+        ref="movingItem"
+        :class="item.className"
+      >
+        <img
+          :src="require(`@/assets/images/pizzaAssets/${item.image}`)"
+          :alt="item.className"
+          class="moving__item unselectable"
+          :class="[{ rellax: item.isMoving }]"
+          :data-rellax-speed="
+            item.isMoving
               ? item.parallaxSpeed
-              : 1 + getRandomInt(0, 4)
-            : 0
-        "
-      />
+                ? item.parallaxSpeed
+                : 1 + getRandomInt(0, 4)
+              : 0
+          "
+        />
+      </div>
     </div>
     <div class="static__container" ref="staticNav">
       <div class="burger__container">
@@ -478,18 +484,56 @@ export default class Hero extends Vue {
     const pizza = this.$refs.pizza;
     const base = this.$refs.base;
     const desc = this.$refs.desc;
-    const movingItems = this.$refs.movingItems;
     const staticNav = this.$refs.staticNav;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const movingItem: any = this.$refs.movingItem;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const ar: any = [].slice.call(movingItem);
 
     const tl = new TimelineMax();
 
-    tl.from(base, {
-      duration: 1.5,
-      opacity: 0,
-      ease: "power4",
-      y: -50,
+    tl.set(ar, {
+      autoAlpha: 0,
+      y: 150,
       delay: 1
-    }).to(base, { y: 0, opacity: 1 });
+    });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (tl as any).staggerTo(
+      ar,
+      2,
+      {
+        ease: "expo",
+        autoAlpha: 1,
+        y: 0
+      },
+      0.15
+    );
+    // tl.from(
+    //   movingItems,
+    //   {
+    //     duration: 2,
+    //     opacity: 0,
+    //     ease: "expo",
+    //     y: 150
+    //   },
+    //   "-=1"
+    // ).to(movingItems, {
+    //   opacity: 1,
+    //   y: 0
+    // });
+
+    tl.from(
+      base,
+      {
+        duration: 1.5,
+        opacity: 0,
+        ease: "power4",
+        y: -50
+      },
+      "-=2.5"
+    );
+
     tl.from(
       pizza,
       {
@@ -498,7 +542,7 @@ export default class Hero extends Vue {
         ease: "expo",
         y: -150
       },
-      "-=1.5"
+      "-=2"
     );
 
     tl.from(
@@ -509,22 +553,8 @@ export default class Hero extends Vue {
         ease: "power4",
         y: -50
       },
-      "-=1.5"
-    );
-
-    tl.from(
-      movingItems,
-      {
-        duration: 2,
-        opacity: 0,
-        ease: "expo",
-        y: 150
-      },
       "-=1"
-    ).to(movingItems, {
-      opacity: 1,
-      y: 0
-    });
+    );
 
     tl.from(
       staticNav,
@@ -537,17 +567,34 @@ export default class Hero extends Vue {
       "-=2"
     ).to(staticNav, {
       opacity: 1,
-      y: 0
+      y: 0,
+      delay: 1
     });
 
-    tl.addPause(6, () => this.changeAnimation());
+    tl.addPause(8, () => this.changeAnimation());
   }
 
   changeAnimation() {
     const pizza = this.$refs.pizza;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const movingItems: any = this.$refs.movingItems;
+    const movingItem: any = this.$refs.movingItem;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const ar: any = [].slice.call(movingItem);
+
     const tl = new TimelineMax({ repeat: -1, repeatDelay: 8 });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (tl as any).staggerTo(
+      ar,
+      2,
+      {
+        autoAlpha: 0,
+        opacity: 0,
+        ease: "expo",
+        y: 150
+      },
+      0.1
+    );
 
     tl.from(
       pizza,
@@ -557,46 +604,41 @@ export default class Hero extends Vue {
         ease: "expo",
         y: 0
       },
+      "-=6"
+    ).to(
+      pizza,
+      {
+        opacity: 0,
+        y: 150,
+        onComplete: () => this.updatePizzaIndex()
+      },
       "-=1.5"
-    ).to(pizza, { opacity: 0, y: 150 });
+    );
+
+    tl.set(ar, { autoAlpha: 0, y: 150 });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (tl as any).staggerTo(
+      ar,
+      3,
+      {
+        autoAlpha: 1,
+        ease: "expo",
+        y: 0,
+        delay: 1
+      },
+      0.15
+    );
 
     tl.from(
-      movingItems,
+      pizza,
       {
         duration: 2,
-        opacity: 1,
-        ease: "expo",
-        y: 0
-      },
-      "-=3.5"
-    ).to(movingItems, {
-      opacity: 0,
-      y: 150,
-      onComplete: () => {
-        movingItems.style.opacity = "0";
-        this.updatePizzaIndex();
-        movingItems.style.opacity = "0";
-      }
-    });
-
-    tl.from(pizza, {
-      duration: 2,
-      opacity: 0,
-      ease: "expo",
-      y: -150,
-      delay: 1
-    });
-
-    tl.from(
-      movingItems,
-      {
-        duration: 1,
         opacity: 0,
         ease: "expo",
-        y: 150
+        y: -150
       },
-      "-=1.5"
-    ).to(movingItems, { opacity: 1, y: 0 });
+      "-=3"
+    );
   }
 
   getRandomInt(min: number, max: number) {
@@ -679,11 +721,19 @@ export default class Hero extends Vue {
     height: 100%;
     top: 0;
     position: absolute;
-    .moving__item {
-      display: none;
-      position: absolute;
+    .moving__item--container {
       max-width: 15vw;
       max-height: 20vw;
+      position: absolute;
+      display: none;
+      visibility: hidden;
+      .moving__item {
+        max-width: 100%;
+        max-height: 100%;
+      }
+      &.visible {
+        visibility: visible;
+      }
       &.champ1 {
         left: -4vw;
         top: 35%;
@@ -1091,7 +1141,7 @@ export default class Hero extends Vue {
   @media (min-width: 1280px) and (min-height: 768px) {
     .moving__items {
       top: auto;
-      .moving__item {
+      .moving__item--container {
         display: block;
       }
     }
