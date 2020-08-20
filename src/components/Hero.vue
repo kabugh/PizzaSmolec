@@ -785,14 +785,14 @@ export default class Hero extends Vue {
         max-width: 5vw;
       }
       &.cheese1 {
-        left: 2vw;
+        left: -1vw;
         top: 40%;
-        max-width: 8vw;
+        max-width: 12vw;
       }
       &.desk {
         left: -3vh;
         bottom: -3vh;
-        max-width: 40vw;
+        max-width: 25vw;
       }
       &.rocket2 {
         bottom: 1vh;
@@ -804,7 +804,7 @@ export default class Hero extends Vue {
         left: 37.5%;
       }
       &.cheese2 {
-        bottom: 2vh;
+        bottom: -1vh;
         right: 15%;
       }
       &.rocket3 {
@@ -818,7 +818,7 @@ export default class Hero extends Vue {
       &.tomato1 {
         top: 5%;
         left: 4vh;
-        max-width: 6vw;
+        max-width: 8vw;
       }
       &.lamblettuce1 {
         top: 25%;
@@ -827,7 +827,7 @@ export default class Hero extends Vue {
       &.tomato2 {
         bottom: 1vh;
         left: 8vh;
-        max-width: 6vw;
+        max-width: 8vw;
       }
       &.lamblettuce2 {
         bottom: -2vh;
