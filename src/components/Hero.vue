@@ -108,7 +108,7 @@
           alt="pizza"
           class="pizza unselectable"
           ref="pizza"
-          v-scroll-to="'.introduction'"
+          v-scroll-to="'.greeting'"
         />
       </div>
     </div>
@@ -466,10 +466,6 @@ export default class Hero extends Vue {
     {
       title: "Gdzie dowozimy?",
       link: "/dostawa"
-    },
-    {
-      title: "Kontakt",
-      link: "/kontakt"
     }
   ];
 
@@ -493,7 +489,7 @@ export default class Hero extends Vue {
 
     tl.set(ar, {
       autoAlpha: 0,
-      y: 150,
+      y: 50,
       delay: 1
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -578,7 +574,7 @@ export default class Hero extends Vue {
         autoAlpha: 0,
         opacity: 0,
         ease: "expo",
-        y: 150
+        y: 50
       },
       0.1
     );
@@ -596,7 +592,7 @@ export default class Hero extends Vue {
       pizza,
       {
         opacity: 0,
-        y: 150,
+        y: 50,
         onComplete: () => this.updatePizzaIndex()
       },
       "-=1.5"
@@ -644,6 +640,7 @@ export default class Hero extends Vue {
   @include backgroundDefault;
   background-image: url("../assets/images/bg.jpg");
   position: relative;
+  z-index: 1;
   .static__container {
     position: static;
     display: grid;
@@ -996,7 +993,7 @@ export default class Hero extends Vue {
           .navItems {
             padding: $verticalPadding / 8 $horizontalPadding / 8;
             display: grid;
-            grid-template-columns: repeat(6, auto);
+            grid-template-columns: repeat(5, auto);
             grid-template-rows: 1fr;
             column-gap: $horizontalPadding / 8;
             background-color: rgba(0, 0, 0, 0.4);

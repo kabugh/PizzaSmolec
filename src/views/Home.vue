@@ -1,6 +1,45 @@
 <template>
   <section class="home">
     <Hero />
+    <section class="greeting">
+      <div class="greeting__container">
+        <div class="greeting__content">
+          <h1>
+            Witaj w Pizza Smolec - Tenis Planet!
+          </h1>
+          <h2>Na jaką pizzę masz dzisiaj ochotę?</h2>
+          <img
+            class="pizza rellax unselectable"
+            data-rellax-speed="-2"
+            data-rellax-percentage="0.5"
+            src="@/assets/images/funghi.webp"
+            alt="pizza1"
+          />
+          <img
+            class="pizza rellax unselectable"
+            data-rellax-speed="2"
+            data-rellax-percentage="0.5"
+            src="@/assets/images/capresse.webp"
+            alt="pizza2"
+          />
+          <p>Zajrzyj na nasze social media i bądź na bieżąco.</p>
+          <div class="socials__container">
+            <a
+              :href="item.link"
+              v-for="item in socialsItems"
+              :key="item.link"
+              target="_blank"
+            >
+              <img
+                :src="require(`@/assets/images/icons/${item.icon}`)"
+                alt="icon"
+                class="unselectable"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="introduction">
       <div class="introduction__container">
         <div
@@ -78,17 +117,20 @@ export default class Home extends Vue {
     this.overlayLoading = false;
   }
 
-  get pizzaOfTheMonth() {
-    return this.$store.getters.pizzaOfTheMonth;
-  }
-
-  set pizzaOfTheMonth(value) {
-    this.$store.commit("setPizzaOfTheMonth", value);
-  }
-
-  get loading() {
-    return this.$store.getters.loading;
-  }
+  socialsItems = [
+    {
+      icon: "ig_black.png",
+      link: "https://www.instagram.com/tenisplanet/"
+    },
+    {
+      icon: "fb_black.png",
+      link: "https://www.facebook.com/tenisplanetsmolec/"
+    },
+    {
+      icon: "yt_black.png",
+      link: "https://www.youtube.com/channel/UCKD_wDLcAK9FTLmjDOAyHhQ"
+    }
+  ];
 
   introductionItems: IntroductionItem[] = [
     {
@@ -120,6 +162,19 @@ export default class Home extends Vue {
       image: "slide3.jpg"
     }
   ];
+
+  get pizzaOfTheMonth() {
+    return this.$store.getters.pizzaOfTheMonth;
+  }
+
+  set pizzaOfTheMonth(value) {
+    this.$store.commit("setPizzaOfTheMonth", value);
+  }
+
+  get loading() {
+    return this.$store.getters.loading;
+  }
+
   get overlayLoading() {
     return this.$store.getters.overlayLoading;
   }
@@ -133,6 +188,75 @@ export default class Home extends Vue {
 @import "@/assets/scss/global.scss";
 .home {
   width: 100%;
+  .greeting {
+    width: 100%;
+    background-color: white;
+    z-index: 20;
+    overflow: hidden;
+    position: relative;
+    .greeting__container {
+      padding: $verticalPadding * 3 / 2 $horizontalPadding / 2;
+      color: black;
+      .greeting__content {
+        @include flex;
+        h1,
+        h2,
+        p {
+          text-align: center;
+        }
+        h1 {
+          font-weight: 700;
+          font-size: 1.25rem;
+        }
+        h2 {
+          font-size: 1.125rem;
+          padding: $verticalPadding / 4 0;
+        }
+        .pizza {
+          max-width: 30vw;
+          position: absolute;
+          left: -10rem;
+          top: 30%;
+          display: none;
+          &:last-of-type {
+            right: -10rem;
+            left: auto;
+          }
+          @media (min-width: 768px) and (min-height: 700px) {
+            display: block;
+          }
+        }
+        .socials__container {
+          @include flex;
+          flex-direction: row;
+          margin-top: $verticalPadding / 2;
+          > a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            padding: 1vh;
+            transition: background-color 0.2s linear 0s;
+            margin: 0 10px;
+            &:hover {
+              background-color: rgba(0, 0, 0, 0.1);
+            }
+            &:first-of-type {
+              margin-left: 0;
+            }
+            &:last-of-type {
+              margin-right: 0;
+            }
+
+            img {
+              width: 24px;
+              height: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
   .introduction {
     width: 100%;
     .introduction__container {
@@ -233,8 +357,24 @@ export default class Home extends Vue {
     }
   }
   @media (min-width: 450px) and (min-height: 500px) {
+    .greeting .greeting__container .greeting__content {
+      h1 {
+        font-size: 1.5rem;
+      }
+      h2 {
+        font-size: 1.25rem;
+      }
+    }
   }
   @media (min-width: 768px) and (min-height: 500px) {
+    .greeting .greeting__container .greeting__content {
+      h1 {
+        font-size: 1.75rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+    }
     .introduction .introduction__container .introduction__item {
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: 1fr;
@@ -318,6 +458,21 @@ export default class Home extends Vue {
     }
   }
   @media (min-width: 1024px) and (min-height: 500px) {
+    .greeting .greeting__container .greeting__content {
+      h1 {
+        font-size: 2.25rem;
+      }
+      h2 {
+        font-size: 1.75rem;
+      }
+      p {
+        font-size: 1.125rem;
+      }
+      .socials__container > a img {
+        width: 36px;
+        height: 36px;
+      }
+    }
     .introduction .introduction__container .introduction__item {
       .description__container {
         grid-row: 1;
@@ -340,6 +495,11 @@ export default class Home extends Vue {
   @media (min-width: 1024px) and (min-height: 500px) and (hover: hover) and (pointer: fine) {
   }
   @media (min-width: 1280px) and (min-height: 500px) {
+    .greeting .greeting__container .greeting__content {
+      h1 {
+        font-size: 2.5rem;
+      }
+    }
     .introduction .introduction__container .introduction__item {
       grid-template-rows: minmax(20vh, auto);
       .description__container {
@@ -356,6 +516,17 @@ export default class Home extends Vue {
     }
   }
   @media (min-width: 1650px) and (min-height: 500px) {
+    .greeting .greeting__container .greeting__content {
+      h1 {
+        font-size: 2.75rem;
+      }
+      h2 {
+        font-size: 2rem;
+      }
+      p {
+        font-size: 1.25rem;
+      }
+    }
     .introduction
       .introduction__container
       .introduction__item
@@ -377,6 +548,17 @@ export default class Home extends Vue {
     }
   }
   @media (min-width: 1850px) and (min-height: 500px) {
+    .greeting .greeting__container .greeting__content {
+      h1 {
+        font-size: 3.5rem;
+      }
+      h2 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+    }
     .introduction
       .introduction__container
       .introduction__item
