@@ -59,10 +59,6 @@ export default class NavOverlay extends Vue {
     {
       title: "Gdzie dowozimy?",
       link: "/dostawa"
-    },
-    {
-      title: "Kontakt",
-      link: "/kontakt"
     }
   ];
   get filteredNavItems() {

@@ -79,16 +79,6 @@ const routes: Array<RouteConfig> = [
     meta: {
       initialNav: true
     }
-  },
-  {
-    path: "/kontakt",
-    name: "Contact",
-    component: () =>
-      import(/* webpackChunkName: "contact" */ "../views/Contact.vue"),
-    beforeEnter: overlayGuard,
-    meta: {
-      initialNav: true
-    }
   }
 ];
 
