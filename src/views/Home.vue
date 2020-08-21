@@ -202,7 +202,7 @@ export default class Home extends Vue {
               justify-content: flex-start;
               flex-direction: row;
               .price__tag {
-                background-color: $invertedColor;
+                background-color: $mainColor;
                 color: $brandColor;
                 padding: 14px 10px;
                 text-align: center;

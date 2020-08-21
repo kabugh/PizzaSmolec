@@ -2,7 +2,7 @@
   <nav
     class="navbar"
     :class="{
-      hiddenNavbar: !showNavbar && (!isNavOpen || !$route.meta.initialNav)
+      hiddenNavbar: !showNavbar && !isNavOpen
     }"
   >
     <div class="back__wrapper" v-if="$route.path !== '/'">
@@ -38,6 +38,7 @@ export default class TheNavbar extends Vue {
   showNavbar = false;
 
   mounted() {
+    if (this.$route.meta.initialNav) this.showNavbar = true;
     this.lastScrollPosition = window.pageYOffset;
     window.addEventListener("scroll", this.onScroll);
   }

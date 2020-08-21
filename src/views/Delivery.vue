@@ -56,7 +56,9 @@
         fullscreenControl: true,
         disableDefaultUi: false
       }"
+      ref="map"
     >
+      <gmap-polygon :paths="paths" ref="polygon"> </gmap-polygon>
       <GmapMarker
         :position="{ lat: 51.0840755, lng: 16.9018066 }"
         :clickable="false"
@@ -68,10 +70,12 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { gmapApi } from "gmap-vue";
 
 @Component
 export default class Delivery extends Vue {
   inRange = false;
+  google = gmapApi;
 
   mounted() {
     this.overlayLoading = false;
@@ -80,8 +84,27 @@ export default class Delivery extends Vue {
   }
 
   checkDelivery(address: any) {
-    console.log(address);
+    const lat = address.geometry.location.lat();
+    const lng = address.geometry.location.lng();
+    const point = { lat, lng };
+    console.log(this.$refs.polygon);
+    // console.log(
+    //   this.google().maps.geometry.poly.containsLocation(
+    //     point,
+    //     this.$refs.polygon.paths
+    //   )
+    // );
   }
+
+  paths = [
+    { lat: 51.063485, lng: 16.871395 },
+    { lat: 51.076826, lng: 16.906189 },
+    { lat: 51.086575, lng: 16.92787 },
+    { lat: 51.097788, lng: 16.926839 },
+    { lat: 51.097788, lng: 16.926839 },
+    { lat: 51.095135, lng: 16.902984 },
+    { lat: 51.084666, lng: 16.856313 }
+  ];
 
   get overlayLoading() {
     return this.$store.getters.overlayLoading;

@@ -64,13 +64,11 @@
       >
         <div class="pizza__description--container" ref="desc">
           <div class="title__container">
-            <transition name="fade">
-              <h1>
-                Pizza <span>{{ currentPizza.title }}</span>
-              </h1>
-            </transition>
+            <h1>
+              Pizza <span>{{ currentPizza.title }}</span>
+            </h1>
             <div class="button__container">
-              <div class="price__tag">30 zł</div>
+              <div class="price__tag">{{ currentPizza.price }} zł</div>
               <button type="button" @click="$router.push('/menu')">
                 Zamów teraz
               </button>
@@ -251,7 +249,7 @@ export default class Hero extends Vue {
     },
     {
       title: "Capresse",
-      price: 25,
+      price: 27,
       image: "capresse.webp",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
       movingItems: [
@@ -349,7 +347,7 @@ export default class Hero extends Vue {
     },
     {
       title: "Parma",
-      price: 25,
+      price: 30,
       image: "parma.webp",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
       movingItems: [
@@ -501,7 +499,7 @@ export default class Hero extends Vue {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (tl as any).staggerTo(
       ar,
-      2,
+      1.5,
       {
         ease: "expo",
         autoAlpha: 1,
@@ -509,19 +507,6 @@ export default class Hero extends Vue {
       },
       0.15
     );
-    // tl.from(
-    //   movingItems,
-    //   {
-    //     duration: 2,
-    //     opacity: 0,
-    //     ease: "expo",
-    //     y: 150
-    //   },
-    //   "-=1"
-    // ).to(movingItems, {
-    //   opacity: 1,
-    //   y: 0
-    // });
 
     tl.from(
       base,
@@ -571,7 +556,8 @@ export default class Hero extends Vue {
       delay: 1
     });
 
-    tl.addPause(8, () => this.changeAnimation());
+    const delay = 8;
+    tl.addPause(delay, () => this.changeAnimation());
   }
 
   changeAnimation() {
@@ -580,8 +566,9 @@ export default class Hero extends Vue {
     const movingItem: any = this.$refs.movingItem;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ar: any = [].slice.call(movingItem);
+    const delay = 8;
 
-    const tl = new TimelineMax({ repeat: -1, repeatDelay: 8 });
+    const tl = new TimelineMax({ repeat: -1, repeatDelay: delay });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (tl as any).staggerTo(
@@ -604,7 +591,7 @@ export default class Hero extends Vue {
         ease: "expo",
         y: 0
       },
-      "-=6"
+      "-=5"
     ).to(
       pizza,
       {
@@ -619,14 +606,15 @@ export default class Hero extends Vue {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (tl as any).staggerTo(
       ar,
-      3,
+      1.5,
       {
         autoAlpha: 1,
         ease: "expo",
         y: 0,
         delay: 1
       },
-      0.15
+      0.15,
+      "-=1"
     );
 
     tl.from(
@@ -650,14 +638,6 @@ export default class Hero extends Vue {
 </script>
 <style lang="scss">
 @import "@/assets/scss/global.scss";
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
 .hero {
   width: 100%;
   height: 100vh;

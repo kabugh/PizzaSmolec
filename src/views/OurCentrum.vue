@@ -8,9 +8,17 @@
       >
         <div class="description__container">
           <div class="description__wrapper">
-            <h1>{{ item.title }}</h1>
-            <h2>{{ item.subTitle }}</h2>
-            <p v-for="(paragraph, i) in item.paragraphs" :key="i">
+            <h1 data-aos="fade-up" data-aos-duration="800">{{ item.title }}</h1>
+            <h2 data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+              {{ item.subTitle }}
+            </h2>
+            <p
+              data-aos="fade-up"
+              data-aos-duration="800"
+              :data-aos-delay="150 + i * 50"
+              v-for="(paragraph, i) in item.paragraphs"
+              :key="i"
+            >
               {{ paragraph }}
             </p>
           </div>
@@ -90,6 +98,7 @@ export default class OurCentrum extends Vue {
     grid-template-rows: 1fr;
     align-items: center;
     justify-content: center;
+    overflow-y: hidden;
     .ourCentrum__item {
       width: 100%;
       min-height: 30vh;
@@ -98,6 +107,7 @@ export default class OurCentrum extends Vue {
       grid-template-rows: 0.4fr auto;
       justify-content: center;
       align-items: center;
+      overflow-y: hidden;
       .description__container {
         width: 100%;
         height: 100%;
