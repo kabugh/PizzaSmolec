@@ -2,7 +2,7 @@
   <header class="hero">
     <div class="moving__items" ref="movingItems">
       <div
-        class="moving__item--container"
+        class="moving__item--container bounce"
         v-for="(item, index) in currentPizza.movingItems"
         :key="index"
         ref="movingItem"
@@ -151,6 +151,7 @@ interface NavItem {
 @Component
 export default class Hero extends Vue {
   activePizzaIndex = 0;
+  bounce: any = {};
 
   mounted() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -474,6 +475,12 @@ export default class Hero extends Vue {
     else this.activePizzaIndex = 0;
   }
 
+  wait(timeout: number) {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+    });
+  }
+
   startAnimation() {
     const pizza = this.$refs.pizza;
     const base = this.$refs.base;
@@ -489,7 +496,7 @@ export default class Hero extends Vue {
 
     tl.set(ar, {
       autoAlpha: 0,
-      y: 50,
+      y: 100,
       delay: 1
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -501,7 +508,19 @@ export default class Hero extends Vue {
         autoAlpha: 1,
         y: 0
       },
-      0.15
+      0.15,
+      ar.forEach(async (item: any) => {
+        item.style.setProperty(
+          "animation-delay",
+          this.getRandomInt(0, 8) / 4 + "s"
+        );
+        item.style.setProperty(
+          "animation-duration",
+          this.getRandomInt(4, 8) / 4 + "s"
+        );
+        await this.wait(4000);
+        item.style.setProperty("animation-name", "bounce");
+      })
     );
 
     tl.from(
@@ -553,7 +572,12 @@ export default class Hero extends Vue {
     });
 
     const delay = 8;
-    tl.addPause(delay, () => this.changeAnimation());
+    tl.addPause(delay, () => {
+      // ar.forEach((item: any) => {
+      //   item.classList.remove("bounce");
+      // });
+      this.changeAnimation();
+    });
   }
 
   changeAnimation() {
@@ -574,7 +598,7 @@ export default class Hero extends Vue {
         autoAlpha: 0,
         opacity: 0,
         ease: "expo",
-        y: 50
+        y: 100
       },
       0.1
     );
@@ -593,12 +617,17 @@ export default class Hero extends Vue {
       {
         opacity: 0,
         y: 50,
-        onComplete: () => this.updatePizzaIndex()
+        onComplete: () => {
+          ar.forEach((item: any) => {
+            item.classList.remove("bounce");
+          });
+          this.updatePizzaIndex();
+        }
       },
       "-=1.5"
     );
 
-    tl.set(ar, { autoAlpha: 0, y: 150 });
+    tl.set(ar, { autoAlpha: 0, y: 100 });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (tl as any).staggerTo(
       ar,
@@ -610,7 +639,18 @@ export default class Hero extends Vue {
         delay: 1
       },
       0.15,
-      "-=1"
+      ar.forEach(async (item: any) => {
+        item.style.setProperty(
+          "animation-delay",
+          this.getRandomInt(0, 8) / 4 + "s"
+        );
+        item.style.setProperty(
+          "animation-duration",
+          this.getRandomInt(4, 8) / 4 + "s"
+        );
+        await this.wait(4000);
+        item.classList.add("bounce");
+      })
     );
 
     tl.from(
@@ -710,6 +750,19 @@ export default class Hero extends Vue {
       }
       &.visible {
         visibility: visible;
+      }
+      &.bounce {
+        animation-direction: alternate;
+        animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+        animation-iteration-count: infinite;
+      }
+      @keyframes bounce {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(8px);
+        }
       }
       &.champ1 {
         left: -4vw;

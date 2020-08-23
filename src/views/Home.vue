@@ -469,8 +469,8 @@ export default class Home extends Vue {
         font-size: 1.125rem;
       }
       .socials__container > a img {
-        width: 36px;
-        height: 36px;
+        width: 28px;
+        height: 28px;
       }
     }
     .introduction .introduction__container .introduction__item {
