@@ -958,7 +958,6 @@ export default class Hero extends Vue {
               text-align: center;
               font-weight: 700;
               font-size: 0.875rem;
-              height: 100%;
             }
             button {
               background-color: $mainColor;
@@ -984,7 +983,7 @@ export default class Hero extends Vue {
             column-gap: $horizontalPadding;
             align-items: center;
             justify-content: center;
-            height: 100%;
+            // height: 100%;
             img {
               width: 36px;
               height: 36px;
@@ -1095,7 +1094,7 @@ export default class Hero extends Vue {
               column-gap: $horizontalPadding / 6;
 
               &:first-of-type {
-                margin-bottom: 10vh;
+                margin: $verticalPadding 0;
               }
               img {
                 width: 48px;
