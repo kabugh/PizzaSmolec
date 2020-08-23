@@ -1027,6 +1027,9 @@ export default class Hero extends Vue {
         &:hover {
           cursor: pointer;
         }
+        &.parma {
+          background-image: url("../assets/images/parma.png");
+        }
       }
     }
   }
