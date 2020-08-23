@@ -99,12 +99,14 @@
       <div class="pizza__container rellax" data-rellax-speed="5">
         <img
           src="@/assets/images/base.webp"
+          srcset="@/assets/images/base.png"
           alt="base"
           class="base unselectable"
           ref="base"
         />
         <img
           :src="require(`@/assets/images/${currentPizza.image}`)"
+          :srcset="require(`@/assets/images/${currentPizza.alternativeImg}`)"
           alt="pizza"
           class="pizza unselectable"
           ref="pizza"
@@ -131,6 +133,7 @@ interface Pizza {
   title: string;
   price: number;
   image: string;
+  alternativeImg: string;
   ingredients: string[];
   movingItems?: MovingItem[];
 }
@@ -176,6 +179,7 @@ export default class Hero extends Vue {
       title: "Prosciutto e fungi",
       price: 25,
       image: "funghi.webp",
+      alternativeImg: "funghi.png",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
       movingItems: [
         {
@@ -252,6 +256,7 @@ export default class Hero extends Vue {
       title: "Capresse",
       price: 27,
       image: "capresse.webp",
+      alternativeImg: "capresse.png",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
       movingItems: [
         {
@@ -350,6 +355,7 @@ export default class Hero extends Vue {
       title: "Parma",
       price: 30,
       image: "parma.webp",
+      alternativeImg: "parma.png",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
       movingItems: [
         {
@@ -963,7 +969,6 @@ export default class Hero extends Vue {
               background-color: $mainColor;
               color: $secondaryColor;
               border: none;
-              height: 100%;
               font-size: 0.875rem;
               padding: 8px 16px;
               &:hover {
@@ -1018,7 +1023,6 @@ export default class Hero extends Vue {
         max-height: 90%;
         margin-top: -1vh;
         z-index: 5;
-
         transform-origin: center;
         &:hover {
           cursor: pointer;
