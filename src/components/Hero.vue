@@ -110,7 +110,7 @@
           alt="pizza"
           class="pizza unselectable"
           ref="pizza"
-          v-scroll-to="'.greeting'"
+          v-scroll-to="'.introduction'"
         />
       </div>
     </div>

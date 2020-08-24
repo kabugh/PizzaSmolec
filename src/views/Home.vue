@@ -1,61 +1,49 @@
 <template>
   <section class="home">
     <Hero />
-    <section class="greeting">
-      <div class="greeting__container">
-        <div class="greeting__content">
-          <h1>
-            Witaj w Pizza Smolec - Tenis Planet!
-          </h1>
-          <h2>Na jaką pizzę masz dzisiaj ochotę?</h2>
-          <img
-            class="pizza rellax unselectable"
-            data-rellax-speed="-2"
-            data-rellax-percentage="0.5"
-            src="@/assets/images/funghi.webp"
-            alt="pizza1"
-          />
-          <img
-            class="pizza rellax unselectable"
-            data-rellax-speed="2"
-            data-rellax-percentage="0.5"
-            src="@/assets/images/capresse.webp"
-            alt="pizza2"
-          />
-          <p>Zajrzyj na nasze social media i bądź na bieżąco.</p>
-          <div class="socials__container">
-            <a
-              :href="item.link"
-              v-for="item in socialsItems"
-              :key="item.link"
-              target="_blank"
-            >
-              <img
-                :src="require(`@/assets/images/icons/${item.icon}`)"
-                alt="icon"
-                class="unselectable"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
     <section class="introduction">
       <div class="introduction__container">
-        <div
-          class="introduction__item informative__item"
-          v-if="pizzaOfTheMonth.image"
-        >
+        <div class="introduction__item greeting">
           <div class="image__wrapper">
+            <img
+              src="@/assets/images/dough.jpg"
+              alt="item.image"
+              class="unselectable"
+            />
+          </div>
+          <div class="description__container">
+            <div class="description__wrapper">
+              <h1>
+                Witaj w Pizza Smolec - Tenis Planet!
+              </h1>
+              <h2>Na jaką pizzę masz dzisiaj ochotę?</h2>
+              <p>Zajrzyj na nasze social media i bądź na bieżąco.</p>
+              <div class="socials__container">
+                <a
+                  :href="item.link"
+                  v-for="item in socialsItems"
+                  :key="item.link"
+                  target="_blank"
+                >
+                  <img
+                    :src="require(`@/assets/images/icons/${item.icon}`)"
+                    alt="icon"
+                    class="unselectable"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="introduction__item" v-if="pizzaOfTheMonth.image">
+          <div class="image__wrapper pizzaItem">
             <img
               :src="pizzaOfTheMonth.image.fields.file.url"
               alt="item.image"
               class="unselectable"
             />
           </div>
-          <div
-            class="description__container subItem__container pizzaOfTheMonth"
-          >
+          <div class="description__container pizzaOfTheMonth">
             <div class="description__wrapper">
               <h1>{{ pizzaOfTheMonth.name }}</h1>
               <p>
@@ -75,7 +63,10 @@
           v-for="(item, index) in introductionItems"
           :key="index"
         >
-          <div class="description__container">
+          <div
+            class="description__container"
+            :style="{ backgroundColor: item.backgroundColor }"
+          >
             <div class="description__wrapper">
               <h1>{{ item.title }}</h1>
               <h2>{{ item.subTitle }}</h2>
@@ -84,7 +75,7 @@
               </p>
             </div>
           </div>
-          <div class="image__wrapper">
+          <div class="image__wrapper" :class="item.name">
             <img
               :src="require(`@/assets/images/${item.image}`)"
               alt="item.image"
@@ -102,10 +93,12 @@ import { Component, Vue } from "vue-property-decorator";
 import Hero from "@/components/Hero.vue";
 
 interface IntroductionItem {
+  name: string;
   title: string;
   subTitle: string;
   paragraphs: string[];
   image: string;
+  backgroundColor: string;
 }
 
 @Component({
@@ -134,6 +127,7 @@ export default class Home extends Vue {
 
   introductionItems: IntroductionItem[] = [
     {
+      name: "introduction",
       title: "Witaj w naszej restauracji",
       subTitle:
         "tu gdzie łączymy pasję z rodzinną atmosferą i pysznym smakiem!",
@@ -141,25 +135,30 @@ export default class Home extends Vue {
         "Naszą misją jest, aby każdy czuł się jak u siebie w domu. Rodzina odgrywa niezwykle istotną rolę w życiu każdego człowieka. To wśród najbliższych nabywamy podstawową wiedzę i umiejętności niezbędne do funkcjonowania w rzeczywistości społecznej.",
         "Rodzice i krewni stają się przykładem dla dzieci, które, jak wiadomo nie od dziś, najszybciej uczą się poprzez obserwację i naśladownictwo dorosłych."
       ],
-      image: "slide1.jpg"
+      image: "slide1.jpg",
+      backgroundColor: "white"
     },
     {
+      name: "location",
       title: "Nasze menu na miejscu",
       subTitle: "Pozwól ugościć się naszym kucharzom.",
       paragraphs: [
         "Tradycyjne receptury, przekazywane z pokolenia na pokolenie, staranny dobór składników i kadra kucharzy z pasją, pozwalają częstować naszych klientów daniami o wspaniałym smaku.",
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
-      image: "slide2.jpg"
+      image: "slide2.jpg",
+      backgroundColor: "#d4bb95"
     },
     {
+      name: "delivery",
       title: "Nasze menu na dowóz",
       subTitle: "Poznaj nasze smaki i zostań z nami na stałe.",
       paragraphs: [
         "Tradycyjne receptury, przekazywane z pokolenia na pokolenie, staranny dobór składników i kadra kucharzy z pasją, pozwalającą częstować naszych klientów daniami o wspaniałym smaku.",
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
-      image: "slide3.jpg"
+      image: "slide3.jpg",
+      backgroundColor: "#d1d8df"
     }
   ];
 
@@ -188,75 +187,6 @@ export default class Home extends Vue {
 @import "@/assets/scss/global.scss";
 .home {
   width: 100%;
-  .greeting {
-    width: 100%;
-    background-color: white;
-    z-index: 20;
-    overflow: hidden;
-    position: relative;
-    .greeting__container {
-      padding: $verticalPadding * 3 / 2 $horizontalPadding / 2;
-      color: black;
-      .greeting__content {
-        @include flex;
-        h1,
-        h2,
-        p {
-          text-align: center;
-        }
-        h1 {
-          font-weight: 700;
-          font-size: 1.25rem;
-        }
-        h2 {
-          font-size: 1.125rem;
-          padding: $verticalPadding / 4 0;
-        }
-        .pizza {
-          max-width: 30vw;
-          position: absolute;
-          left: -10rem;
-          top: 30%;
-          display: none;
-          &:last-of-type {
-            right: -10rem;
-            left: auto;
-          }
-          @media (min-width: 768px) and (min-height: 700px) {
-            display: block;
-          }
-        }
-        .socials__container {
-          @include flex;
-          flex-direction: row;
-          margin-top: $verticalPadding / 2;
-          > a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            padding: 1vh;
-            transition: background-color 0.2s linear 0s;
-            margin: 0 10px;
-            &:hover {
-              background-color: rgba(0, 0, 0, 0.1);
-            }
-            &:first-of-type {
-              margin-left: 0;
-            }
-            &:last-of-type {
-              margin-right: 0;
-            }
-
-            img {
-              width: 24px;
-              height: 24px;
-            }
-          }
-        }
-      }
-    }
-  }
   .introduction {
     width: 100%;
     .introduction__container {
@@ -297,7 +227,67 @@ export default class Home extends Vue {
               font-size: 0.875rem;
               margin: 1vh 0;
             }
+            .button__container {
+              @include flex;
+              justify-content: flex-start;
+              flex-direction: row;
+              margin-top: $verticalPadding / 2;
+              .price__tag {
+                background-color: $invertedColor;
+                color: $brandColor;
+                padding: 14px 10px;
+                text-align: center;
+                font-weight: 700;
+              }
+              button {
+                background-color: $mainColor;
+                color: $secondaryColor;
+                border: none;
+                &:hover {
+                  background-color: black;
+                  color: white;
+                }
+              }
+            }
+            .socials__container {
+              @include flex;
+              flex-direction: row;
+              margin-top: $verticalPadding / 2;
+              > a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                padding: 1vh;
+                transition: background-color 0.2s linear 0s;
+                margin: 0 10px;
+                &:hover {
+                  background-color: rgba(0, 0, 0, 0.1);
+                }
+                &:first-of-type {
+                  margin-left: -1vh;
+                }
+                &:last-of-type {
+                  margin-right: -1vh;
+                }
+
+                img {
+                  width: 24px;
+                  height: 24px;
+                }
+              }
+            }
           }
+          &.pizzaOfTheMonth {
+            background-color: #575757;
+            color: white;
+            p {
+              color: white;
+            }
+          }
+        }
+        &.greeting .description__container {
+          text-align: center;
         }
         .image__wrapper {
           grid-row: 1;
@@ -308,39 +298,6 @@ export default class Home extends Vue {
             width: 100%;
             height: 100%;
             object-fit: cover;
-          }
-        }
-        &.informative__item {
-          text-align: left;
-          min-height: 30vh;
-          .subItem__container {
-            width: 100%;
-            height: 100%;
-            @include backgroundDefault;
-            flex-direction: column;
-            &.description__container {
-              grid-column: auto;
-            }
-            &.pizzaOfTheMonth .description__wrapper .button__container {
-              @include flex;
-              justify-content: flex-start;
-              flex-direction: row;
-              .price__tag {
-                background-color: $mainColor;
-                color: $brandColor;
-                padding: 14px 10px;
-                text-align: center;
-                font-weight: 700;
-              }
-              button {
-                background-color: $brandColor;
-                border: none;
-                &:hover {
-                  background-color: $secondaryColor;
-                  color: white;
-                }
-              }
-            }
           }
         }
       }
@@ -357,38 +314,37 @@ export default class Home extends Vue {
     }
   }
   @media (min-width: 450px) and (min-height: 500px) {
-    .greeting .greeting__container .greeting__content {
-      h1 {
-        font-size: 1.5rem;
-      }
-      h2 {
-        font-size: 1.25rem;
-      }
-    }
   }
   @media (min-width: 768px) and (min-height: 500px) {
-    .greeting .greeting__container .greeting__content {
-      h1 {
-        font-size: 1.75rem;
-      }
-      h2 {
-        font-size: 1.5rem;
-      }
-    }
     .introduction .introduction__container .introduction__item {
       grid-template-columns: repeat(2, 1fr);
       grid-template-rows: 1fr;
       height: auto;
       min-height: auto;
-      &:not(.informative__item):nth-of-type(even) {
+      &.greeting .description__container {
+        text-align: inherit;
+      }
+      &:nth-of-type(odd) {
         .description__container {
           grid-column: 1;
+          .description__wrapper {
+            .button__container,
+            .socials__container {
+              justify-content: flex-start;
+            }
+          }
         }
         text-align: left;
       }
-      &:not(.informative__item):nth-of-type(odd) {
+      &:nth-of-type(even) {
         .description__container {
           grid-column: 2;
+          .description__wrapper {
+            .button__container,
+            .socials__container {
+              justify-content: flex-end;
+            }
+          }
         }
         text-align: right;
       }
@@ -416,35 +372,165 @@ export default class Home extends Vue {
           bottom: 0;
           left: 0;
           display: block;
+          max-width: 50%;
         }
         // image gradients
-        // &:nth-of-type(even) {
-        //   .image__wrapper {
-        //     &::after {
-        //       background: linear-gradient(
-        //         270deg,
-        //         rgba(201, 215, 231, 0),
-        //         rgba(201, 215, 231, 0) 70%,
-        //         rgba(201, 215, 231, 0.96) 95%,
-        //         white
-        //       );
-        //     }
-        //   }
-        // }
-        // &:nth-of-type(odd) {
-        //   .image__wrapper {
-        //     &::after {
-        //       background: linear-gradient(
-        //         90deg,
-        //         rgba(201, 215, 231, 0),
-        //         rgba(201, 215, 231, 0) 70%,
-        //         rgba(201, 215, 231, 0.96) 95%,
-        //         white
-        //       );
-        //     }
-        //   }
-        // }
+        &:nth-of-type(odd) {
+          .image__wrapper {
+            &::after {
+              background: rgb(2, 0, 36);
+              background: linear-gradient(
+                270deg,
+                rgba(2, 0, 36, 0) 0%,
+                rgba(255, 255, 255, 1) 94%
+              );
+            }
+            &.pizzaItem::after {
+              background: rgb(87, 87, 87);
+              background: linear-gradient(
+                270deg,
+                rgba(87, 87, 87, 1) 0%,
+                rgba(255, 255, 255, 0) 20%
+              );
+            }
+            &.location::after {
+              background: rgb(212, 187, 149);
+              background: linear-gradient(
+                90deg,
+                rgba(212, 187, 149, 1) 0%,
+                rgba(255, 255, 255, 0) 100%
+              );
+            }
+            &.delivery::after {
+              background: rgb(209, 216, 223);
+              background: linear-gradient(
+                90deg,
+                rgba(209, 216, 223, 1) 10%,
+                rgba(255, 255, 255, 0) 100%
+              );
+            }
+          }
+        }
+        &:nth-of-type(even) {
+          .image__wrapper {
+            &::after {
+              margin-left: auto;
+              background: linear-gradient(
+                270deg,
+                rgba(201, 215, 231, 0),
+                rgba(201, 215, 231, 0) 70%,
+                rgba(201, 215, 231, 0.96) 100%,
+                white
+              );
+            }
+            &.pizzaItem::after {
+              background: rgb(87, 87, 87);
+              background: linear-gradient(
+                270deg,
+                rgba(87, 87, 87, 1) 0%,
+                rgba(255, 255, 255, 0) 20%
+              );
+            }
+            &.location::after {
+              background: rgb(212, 187, 149);
+              background: linear-gradient(
+                270deg,
+                rgba(212, 187, 149, 1) 0%,
+                rgba(255, 255, 255, 0) 100%
+              );
+            }
+            &.delivery::after {
+              background: rgb(209, 216, 223);
+              background: linear-gradient(
+                270deg,
+                rgba(209, 216, 223, 1) 10%,
+                rgba(255, 255, 255, 0) 100%
+              );
+            }
+          }
+        }
       }
+      // &.pizzaItem {
+      //   // image gradients
+      //   &:nth-of-type(odd) {
+      //     .image__wrapper {
+      //       &::after {
+      //         background: rgb(87, 87, 87);
+      //         background: linear-gradient(
+      //           270deg,
+      //           rgba(87, 87, 87, 1) 0%,
+      //           rgba(255, 255, 255, 0) 20%
+      //         );
+      //       }
+      //     }
+      //   }
+      //   &:nth-of-type(even) {
+      //     .image__wrapper {
+      //       &::after {
+      //         background: rgb(87, 87, 87);
+      //         background: linear-gradient(
+      //           270deg,
+      //           rgba(87, 87, 87, 1) 0%,
+      //           rgba(255, 255, 255, 0) 20%
+      //         );
+      //       }
+      //     }
+      //   }
+      // }
+      // &.location {
+      //   // image gradients
+      //   &:nth-of-type(odd) {
+      //     .image__wrapper {
+      //       &::after {
+      //         background: rgb(212, 187, 149);
+      //         background: linear-gradient(
+      //           90deg,
+      //           rgba(212, 187, 149, 1) 0%,
+      //           rgba(255, 255, 255, 0) 100%
+      //         );
+      //       }
+      //     }
+      //   }
+      //   &:nth-of-type(even) {
+      //     .image__wrapper {
+      //       &::after {
+      //         background: rgb(212, 187, 149);
+      //         background: linear-gradient(
+      //           270deg,
+      //           rgba(212, 187, 149, 1) 0%,
+      //           rgba(255, 255, 255, 0) 100%
+      //         );
+      //       }
+      //     }
+      //   }
+      // }
+      // &.delivery {
+      //   // image gradients
+      //   &:nth-of-type(odd) {
+      //     .image__wrapper {
+      //       &::after {
+      //         background: rgb(212, 187, 149);
+      //         background: linear-gradient(
+      //           90deg,
+      //           rgba(212, 187, 149, 1) 0%,
+      //           rgba(255, 255, 255, 0) 100%
+      //         );
+      //       }
+      //     }
+      //   }
+      //   &:nth-of-type(even) {
+      //     .image__wrapper {
+      //       &::after {
+      //         background: rgb(212, 187, 149);
+      //         background: linear-gradient(
+      //           270deg,
+      //           rgba(212, 187, 149, 1) 0%,
+      //           rgba(255, 255, 255, 0) 100%
+      //         );
+      //       }
+      //     }
+      //   }
+      // }
     }
   }
   @media (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {
@@ -458,21 +544,6 @@ export default class Home extends Vue {
     }
   }
   @media (min-width: 1024px) and (min-height: 500px) {
-    .greeting .greeting__container .greeting__content {
-      h1 {
-        font-size: 2.25rem;
-      }
-      h2 {
-        font-size: 1.75rem;
-      }
-      p {
-        font-size: 1.125rem;
-      }
-      .socials__container > a img {
-        width: 28px;
-        height: 28px;
-      }
-    }
     .introduction .introduction__container .introduction__item {
       .description__container {
         grid-row: 1;
@@ -485,6 +556,10 @@ export default class Home extends Vue {
           }
           p {
             font-size: 1rem;
+          }
+          .socials__container > a img {
+            width: 28px;
+            height: 28px;
           }
         }
       }
@@ -516,17 +591,6 @@ export default class Home extends Vue {
     }
   }
   @media (min-width: 1650px) and (min-height: 500px) {
-    .greeting .greeting__container .greeting__content {
-      h1 {
-        font-size: 2.75rem;
-      }
-      h2 {
-        font-size: 2rem;
-      }
-      p {
-        font-size: 1.25rem;
-      }
-    }
     .introduction
       .introduction__container
       .introduction__item
@@ -548,17 +612,6 @@ export default class Home extends Vue {
     }
   }
   @media (min-width: 1850px) and (min-height: 500px) {
-    .greeting .greeting__container .greeting__content {
-      h1 {
-        font-size: 3.5rem;
-      }
-      h2 {
-        font-size: 2.5rem;
-      }
-      p {
-        font-size: 1.5rem;
-      }
-    }
     .introduction
       .introduction__container
       .introduction__item
