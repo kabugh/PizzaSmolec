@@ -2,25 +2,27 @@
   <header class="hero">
     <div class="moving__items" ref="movingItems">
       <div
-        class="moving__item--container bounce"
+        class="moving__item--container"
         v-for="(item, index) in currentPizza.movingItems"
         :key="index"
         ref="movingItem"
         :class="item.className"
       >
-        <img
-          :src="require(`@/assets/images/pizzaAssets/${item.image}`)"
-          :alt="item.className"
-          class="moving__item unselectable"
-          :class="[{ rellax: item.isMoving }]"
-          :data-rellax-speed="
-            item.isMoving
-              ? item.parallaxSpeed
+        <div class="moving__item--wrapper bounce" ref="movingWrapper">
+          <img
+            :src="require(`@/assets/images/pizzaAssets/${item.image}`)"
+            :alt="item.className"
+            class="moving__item unselectable"
+            :class="[{ rellax: item.isMoving }]"
+            :data-rellax-speed="
+              item.isMoving
                 ? item.parallaxSpeed
-                : 1 + getRandomInt(0, 4)
-              : 0
-          "
-        />
+                  ? item.parallaxSpeed
+                  : 1 + getRandomInt(0, 4)
+                : 0
+            "
+          />
+        </div>
       </div>
     </div>
     <div class="static__container" ref="staticNav">
@@ -494,20 +496,25 @@ export default class Hero extends Vue {
     const staticNav = this.$refs.staticNav;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const movingItem: any = this.$refs.movingItem;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const movingWrapper: any = this.$refs.movingWrapper;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const ar: any = [].slice.call(movingItem);
+    const items: any = [].slice.call(movingItem);
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const wrappersArray: any = [].slice.call(movingWrapper);
 
     const tl = new TimelineMax();
 
-    tl.set(ar, {
+    tl.set(items, {
       autoAlpha: 0,
       y: 100,
       delay: 1
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (tl as any).staggerTo(
-      ar,
+      items,
       1.5,
       {
         ease: "expo",
@@ -515,7 +522,7 @@ export default class Hero extends Vue {
         y: 0
       },
       0.15,
-      ar.forEach(async (item: any) => {
+      wrappersArray.forEach(async (item: any) => {
         item.style.setProperty(
           "animation-delay",
           this.getRandomInt(0, 8) / 4 + "s"
@@ -524,7 +531,7 @@ export default class Hero extends Vue {
           "animation-duration",
           this.getRandomInt(4, 8) / 4 + "s"
         );
-        await this.wait(4000);
+        // await this.wait(4000);
         item.style.setProperty("animation-name", "bounce");
       })
     );
@@ -578,12 +585,7 @@ export default class Hero extends Vue {
     });
 
     const delay = 8;
-    tl.addPause(delay, () => {
-      // ar.forEach((item: any) => {
-      //   item.classList.remove("bounce");
-      // });
-      this.changeAnimation();
-    });
+    tl.addPause(delay, () => this.changeAnimation());
   }
 
   changeAnimation() {
@@ -591,14 +593,19 @@ export default class Hero extends Vue {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const movingItem: any = this.$refs.movingItem;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const ar: any = [].slice.call(movingItem);
+    const items: any = [].slice.call(movingItem);
     const delay = 8;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const movingWrapper: any = this.$refs.movingWrapper;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const wrappersArray: any = [].slice.call(movingWrapper);
 
     const tl = new TimelineMax({ repeat: -1, repeatDelay: delay });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (tl as any).staggerTo(
-      ar,
+      items,
       2,
       {
         autoAlpha: 0,
@@ -623,20 +630,15 @@ export default class Hero extends Vue {
       {
         opacity: 0,
         y: 50,
-        onComplete: () => {
-          ar.forEach((item: any) => {
-            item.classList.remove("bounce");
-          });
-          this.updatePizzaIndex();
-        }
+        onComplete: () => this.updatePizzaIndex()
       },
       "-=1.5"
     );
 
-    tl.set(ar, { autoAlpha: 0, y: 100 });
+    tl.set(items, { autoAlpha: 0, y: 100 });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (tl as any).staggerTo(
-      ar,
+      items,
       1.5,
       {
         autoAlpha: 1,
@@ -645,7 +647,7 @@ export default class Hero extends Vue {
         delay: 1
       },
       0.15,
-      ar.forEach(async (item: any) => {
+      wrappersArray.forEach(async (item: any) => {
         item.style.setProperty(
           "animation-delay",
           this.getRandomInt(0, 8) / 4 + "s"
@@ -654,7 +656,7 @@ export default class Hero extends Vue {
           "animation-duration",
           this.getRandomInt(4, 8) / 4 + "s"
         );
-        await this.wait(4000);
+        // await this.wait(4000);
         item.classList.add("bounce");
       })
     );
@@ -750,6 +752,21 @@ export default class Hero extends Vue {
       position: absolute;
       display: none;
       visibility: hidden;
+      .moving__item--wrapper {
+        &.bounce {
+          animation-direction: alternate;
+          animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
+          animation-iteration-count: infinite;
+        }
+        @keyframes bounce {
+          from {
+            transform: translateY(0);
+          }
+          to {
+            transform: translateY(8px);
+          }
+        }
+      }
       .moving__item {
         max-width: 100%;
         max-height: 100%;
@@ -757,19 +774,7 @@ export default class Hero extends Vue {
       &.visible {
         visibility: visible;
       }
-      &.bounce {
-        animation-direction: alternate;
-        animation-timing-function: cubic-bezier(0.37, 0, 0.63, 1);
-        animation-iteration-count: infinite;
-      }
-      @keyframes bounce {
-        from {
-          transform: translateY(0);
-        }
-        to {
-          transform: translateY(8px);
-        }
-      }
+
       &.champ1 {
         left: -4vw;
         top: 35%;
@@ -1050,7 +1055,7 @@ export default class Hero extends Vue {
         }
         .static__nav {
           .navItems {
-            padding: $verticalPadding / 8 $horizontalPadding / 8;
+            padding: $verticalPadding / 6 $horizontalPadding / 8;
             display: grid;
             grid-template-columns: repeat(5, auto);
             grid-template-rows: 1fr;
@@ -1063,6 +1068,23 @@ export default class Hero extends Vue {
               white-space: nowrap;
               :hover {
                 cursor: pointer;
+              }
+              span {
+                position: relative;
+                &:hover:after {
+                  width: 100%;
+                }
+                &::after {
+                  content: "";
+                  display: block;
+                  position: absolute;
+                  left: 0px;
+                  background-color: white;
+                  height: 1px;
+                  margin-top: 2px;
+                  transition: width 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+                  width: 0;
+                }
               }
             }
           }

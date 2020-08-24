@@ -11,7 +11,11 @@
     <keep-alive include="Home">
       <router-view />
     </keep-alive>
-    <TheFooter data-aos="fade-in" data-aos-delay="400" data-aos-offset="-500" />
+    <TheFooter
+      data-aos="fade-in"
+      data-aos-delay="400"
+      data-aos-offset="-1000"
+    />
   </div>
 </template>
 <script lang="ts">

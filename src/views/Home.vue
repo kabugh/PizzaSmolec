@@ -189,6 +189,7 @@ export default class Home extends Vue {
   width: 100%;
   .introduction {
     width: 100%;
+    overflow: hidden;
     .introduction__container {
       width: 100%;
       display: grid;
@@ -378,15 +379,15 @@ export default class Home extends Vue {
         &:nth-of-type(odd) {
           .image__wrapper {
             &::after {
-              background: rgb(2, 0, 36);
+              background-image: white;
               background: linear-gradient(
-                270deg,
-                rgba(2, 0, 36, 0) 0%,
-                rgba(255, 255, 255, 1) 94%
+                90deg,
+                rgba(255, 255, 255, 1) 10%,
+                rgba(209, 216, 223, 0) 100%
               );
             }
             &.pizzaItem::after {
-              background: rgb(87, 87, 87);
+              background-image: #575757;
               background: linear-gradient(
                 270deg,
                 rgba(87, 87, 87, 1) 0%,
@@ -394,7 +395,7 @@ export default class Home extends Vue {
               );
             }
             &.location::after {
-              background: rgb(212, 187, 149);
+              background-image: #d4bb95;
               background: linear-gradient(
                 90deg,
                 rgba(212, 187, 149, 1) 0%,
@@ -402,7 +403,7 @@ export default class Home extends Vue {
               );
             }
             &.delivery::after {
-              background: rgb(209, 216, 223);
+              background-image: #d1d8df;
               background: linear-gradient(
                 90deg,
                 rgba(209, 216, 223, 1) 10%,
@@ -415,12 +416,11 @@ export default class Home extends Vue {
           .image__wrapper {
             &::after {
               margin-left: auto;
+              background-image: #ffffff;
               background: linear-gradient(
                 270deg,
-                rgba(201, 215, 231, 0),
-                rgba(201, 215, 231, 0) 70%,
-                rgba(201, 215, 231, 0.96) 100%,
-                white
+                rgba(255, 255, 255, 1) 10%,
+                rgba(209, 216, 223, 0) 100%
               );
             }
             &.pizzaItem::after {
