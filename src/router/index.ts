@@ -84,7 +84,19 @@ const routes: Array<RouteConfig> = [
     path: "/klienci",
     name: "ClientsPhotos",
     component: () =>
-      import(/* webpackChunkName: "clientsPhotos" */ "../views/ClientsPhotos.vue"),
+      import(
+        /* webpackChunkName: "clientsPhotos" */ "../views/ClientsPhotos.vue"
+      ),
+    beforeEnter: overlayGuard,
+    meta: {
+      initialNav: true
+    }
+  },
+  {
+    path: "/admin",
+    name: "Admin",
+    component: () =>
+      import(/* webpackChunkName: "admin" */ "../views/Admin.vue"),
     beforeEnter: overlayGuard,
     meta: {
       initialNav: true

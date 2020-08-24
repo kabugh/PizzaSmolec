@@ -8,9 +8,9 @@ import "aos/dist/aos.css";
 import VueScrollTo from "vue-scrollto";
 import { gsap, TimelineLite, TimelineMax } from "gsap";
 import * as GmapVue from "gmap-vue";
-import VueYoutube from 'vue-youtube'
+import VueYoutube from "vue-youtube";
 
-Vue.use(VueYoutube)
+Vue.use(VueYoutube);
 Vue.use(GmapVue, {
   load: {
     key: process.env.VUE_APP_map,
@@ -31,7 +31,7 @@ Vue.use(GmapVue, {
   //// then set installComponents to 'false'.
   //// If you want to automatically install all the components this property must be set to 'true':
   installComponents: true
-})
+});
 
 Vue.use(VueScrollTo, {
   easing: [0.86, 0, 0.07, 1],

@@ -60,7 +60,7 @@ const getters = {
   },
   videoModal(state: { videoModal: boolean }) {
     return state.videoModal;
-  },
+  }
 };
 
 export default {
