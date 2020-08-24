@@ -8,7 +8,9 @@ import "aos/dist/aos.css";
 import VueScrollTo from "vue-scrollto";
 import { gsap, TimelineLite, TimelineMax } from "gsap";
 import * as GmapVue from "gmap-vue";
+import VueYoutube from 'vue-youtube'
 
+Vue.use(VueYoutube)
 Vue.use(GmapVue, {
   load: {
     key: process.env.VUE_APP_map,

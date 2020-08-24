@@ -368,3 +368,11 @@ select:-webkit-autofill:focus {
     transform: rotate(-45deg);
     top: 15px;
   }
+
+  .fade-enter-active {
+    transition: opacity 0.15s;
+  }
+  
+  .fade-enter {
+    opacity: 0;
+  }

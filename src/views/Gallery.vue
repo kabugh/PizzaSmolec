@@ -26,7 +26,7 @@ import PhotoGallery from "@/components/PhotoGallery.vue";
     PhotoGallery
   }
 })
-export default class OurCentrum extends Vue {
+export default class Gallery extends Vue {
   async created() {
     await this.$store.dispatch("fetchGalleries");
     this.overlayLoading = false;

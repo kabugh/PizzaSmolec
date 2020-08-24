@@ -3,11 +3,12 @@ const state = {
   loading: false,
   error: null,
   overlayLoading: true,
+  videoModal: false,
 
   socialsItems: [
     {
       icon: "ig.png",
-      link: "https://www.instagram.com/tenisplanet/"
+      link: "https://www.instagram.com/tenis_planet/"
     },
     {
       icon: "fb.png",
@@ -35,6 +36,9 @@ const mutations = {
   },
   setOverlayLoading(state: { overlayLoading: boolean }, payload: boolean) {
     state.overlayLoading = payload;
+  },
+  setVideoModal(state: { videoModal: boolean }, payload: boolean) {
+    state.videoModal = payload;
   }
 };
 
@@ -53,7 +57,10 @@ const getters = {
   },
   socialsItems(state: { socialsItems: Array<{ icon: string; link: string }> }) {
     return state.socialsItems;
-  }
+  },
+  videoModal(state: { videoModal: boolean }) {
+    return state.videoModal;
+  },
 };
 
 export default {

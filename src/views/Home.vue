@@ -1,6 +1,9 @@
 <template>
   <section class="home">
     <Hero />
+    <transition name="fade" appear>
+      <YoutubePlayer v-if="videoModal" />
+    </transition>
     <section class="introduction">
       <div class="introduction__container">
         <div class="introduction__item greeting">
@@ -91,6 +94,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import Hero from "@/components/Hero.vue";
+import YoutubePlayer from "@/components/YoutubePlayer.vue";
 
 interface IntroductionItem {
   name: string;
@@ -102,7 +106,7 @@ interface IntroductionItem {
 }
 
 @Component({
-  components: { Hero }
+  components: { Hero, YoutubePlayer }
 })
 export default class Home extends Vue {
   async created() {
@@ -180,6 +184,10 @@ export default class Home extends Vue {
 
   set overlayLoading(value) {
     this.$store.commit("setOverlayLoading", value);
+  }
+
+  get videoModal() {
+    return this.$store.getters.videoModal;
   }
 }
 </script>
@@ -380,6 +388,11 @@ export default class Home extends Vue {
           .image__wrapper {
             &::after {
               background-image: white;
+              background: -webkit-linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 1) 10%,
+                rgba(209, 216, 223, 0) 100%
+              );
               background: linear-gradient(
                 90deg,
                 rgba(255, 255, 255, 1) 10%,
@@ -388,6 +401,11 @@ export default class Home extends Vue {
             }
             &.pizzaItem::after {
               background-image: #575757;
+              background: -webkit-linear-gradient(
+                270deg,
+                rgba(87, 87, 87, 1) 0%,
+                rgba(255, 255, 255, 0) 20%
+              );
               background: linear-gradient(
                 270deg,
                 rgba(87, 87, 87, 1) 0%,
@@ -396,6 +414,11 @@ export default class Home extends Vue {
             }
             &.location::after {
               background-image: #d4bb95;
+              background: -webkit-linear-gradient(
+                90deg,
+                rgba(212, 187, 149, 1) 0%,
+                rgba(255, 255, 255, 0) 100%
+              );
               background: linear-gradient(
                 90deg,
                 rgba(212, 187, 149, 1) 0%,
@@ -404,6 +427,11 @@ export default class Home extends Vue {
             }
             &.delivery::after {
               background-image: #d1d8df;
+              background: -webkit-linear-gradient(
+                90deg,
+                rgba(209, 216, 223, 1) 10%,
+                rgba(255, 255, 255, 0) 100%
+              );
               background: linear-gradient(
                 90deg,
                 rgba(209, 216, 223, 1) 10%,
@@ -417,6 +445,11 @@ export default class Home extends Vue {
             &::after {
               margin-left: auto;
               background-image: #ffffff;
+              background: -webkit-linear-gradient(
+                270deg,
+                rgba(255, 255, 255, 1) 10%,
+                rgba(209, 216, 223, 0) 100%
+              );
               background: linear-gradient(
                 270deg,
                 rgba(255, 255, 255, 1) 10%,
@@ -425,6 +458,11 @@ export default class Home extends Vue {
             }
             &.pizzaItem::after {
               background: rgb(87, 87, 87);
+              background: -webkit-linear-gradient(
+                270deg,
+                rgba(87, 87, 87, 1) 0%,
+                rgba(255, 255, 255, 0) 20%
+              );
               background: linear-gradient(
                 270deg,
                 rgba(87, 87, 87, 1) 0%,
@@ -433,6 +471,11 @@ export default class Home extends Vue {
             }
             &.location::after {
               background: rgb(212, 187, 149);
+              background: -webkit-linear-gradient(
+                270deg,
+                rgba(212, 187, 149, 1) 0%,
+                rgba(255, 255, 255, 0) 100%
+              );
               background: linear-gradient(
                 270deg,
                 rgba(212, 187, 149, 1) 0%,
@@ -441,6 +484,11 @@ export default class Home extends Vue {
             }
             &.delivery::after {
               background: rgb(209, 216, 223);
+              background: -webkit-linear-gradient(
+                270deg,
+                rgba(209, 216, 223, 1) 10%,
+                rgba(255, 255, 255, 0) 100%
+              );
               background: linear-gradient(
                 270deg,
                 rgba(209, 216, 223, 1) 10%,
@@ -450,87 +498,6 @@ export default class Home extends Vue {
           }
         }
       }
-      // &.pizzaItem {
-      //   // image gradients
-      //   &:nth-of-type(odd) {
-      //     .image__wrapper {
-      //       &::after {
-      //         background: rgb(87, 87, 87);
-      //         background: linear-gradient(
-      //           270deg,
-      //           rgba(87, 87, 87, 1) 0%,
-      //           rgba(255, 255, 255, 0) 20%
-      //         );
-      //       }
-      //     }
-      //   }
-      //   &:nth-of-type(even) {
-      //     .image__wrapper {
-      //       &::after {
-      //         background: rgb(87, 87, 87);
-      //         background: linear-gradient(
-      //           270deg,
-      //           rgba(87, 87, 87, 1) 0%,
-      //           rgba(255, 255, 255, 0) 20%
-      //         );
-      //       }
-      //     }
-      //   }
-      // }
-      // &.location {
-      //   // image gradients
-      //   &:nth-of-type(odd) {
-      //     .image__wrapper {
-      //       &::after {
-      //         background: rgb(212, 187, 149);
-      //         background: linear-gradient(
-      //           90deg,
-      //           rgba(212, 187, 149, 1) 0%,
-      //           rgba(255, 255, 255, 0) 100%
-      //         );
-      //       }
-      //     }
-      //   }
-      //   &:nth-of-type(even) {
-      //     .image__wrapper {
-      //       &::after {
-      //         background: rgb(212, 187, 149);
-      //         background: linear-gradient(
-      //           270deg,
-      //           rgba(212, 187, 149, 1) 0%,
-      //           rgba(255, 255, 255, 0) 100%
-      //         );
-      //       }
-      //     }
-      //   }
-      // }
-      // &.delivery {
-      //   // image gradients
-      //   &:nth-of-type(odd) {
-      //     .image__wrapper {
-      //       &::after {
-      //         background: rgb(212, 187, 149);
-      //         background: linear-gradient(
-      //           90deg,
-      //           rgba(212, 187, 149, 1) 0%,
-      //           rgba(255, 255, 255, 0) 100%
-      //         );
-      //       }
-      //     }
-      //   }
-      //   &:nth-of-type(even) {
-      //     .image__wrapper {
-      //       &::after {
-      //         background: rgb(212, 187, 149);
-      //         background: linear-gradient(
-      //           270deg,
-      //           rgba(212, 187, 149, 1) 0%,
-      //           rgba(255, 255, 255, 0) 100%
-      //         );
-      //       }
-      //     }
-      //   }
-      // }
     }
   }
   @media (max-width: 850px) and (max-height: 450px) and (orientation: landscape) {

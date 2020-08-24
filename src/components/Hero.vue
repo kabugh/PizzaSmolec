@@ -47,7 +47,14 @@
       </div>
       <div class="nav__container">
         <div class="contact__details">
-          <h2 class="address">ul. Śliwkowa 134 - Smolec</h2>
+          <h2>
+            <a
+              class="address"
+              href="https://goo.gl/maps/ENCqowpYxAhEJDy8A"
+              target="_blank"
+              >ul. Śliwkowa 134 - Smolec</a
+            >
+          </h2>
           <a class="phone" href="tel:0048510400616">+48 510 400 616</a>
         </div>
         <nav class="static__nav">
@@ -81,14 +88,18 @@
               class="item__container"
               v-for="(item, index) in heroDescription"
               :key="item.title"
+              :class="{ clickable: item.action }"
             >
               <img
                 :src="require(`@/assets/images/icons/${item.image}`)"
                 :alt="item.title"
                 class="unselectable"
+                @click="item.action ? item.action() : ''"
               />
               <div class="text__container">
-                <h3>{{ item.title }}</h3>
+                <h3 @click="item.action ? item.action() : ''">
+                  {{ item.title }}
+                </h3>
                 <p v-if="item.description">{{ item.description }}</p>
                 <p v-else-if="!item.headItem">
                   {{ pizzas[index].ingredients.join(", ") }}
@@ -146,6 +157,7 @@ interface HeroDescriptionItem {
   description?: string;
   headItem?: boolean;
   link?: string;
+  action?: Function;
 }
 
 interface NavItem {
@@ -156,12 +168,18 @@ interface NavItem {
 @Component
 export default class Hero extends Vue {
   activePizzaIndex = 0;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   bounce: any = {};
 
   mounted() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const rellax = new Rellax(".rellax");
     this.startAnimation();
+  }
+
+  openVideoModal() {
+    this.videoModal = true;
+    document.body.style.overflow = "hidden";
   }
 
   get isNavOpen() {
@@ -174,6 +192,14 @@ export default class Hero extends Vue {
 
   get currentPizza(): Pizza {
     return this.pizzas[this.activePizzaIndex];
+  }
+
+  get videoModal() {
+    return this.$store.getters.videoModal;
+  }
+
+  set videoModal(value) {
+    this.$store.commit("setVideoModal", value);
   }
 
   pizzas: Pizza[] = [
@@ -259,7 +285,7 @@ export default class Hero extends Vue {
       price: 27,
       image: "capresse.webp",
       alternativeImg: "capresse.png",
-      ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
+      ingredients: ["sos pomidorowy", "mozzarella", "szynka"],
       movingItems: [
         {
           image: "tomato1.png",
@@ -446,12 +472,14 @@ export default class Hero extends Vue {
     {
       title: "Film",
       image: "video.png",
-      description: "Ekskluzywne nagrania tworzenia pizzy"
+      description: "Ekskluzywne nagrania tworzenia pizzy",
+      action: this.openVideoModal
     },
     {
       title: "Zdjecia",
       image: "camera.png",
-      description: "Zobacz jak jedzą nasi klienci"
+      description: "Zobacz jak jedzą nasi klienci",
+      action: () => this.$router.push("/klienci")
     }
   ];
 
@@ -481,12 +509,6 @@ export default class Hero extends Vue {
   updatePizzaIndex() {
     if (this.activePizzaIndex < this.pizzas.length - 1) this.activePizzaIndex++;
     else this.activePizzaIndex = 0;
-  }
-
-  wait(timeout: number) {
-    return new Promise(resolve => {
-      setTimeout(resolve, timeout);
-    });
   }
 
   startAnimation() {
@@ -522,6 +544,7 @@ export default class Hero extends Vue {
         y: 0
       },
       0.15,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       wrappersArray.forEach(async (item: any) => {
         item.style.setProperty(
           "animation-delay",
@@ -531,7 +554,6 @@ export default class Hero extends Vue {
           "animation-duration",
           this.getRandomInt(4, 8) / 4 + "s"
         );
-        // await this.wait(4000);
         item.style.setProperty("animation-name", "bounce");
       })
     );
@@ -647,6 +669,7 @@ export default class Hero extends Vue {
         delay: 1
       },
       0.15,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       wrappersArray.forEach(async (item: any) => {
         item.style.setProperty(
           "animation-delay",
@@ -656,7 +679,6 @@ export default class Hero extends Vue {
           "animation-duration",
           this.getRandomInt(4, 8) / 4 + "s"
         );
-        // await this.wait(4000);
         item.classList.add("bounce");
       })
     );
@@ -729,7 +751,7 @@ export default class Hero extends Vue {
           font-size: 1.25rem;
           text-shadow: 1px 2px rgba(0, 0, 0, 0.3);
           text-decoration: none;
-
+          color: white;
           &.phone {
             color: $mainColor;
           }
@@ -945,7 +967,6 @@ export default class Hero extends Vue {
       .pizza__description--container {
         @include flex;
         align-items: center;
-
         .title__container {
           @include flex;
           h1 {
@@ -993,7 +1014,15 @@ export default class Hero extends Vue {
             column-gap: $horizontalPadding;
             align-items: center;
             justify-content: center;
-            // height: 100%;
+            &.clickable {
+              img:hover,
+              .text__container h3:hover {
+                cursor: pointer;
+              }
+              .text__container h3:hover {
+                text-decoration: underline;
+              }
+            }
             img {
               width: 36px;
               height: 36px;
@@ -1002,6 +1031,7 @@ export default class Hero extends Vue {
             .text__container {
               h3 {
                 font-weight: 600;
+                display: inline-block;
               }
               p {
                 font-size: 0.875rem;
