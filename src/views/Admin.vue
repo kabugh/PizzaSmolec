@@ -18,7 +18,7 @@
           <div class="posts__container" v-else-if="!loading">
             <p>Brak postów do wyświetlenia</p>
           </div>
-          <div class="posts__container" v-else><LoadingComponent /></div>
+          <LoadingComponent v-else />
         </div>
       </transition>
       <transition name="fade" v-else>
