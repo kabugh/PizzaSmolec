@@ -376,3 +376,9 @@ select:-webkit-autofill:focus {
   .fade-enter {
     opacity: 0;
   }
+
+  .toasted-container .toasted {
+    .action {
+      color: white;
+    }
+  }

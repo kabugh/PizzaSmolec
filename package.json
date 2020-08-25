@@ -12,6 +12,7 @@
     "aos": "^2.3.4",
     "contentful": "^7.14.6",
     "core-js": "^3.6.5",
+    "firebase": "^7.19.0",
     "gmap-vue": "^1.4.0",
     "gsap": "^3.4.2",
     "register-service-worker": "^1.7.1",
@@ -23,6 +24,7 @@
     "vue-property-decorator": "^8.4.2",
     "vue-router": "^3.2.0",
     "vue-scrollto": "^2.18.2",
+    "vue-toasted": "^1.1.28",
     "vue-youtube": "^1.4.0",
     "vuelidate": "^0.7.5",
     "vuex": "^3.4.0"

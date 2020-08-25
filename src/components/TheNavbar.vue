@@ -14,11 +14,13 @@
       <img src="@/assets/images/logo_white.png" alt="logo" />
     </div>
     <div class="burger__wrapper">
+      <p @click="logOut" v-if="user && $route.path === '/admin'">Wyloguj</p>
       <div
         class="nav-mobile"
         id="nav-icon"
         :class="{ open: isNavOpen }"
         @click="isNavOpen = !isNavOpen"
+        v-else
       >
         <span></span>
         <span></span>
@@ -70,12 +72,20 @@ export default class TheNavbar extends Vue {
     }
   }
 
+  logOut() {
+    this.$store.dispatch("signUserOut");
+  }
+
   get isNavOpen() {
     return this.$store.getters.isNavOpen;
   }
 
   set isNavOpen(value) {
     this.$store.commit("setNav", value);
+  }
+
+  get user() {
+    return this.$store.getters.user;
   }
 }
 </script>
@@ -150,6 +160,10 @@ export default class TheNavbar extends Vue {
     align-items: center;
     flex: 1;
     height: 100%;
+    p {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 
   @media (min-width: 450px) {

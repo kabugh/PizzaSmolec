@@ -10,6 +10,15 @@ const overlayGuard = (to: Route, from: Route, next: Function) => {
   next();
 };
 
+const authGuard = (to: Route, from: Route, next: Function) => {
+  if (store.getters.user) {
+    store.commit("setNav", false);
+    next({ to: 'Admin', params: { isAuthenticated: true }});
+  } else {
+    next({ to: 'Admin', params: { isAuthenticated: false }});
+  }
+};
+
 const routes: Array<RouteConfig> = [
   {
     path: "/",
@@ -97,7 +106,7 @@ const routes: Array<RouteConfig> = [
     name: "Admin",
     component: () =>
       import(/* webpackChunkName: "admin" */ "../views/Admin.vue"),
-    beforeEnter: overlayGuard,
+    beforeEnter: authGuard,
     meta: {
       initialNav: true
     }
