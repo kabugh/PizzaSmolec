@@ -25,7 +25,7 @@
         </div>
         <div class="image__wrapper">
           <img
-            :src="require(`@/assets/images/introduction/${item.image}`)"
+            :src="require(`@/assets/images/centrum/${item.image}`)"
             alt="item.image"
             class="unselectable"
           />
@@ -64,24 +64,24 @@ export default class OurCentrum extends Vue {
         "Naszą misją jest, aby każdy czuł się jak u siebie w domu. Rodzina odgrywa niezwykle istotną rolę w życiu każdego człowieka. To wśród najbliższych nabywamy podstawową wiedzę i umiejętności niezbędne do funkcjonowania w rzeczywistości społecznej.",
         "Rodzice i krewni stają się przykładem dla dzieci, które, jak wiadomo nie od dziś, najszybciej uczą się poprzez obserwację i naśladownictwo dorosłych."
       ],
-      image: "pizza.jpg"
+      image: "centrum1.jpg"
     },
     {
       title: "Tenis i inne sporty to nasza rodzinna pasja",
       paragraphs: [
         "Zapraszamy na nasz kameralny obiekt z rodzinną atmosferą. Nie chcemy się chwalić zawodnikami, trenerami. To są nieodłączne elementy każdego sportu. I każdy klub je ma. Bez nich by nie istniał.",
-        "My chcemy się pochwalić .... atmosferą. Obiekt prowadzimy całą rodziną, wspierani przez naszych współpracowników, którzy dla nas są także jak rodzina. Także i naszych klientów traktujemy jak rodzinę.",
+        "My chcemy się pochwalić... atmosferą. Obiekt prowadzimy całą rodziną, wspierani przez naszych współpracowników, którzy dla nas są także jak rodzina. Także i naszych klientów traktujemy jak rodzinę.",
         "Zapraszamy więc wszystkich z rodziny tenisowej na nasz obiekt. Miło nam będzie Was ugościć."
       ],
-      image: "pizza.jpg"
+      image: "centrum2.jpg"
     },
     {
       title: "Sukcesy",
       paragraphs: [
         "Niezwykłe osiągnięcia oraz sukcesy sportowe bez wątpienia zależą w dużym stopniu od talentu oraz czasu jaki poświęcamy na treningi i ciągłe doskonalenie własnych umiejętności.",
-        "Duże znaczenie także, wsparcie najbliższych . My chcemy Wam je dać."
+        "Duże znaczenie także, wsparcie najbliższych. My chcemy Wam je dać."
       ],
-      image: "pizza.jpg"
+      image: "centrum3.jpg"
     }
   ];
 }
@@ -189,13 +189,13 @@ export default class OurCentrum extends Vue {
     grid-template-rows: 1fr;
     height: auto;
     min-height: auto;
-    &:not(.informative__item):nth-of-type(even) {
+    &:not(.informative__item):nth-of-type(odd) {
       .description__container {
         grid-column: 1;
       }
       text-align: left;
     }
-    &:not(.informative__item):nth-of-type(odd) {
+    &:not(.informative__item):nth-of-type(even) {
       .description__container {
         grid-column: 2;
       }

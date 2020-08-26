@@ -151,7 +151,7 @@ export default class Home extends Vue {
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
       image: "slide2.jpg",
-      backgroundColor: "#d4bb95"
+      backgroundColor: "#f1b82b"
     },
     {
       name: "delivery",
@@ -162,7 +162,7 @@ export default class Home extends Vue {
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
       image: "slide3.jpg",
-      backgroundColor: "#d1d8df"
+      backgroundColor: "#cbba9e"
     }
   ];
 
@@ -413,28 +413,29 @@ export default class Home extends Vue {
               );
             }
             &.location::after {
-              background-image: #d4bb95;
+              background: rgb(0, 0, 0);
               background: -webkit-linear-gradient(
                 90deg,
-                rgba(212, 187, 149, 1) 0%,
+                rgba(0, 0, 0, 1) 0%,
                 rgba(255, 255, 255, 0) 100%
               );
               background: linear-gradient(
                 90deg,
-                rgba(212, 187, 149, 1) 0%,
+                rgba(0, 0, 0, 1) 0%,
                 rgba(255, 255, 255, 0) 100%
               );
             }
             &.delivery::after {
-              background-image: #d1d8df;
+              background: rgb(203, 186, 158);
               background: -webkit-linear-gradient(
                 90deg,
-                rgba(209, 216, 223, 1) 10%,
+                rgba(203, 186, 158, 1) 0%,
                 rgba(255, 255, 255, 0) 100%
               );
+              background: rgb(203, 186, 158);
               background: linear-gradient(
                 90deg,
-                rgba(209, 216, 223, 1) 10%,
+                rgba(203, 186, 158, 1) 0%,
                 rgba(255, 255, 255, 0) 100%
               );
             }
@@ -470,29 +471,29 @@ export default class Home extends Vue {
               );
             }
             &.location::after {
-              background: rgb(212, 187, 149);
+              background: rgb(0, 0, 0);
               background: -webkit-linear-gradient(
                 270deg,
-                rgba(212, 187, 149, 1) 0%,
+                rgba(0, 0, 0, 1) 0%,
                 rgba(255, 255, 255, 0) 100%
               );
               background: linear-gradient(
                 270deg,
-                rgba(212, 187, 149, 1) 0%,
+                rgba(0, 0, 0, 1) 0%,
                 rgba(255, 255, 255, 0) 100%
               );
             }
             &.delivery::after {
-              background: rgb(209, 216, 223);
+              background: rgb(255, 255, 255);
               background: -webkit-linear-gradient(
                 270deg,
-                rgba(209, 216, 223, 1) 10%,
-                rgba(255, 255, 255, 0) 100%
+                rgba(255, 255, 255, 0) 0%,
+                rgba(203, 186, 158, 1) 100%
               );
               background: linear-gradient(
                 270deg,
-                rgba(209, 216, 223, 1) 10%,
-                rgba(255, 255, 255, 0) 100%
+                rgba(255, 255, 255, 0) 0%,
+                rgba(203, 186, 158, 1) 100%
               );
             }
           }
@@ -535,6 +536,16 @@ export default class Home extends Vue {
   @media (min-width: 1024px) and (min-height: 500px) and (max-height: 900px) {
   }
   @media (min-width: 1024px) and (min-height: 500px) and (hover: hover) and (pointer: fine) {
+  }
+  @media (min-width: 769px) and (min-height: 1050px) and (orientation: portrait) {
+    .introduction .introduction__container .introduction__item {
+      &:nth-of-type(even) .image__wrapper::after {
+        margin-right: -2px;
+      }
+      &:nth-of-type(odd) .image__wrapper::after {
+        margin-left: -2px;
+      }
+    }
   }
   @media (min-width: 1280px) and (min-height: 500px) {
     .greeting .greeting__container .greeting__content {

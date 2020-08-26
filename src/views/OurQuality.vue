@@ -25,16 +25,16 @@
           <h1>Nasza Jakość</h1>
         </div>
         <div class="description__wrapper" ref="content1">
-          <h3>
+          <p>
             Dania przygotowujemy dla Państwa wkładając w to nasze serce,
             doświadczenie, pasję i tradycyjne receptury. Wykorzystujemy produkty
             najwyższej jakości, nie idziemy na skróty.
-          </h3>
-          <h3>
+          </p>
+          <p>
             Dodajemy świeże warzywa, najlepsze dodatki, tak aby produkt finalny
             był jak najwyższej jakości. Nie spieszymy się. Jakość a nie ilość
             jest dla nas najważniejsza.
-          </h3>
+          </p>
         </div>
       </div>
       <div class="description__container">
@@ -54,19 +54,19 @@
           <h1>Kochamy Pizzę</h1>
         </div>
         <div class="description__wrapper" ref="content2">
-          <h3>
+          <p>
             Nasze ciasto przygotowujemy tylko z włoskiej mąki, drożdży i wody.
             Leżakuje ono odpowiednio długo, aby było lekkie i chrupiące (nawet 4
             dni) Nasi pizzaiolo wkładają swój kunszt, pasję rozkręcając ciasto
             ręcznie . Nasz sos pomidorowy powstaje wyłącznie z pomidorów pelati,
             oliwy i przypraw. Nie stosujemy żadnych zamienników.
-          </h3>
+          </p>
           <p>
             Jeśli włoska pizza to tylko włoskie składniki : sery: mozzarella,
             taleggio (włoski ser regionalny wytwarzany tylko w dolinie Bergamo),
-            gorgonzola , czy też słynny parmezan najlepsze włoskie szynki i
+            gorgonzola, czy też słynny parmezan najlepsze włoskie szynki i
             wędliny: wieprzowe Prosciutto Cotto (gotowana), Prosciutto Crudo
-            (surowa ), wołowa wędlina Bresaola pochodząca z doliny Valtellina w
+            (surowa), wołowa wędlina Bresaola pochodząca z doliny Valtellina w
             Lombardii w północnym regionie Włoch, dojrzewająca (8-12 tygodni),
             włoskie salami : Salami Spianata - salami pikantne, czy salami
             Napoli – łagodne, włoski boczek Pancetta.
@@ -173,7 +173,6 @@ export default class OurQuality extends Vue {
     }
     .description__container {
       h2,
-      h3,
       p {
         margin: $verticalPadding / 2 0;
       }
@@ -184,12 +183,8 @@ export default class OurQuality extends Vue {
       h2 {
         font-size: 1.25rem;
       }
-      h3 {
-        font-size: 1rem;
-      }
       p {
-        font-size: 0.875rem;
-        color: $secondaryColor;
+        font-size: 1rem;
       }
     }
   }
@@ -202,12 +197,8 @@ export default class OurQuality extends Vue {
     h2 {
       font-size: 1.5rem;
     }
-    h3 {
-      font-size: 1.25rem;
-    }
     p {
-      font-size: 1rem;
-      color: $secondaryColor;
+      font-size: 1.125rem;
     }
   }
 }
