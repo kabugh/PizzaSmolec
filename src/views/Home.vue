@@ -69,6 +69,7 @@
           <div
             class="description__container"
             :style="{ backgroundColor: item.backgroundColor }"
+            :class="item.name"
           >
             <div class="description__wrapper">
               <h1>{{ item.title }}</h1>
@@ -151,7 +152,7 @@ export default class Home extends Vue {
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
       image: "slide2.jpg",
-      backgroundColor: "#f1b82b"
+      backgroundColor: "black"
     },
     {
       name: "delivery",
@@ -220,6 +221,7 @@ export default class Home extends Vue {
           background-color: white;
           @include flex;
           flex-direction: row;
+
           .description__wrapper {
             flex-direction: column;
             padding: $verticalPadding / 2 $horizontalPadding / 2;
@@ -285,6 +287,12 @@ export default class Home extends Vue {
                   height: 24px;
                 }
               }
+            }
+          }
+          &.location {
+            color: white;
+            .description__wrapper p {
+              color: white;
             }
           }
           &.pizzaOfTheMonth {

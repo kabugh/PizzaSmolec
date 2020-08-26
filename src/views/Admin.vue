@@ -24,9 +24,7 @@
               </button>
             </div>
           </div>
-          <div class="posts__container" v-else-if="!loading">
-            <p>Brak postów do wyświetlenia</p>
-          </div>
+          <p v-else-if="!loading">Brak postów do wyświetlenia</p>
           <LoadingComponent v-else />
         </div>
       </transition>
@@ -105,6 +103,9 @@ export default class Admin extends Vue {
       @include flex;
       width: 100%;
       text-align: center;
+      > p {
+        margin-top: $verticalPadding / 2;
+      }
       .posts__container {
         width: 100%;
         margin: $verticalPadding 0;
