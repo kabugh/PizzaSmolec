@@ -8,7 +8,8 @@
         <p data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
           Wystarczy, ze opublikujesz post na instagramie prezentujący twoją
           wizytę w Pizza Smolec, a następnie podasz link poniżej. Na koniec
-          miesiąca masz szansę na wylosowanie darmowej pizzy!
+          miesiąca masz szansę na wylosowanie darmowej pizzy! Informacje o
+          aktualnym losowaniu znajdziesz na naszym facebooku.
         </p>
         <form
           @submit.prevent="addPost"
@@ -57,7 +58,6 @@
           :url="post.link"
           :key="index"
           class="post"
-          :max-width="400"
           data-aos="fade-up"
           data-aos-duration="800"
           data-aos-delay="500"
@@ -212,7 +212,7 @@ export default class ClientsPhotos extends Vue {
       }
     }
     .posts__container {
-      width: 80%;
+      max-width: 90%;
       margin: $verticalPadding auto;
       display: grid;
       justify-content: center;
