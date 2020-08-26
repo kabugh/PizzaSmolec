@@ -395,16 +395,17 @@ export default class Home extends Vue {
         &:nth-of-type(odd) {
           .image__wrapper {
             &::after {
-              background-image: white;
+              background: rgb(255, 255, 255);
               background: -webkit-linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 1) 10%,
-                rgba(209, 216, 223, 0) 100%
+                270deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 1) 100%
               );
+
               background: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 1) 10%,
-                rgba(209, 216, 223, 0) 100%
+                270deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 1) 100%
               );
             }
             &.pizzaItem::after {
@@ -453,16 +454,16 @@ export default class Home extends Vue {
           .image__wrapper {
             &::after {
               margin-left: auto;
-              background-image: #ffffff;
+              background: rgb(255, 255, 255);
               background: -webkit-linear-gradient(
-                270deg,
-                rgba(255, 255, 255, 1) 10%,
-                rgba(209, 216, 223, 0) 100%
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 1) 100%
               );
               background: linear-gradient(
-                270deg,
-                rgba(255, 255, 255, 1) 10%,
-                rgba(209, 216, 223, 0) 100%
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 1) 100%
               );
             }
             &.pizzaItem::after {
