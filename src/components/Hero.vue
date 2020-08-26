@@ -217,15 +217,15 @@ export default class Hero extends Vue {
           direction: "left"
         },
         {
-          image: "pepper.png",
-          className: "pepper",
-          isMoving: true,
-          direction: "left"
-        },
-        {
           image: "basil1.png",
           className: "basil1",
           isMoving: false,
+          direction: "bottom"
+        },
+        {
+          image: "cotto.png",
+          className: "cotto",
+          isMoving: true,
           direction: "bottom"
         },
         {
@@ -308,12 +308,6 @@ export default class Hero extends Vue {
         {
           image: "tomato2.png",
           className: "tomato2",
-          isMoving: true,
-          direction: "bottom"
-        },
-        {
-          image: "basil1.png",
-          className: "basil1",
           isMoving: true,
           direction: "bottom"
         },
@@ -807,7 +801,7 @@ export default class Hero extends Vue {
       }
       &.basil1 {
         bottom: 0;
-        left: 10vw;
+        left: 50vw;
       }
       &.tomatoes {
         top: -3vh;
@@ -817,6 +811,11 @@ export default class Hero extends Vue {
         left: 0;
         top: 10%;
         max-width: 5vw;
+      }
+      &.cotto {
+        left: -3vh;
+        bottom: -1vh;
+        max-width: 25vw;
       }
       &.pepper1 {
         bottom: 0;
@@ -854,7 +853,7 @@ export default class Hero extends Vue {
       }
       &.desk {
         left: -3vh;
-        bottom: -3vh;
+        bottom: -4vh;
         max-width: 25vw;
       }
       &.rocket2 {
@@ -910,10 +909,12 @@ export default class Hero extends Vue {
         max-width: 8vw;
       }
 
-      @media (max-width: 767px) {
+      @media (max-width: 1279px) {
         &.basil4,
         &.pepper1,
-        &.olives {
+        &.olives,
+        &.mozarella1,
+        &.rocket3 {
           max-width: 40vw;
           max-height: 40vw;
           display: block;
@@ -925,8 +926,39 @@ export default class Hero extends Vue {
             max-height: 40vw;
             display: block;
             top: 50%;
-            left: -5vh;
+            left: -7vh;
           }
+          &.cotto,
+          &.desk {
+            max-width: 35vw;
+            max-height: 30vw;
+            display: block;
+            bottom: 0;
+          }
+          &.lamblettuce1 {
+            max-width: 25vw;
+            max-height: 30vw;
+            display: block;
+            top: 20%;
+          }
+        }
+        &.champ1,
+        &.champ2,
+        &.cheese1 {
+          display: block;
+          max-width: 25vw;
+          max-height: 40vw;
+          top: 60vh;
+        }
+
+        &.champ2 {
+          bottom: 10%;
+        }
+
+        &.mozarella1 {
+          max-width: 25vw;
+          top: 30%;
+          right: -10vw;
         }
 
         &.pepper1 {
@@ -942,8 +974,104 @@ export default class Hero extends Vue {
         &.olives {
           max-width: 10vw;
           left: 0;
-          bottom: 0;
-          top: auto;
+        }
+
+        &.tomato2 {
+          max-width: 25vw;
+          max-height: 25vw;
+          display: block;
+          left: 0;
+        }
+
+        &.mozarella2 {
+          max-width: 25vw;
+          max-height: 25vw;
+          display: block;
+          right: 0;
+          bottom: 1vh;
+        }
+        &.tomato3 {
+          max-width: 25vw;
+          max-height: 25vw;
+          display: block;
+          bottom: 20%;
+          right: -5vw;
+        }
+
+        &.rocket3 {
+          bottom: 20vh;
+          right: -8vw;
+        }
+        &.rocket1 {
+          max-width: 25vw;
+          max-height: 25vw;
+          display: block;
+          right: 0;
+          top: 20vh;
+        }
+        @media (min-width: 768px) {
+          &.olives {
+            top: 2vh;
+          }
+          &.champ1 {
+            display: none;
+          }
+          &.cotto {
+            max-width: 20vw;
+          }
+          &.mozarella1 {
+            top: 15%;
+          }
+          &.mozarella2 {
+            right: 30vw;
+            bottom: 10vh;
+          }
+          &.pepper1 {
+            max-width: 25vw;
+          }
+          &.lamblettuce1,
+          &.pepper {
+            display: none;
+          }
+          &.tomato2 {
+            max-width: 20vw;
+          }
+          &.lamblettuce2 {
+            display: block;
+            max-width: 25vw;
+            max-height: 25vh;
+            bottom: 0;
+            right: 10vw;
+            left: auto;
+          }
+          &.cheese1 {
+            left: 50vw;
+            bottom: 5vh;
+            top: auto;
+          }
+          &.rocket3 {
+            right: 0;
+          }
+        }
+        @media (min-width: 1024px) {
+          &.pepper2 {
+            display: block;
+          }
+          &.champ1,
+          &.champ2,
+          &.mozarella1,
+          &.mozarella2,
+          &.pepper1,
+          &.tomato2,
+          &.tomato3,
+          &.desk,
+          &.cheese1 {
+            max-width: 20vw;
+            max-height: 25vh;
+          }
+          &.olives {
+            max-width: 6vw;
+          }
         }
       }
     }
@@ -1226,11 +1354,16 @@ export default class Hero extends Vue {
     }
   }
 
-  @media (min-width: 1280px) and (min-height: 768px) {
+  @media (min-width: 1280px) and (min-height: 600px) {
     .moving__items {
       top: auto;
       .moving__item--container {
         display: block;
+        &.desk,
+        &.cotto {
+          bottom: 1vh;
+          max-width: 20vw;
+        }
       }
     }
   }
