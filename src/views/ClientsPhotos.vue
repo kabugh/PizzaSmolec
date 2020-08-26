@@ -140,11 +140,11 @@ export default class ClientsPhotos extends Vue {
   min-height: 70vh;
   overflow: hidden;
   .clientsPhotos__container {
-    padding: $verticalPadding * 3 $horizontalPadding / 2 $verticalPadding
-      $horizontalPadding / 2;
+    padding: $verticalPadding * 3 $horizontalPadding / 6 $verticalPadding
+      $horizontalPadding / 6;
     @include flex;
     .description__container {
-      padding: 0 $horizontalPadding;
+      padding: 0 $horizontalPadding / 3;
       text-align: center;
       @media (min-width: 1280px) {
         padding: 0 $horizontalPadding * 3 / 2;

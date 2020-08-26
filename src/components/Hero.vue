@@ -1366,6 +1366,9 @@ export default class Hero extends Vue {
         }
       }
     }
+    .hero__container .pizza__container .pizza {
+      max-height: 60%;
+    }
   }
 }
 </style>

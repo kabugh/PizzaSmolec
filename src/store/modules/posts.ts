@@ -50,6 +50,7 @@ const actions = {
       Vue.toasted.error("Podany post został już zgłoszony.");
       return;
     } else {
+      const currentTime = new Date();
       firebase
       .database()
       .ref("/posts/")
@@ -57,7 +58,8 @@ const actions = {
         commit("addPost", payload);
         const post = {
           ...payload,
-          id: response.key
+          id: response.key,
+          submitDate: currentTime
         }
         firebase
             .database()
