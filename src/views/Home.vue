@@ -159,8 +159,9 @@ export default class Home extends Vue {
       title: "Nasze menu na dowóz",
       subTitle: "Poznaj nasze smaki i zostań z nami na stałe.",
       paragraphs: [
-        "Tradycyjne receptury, przekazywane z pokolenia na pokolenie, staranny dobór składników i kadra kucharzy z pasją, pozwalającą częstować naszych klientów daniami o wspaniałym smaku.",
-        "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
+        "Z poszanowaniem dla Państwa, w naszym menu na dowóz, które proponujemy Państwu, poza pizzą znalazły się tylko wyselekcjonowane dania, które jesteśmy Państwu dostarczyć w tak krótkim czasie aby nie utraciły one swojego smaku i aromatu. Nie zależy nam na ilości sprzedanych „placków” pizzy, makaronów czy innych dań. Dla nas najważniejsza jest jakość i Państwa zadowolenie. Nasi kucharze i pizzaiolo są specjalistami w swym fachu i chcemy aby ich praca nie szła na marne. Mamy nadzieję, że będziecie mogli docenić ich kunszt.",
+        "Ze swojej strony prosimy o wyrozumiałość w sytuacjach losowych, gdyż na pewne jak  korki czy inne zdarzenia drogowe nie mamy wpływu.",
+        "Jednak prosimy pamiętać iż żadna potrawa w dostawie nie będzie tak smakować jak ta podana na miejscu. Zapraszamy więc serdecznie."
       ],
       image: "slide3.jpg",
       backgroundColor: "#cbba9e"

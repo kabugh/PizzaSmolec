@@ -13,7 +13,6 @@
     "contentful": "^7.14.6",
     "core-js": "^3.6.5",
     "firebase": "^7.19.0",
-    "gmap-vue": "^1.4.0",
     "gsap": "^3.4.2",
     "register-service-worker": "^1.7.1",
     "rellax": "^1.12.1",

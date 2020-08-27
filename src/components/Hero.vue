@@ -86,7 +86,7 @@
           <div class="details__container">
             <div
               class="item__container"
-              v-for="(item, index) in heroDescription"
+              v-for="item in heroDescription"
               :key="item.title"
               :class="{ clickable: item.action }"
             >
@@ -100,10 +100,13 @@
                 <h3 @click="item.action ? item.action() : ''">
                   {{ item.title }}
                 </h3>
+
                 <p v-if="item.description">{{ item.description }}</p>
-                <p v-else-if="!item.headItem">
-                  {{ pizzas[index].ingredients.join(", ") }}
-                </p>
+                <div class="ingredients__wrapper" v-else-if="!item.headItem">
+                  <p>
+                    {{ currentPizza.ingredients.join(", ") }}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -217,12 +220,6 @@ export default class Hero extends Vue {
           direction: "left"
         },
         {
-          image: "basil1.png",
-          className: "basil1",
-          isMoving: false,
-          direction: "bottom"
-        },
-        {
           image: "cotto.png",
           className: "cotto",
           isMoving: true,
@@ -266,13 +263,6 @@ export default class Hero extends Vue {
           direction: "bottom"
         },
         {
-          image: "basil4.png",
-          className: "basil4",
-          isMoving: true,
-          direction: "bottom",
-          parallaxSpeed: 10
-        },
-        {
           image: "pepper2.png",
           className: "pepper2",
           isMoving: true,
@@ -285,7 +275,14 @@ export default class Hero extends Vue {
       price: 27,
       image: "capresse.webp",
       alternativeImg: "capresse.png",
-      ingredients: ["sos pomidorowy", "mozzarella", "szynka"],
+      ingredients: [
+        "sos pomidorowy",
+        "świeży pomidor malinowy",
+        "świeża mozzarella",
+        "czarne oliwki",
+        "pesto",
+        "bazylia"
+      ],
       movingItems: [
         {
           image: "tomato1.png",
@@ -378,7 +375,14 @@ export default class Hero extends Vue {
       price: 30,
       image: "parma.webp",
       alternativeImg: "parma.png",
-      ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
+      ingredients: [
+        "sos pomidorowy",
+        "prossciutto crudo",
+        "rukola",
+        "pomidorki cherry",
+        "parmezan",
+        "sos balsamiczny"
+      ],
       movingItems: [
         {
           image: "olives.png",
@@ -457,11 +461,8 @@ export default class Hero extends Vue {
     {
       title: "Gdzie zjeść i gdzie dowozimy?",
       image: "pin.png",
-      headItem: true
-    },
-    {
-      title: "Składniki",
-      image: "list.png"
+      headItem: true,
+      action: () => this.$router.push("/dostawa")
     },
     {
       title: "Film",
@@ -474,6 +475,10 @@ export default class Hero extends Vue {
       image: "camera.png",
       description: "Zobacz jak jedzą nasi klienci",
       action: () => this.$router.push("/klienci")
+    },
+    {
+      title: "Składniki",
+      image: "list.png"
     }
   ];
 
@@ -1138,7 +1143,7 @@ export default class Hero extends Vue {
           display: none;
           .item__container {
             display: grid;
-            grid-template-columns: auto 1fr;
+            grid-template-columns: auto 20vw;
             column-gap: $horizontalPadding;
             align-items: center;
             justify-content: center;
@@ -1161,8 +1166,10 @@ export default class Hero extends Vue {
                 font-weight: 600;
                 display: inline-block;
               }
-              p {
-                font-size: 0.875rem;
+              .ingredients__wrapper {
+                p {
+                  font-size: 0.875rem;
+                }
               }
             }
           }
@@ -1281,7 +1288,7 @@ export default class Hero extends Vue {
               column-gap: $horizontalPadding / 6;
 
               &:first-of-type {
-                margin: $verticalPadding 0;
+                margin: $verticalPadding / 2 0;
               }
               img {
                 width: 48px;
@@ -1366,8 +1373,10 @@ export default class Hero extends Vue {
         }
       }
     }
-    .hero__container .pizza__container .pizza {
-      max-height: 60%;
+    @media (max-height: 750px) {
+      .static__container .logo__container {
+        height: 12vh;
+      }
     }
   }
 }
