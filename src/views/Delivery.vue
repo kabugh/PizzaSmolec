@@ -113,6 +113,7 @@ interface Threshold {
 export default class Delivery extends Vue {
   google = "";
   map = "";
+  polygons: any = [];
 
   inputAddress = "";
   passedAddress = "";
@@ -174,7 +175,7 @@ export default class Delivery extends Vue {
 
       const polygon1 = this.createPolygon(google, this.paths1, "#d4dd1f");
       const polygon2 = this.createPolygon(google, this.paths2, "#1098c6");
-      const polygons = [polygon1, polygon2];
+      this.polygons = [polygon1, polygon2];
 
       polygon1.setMap(map);
       polygon2.setMap(map);
@@ -191,7 +192,7 @@ export default class Delivery extends Vue {
       ]);
 
       autocomplete.addListener("place_changed", () =>
-        this.checkDelivery(google, map, autocomplete.getPlace(), polygons)
+        this.checkDelivery(google, map, autocomplete.getPlace(), this.polygons)
       );
 
       this.google = google;
@@ -241,7 +242,6 @@ export default class Delivery extends Vue {
   }
 
   checkDelivery(google: any, map: any, address: any, polygons: any[]) {
-    console.log(address);
     this.passedAddress = address.name;
     this.deliveryResult = false;
     this.insideFreeThreshold = false;
@@ -250,6 +250,10 @@ export default class Delivery extends Vue {
     const lng = address.geometry.location.lng();
     const point = new google.maps.LatLng(lat, lng);
 
+    this.evaluateDelivery(google, map, point, polygons);
+  }
+
+  evaluateDelivery(google: any, map: any, point: Position, polygons: any[]) {
     const insidePaidThreshold = google.maps.geometry.poly.containsLocation(
       point,
       polygons[1]
@@ -286,10 +290,21 @@ export default class Delivery extends Vue {
             lng: position.coords.longitude
           };
 
+          this.passedAddress = `lokalizacja: ${position.coords.latitude} ${position.coords.longitude}`;
+
           infoWindow.setPosition(pos);
           infoWindow.setContent("Lokalizacja znaleziona.");
           infoWindow.open(map);
-          map.setCenter(pos);
+
+          this.evaluateDelivery(
+            google,
+            map,
+            new google.maps.LatLng(
+              position.coords.latitude,
+              position.coords.longitude
+            ),
+            this.polygons
+          );
         },
         () => this.handleLocationError(true, infoWindow, map.getCenter(), map)
       );
