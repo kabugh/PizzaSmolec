@@ -2,7 +2,8 @@
   <nav
     class="navbar"
     :class="{
-      hiddenNavbar: !showNavbar && !isNavOpen
+      hiddenNavbar:
+        (!showNavbar && !isNavOpen) || ($route.path === '/' && !isNavOpen)
     }"
   >
     <div class="back__wrapper" v-if="$route.path !== '/'">
@@ -91,7 +92,14 @@ export default class TheNavbar extends Vue {
 </script>
 <style lang="scss">
 @import "@/assets/scss/global.scss";
-
+.fadeDown-enter-active,
+.fadeDown-leave-active {
+  transition: opacity 0.5s;
+}
+.fadeDown-enter,
+.fadeDown-leave-to {
+  opacity: 0;
+}
 .navbar {
   width: 100%;
   min-height: 6vh;

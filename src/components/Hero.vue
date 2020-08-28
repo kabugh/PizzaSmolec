@@ -58,11 +58,21 @@
           <a class="phone" href="tel:0048510400616">+48 510 400 616</a>
         </div>
         <nav class="static__nav">
-          <ul class="navItems">
-            <li class="item" v-for="item in navItems" :key="item.link">
-              <span @click="$router.push(item.link)">{{ item.title }}</span>
-            </li>
-          </ul>
+          <div class="navItem">
+            <span @click="$router.push('/menu')">Zamów - przejdź do menu</span>
+          </div>
+          <div class="burger__wrapper">
+            <div
+              class="nav-mobile"
+              id="nav-icon"
+              :class="{ open: isNavOpen }"
+              @click="isNavOpen = !isNavOpen"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
         </nav>
       </div>
     </div>
@@ -482,29 +492,6 @@ export default class Hero extends Vue {
     }
   ];
 
-  navItems: NavItem[] = [
-    {
-      title: "Menu",
-      link: "/menu"
-    },
-    {
-      title: "Nasza jakość",
-      link: "/nasza-jakosc"
-    },
-    {
-      title: "Nasze centrum",
-      link: "/nasze-centrum"
-    },
-    {
-      title: "Galeria",
-      link: "/galeria"
-    },
-    {
-      title: "Gdzie dowozimy?",
-      link: "/dostawa"
-    }
-  ];
-
   updatePizzaIndex() {
     if (this.activePizzaIndex < this.pizzas.length - 1) this.activePizzaIndex++;
     else this.activePizzaIndex = 0;
@@ -742,7 +729,6 @@ export default class Hero extends Vue {
       z-index: 1;
       .contact__details {
         @include flex;
-
         padding-bottom: $verticalPadding / 6;
         h2,
         a {
@@ -753,6 +739,7 @@ export default class Hero extends Vue {
           color: white;
           &.phone {
             color: $mainColor;
+            font-size: 1.5rem;
           }
         }
       }
@@ -810,7 +797,7 @@ export default class Hero extends Vue {
       }
       &.tomatoes {
         top: -3vh;
-        left: 50%;
+        left: 40%;
       }
       &.olives {
         left: 0;
@@ -1209,49 +1196,57 @@ export default class Hero extends Vue {
       position: absolute;
       padding: $verticalPadding / 4 $horizontalPadding / 4;
       width: 100%;
-      grid-template-columns: 30vw auto;
-
+      grid-template-columns: minmax(25vw, 1fr) 1fr;
+      .burger__container {
+        display: none;
+      }
+      .logo__container {
+        margin: 0;
+      }
       .nav__container {
         .contact__details {
           justify-content: flex-end;
-          h2:first-of-type {
-            margin-right: 20px;
+          h2 {
+            &:first-of-type {
+              margin-right: 20px;
+            }
           }
         }
         .static__nav {
-          .navItems {
+          @include flex;
+          flex-direction: row;
+          .navItem {
+            @include flex;
+            margin-right: $horizontalPadding / 2;
             padding: $verticalPadding / 6 $horizontalPadding / 8;
-            display: grid;
-            grid-template-columns: repeat(5, auto);
-            grid-template-rows: 1fr;
-            column-gap: $horizontalPadding / 8;
             background-color: rgba(0, 0, 0, 0.4);
-            .item {
-              font-size: 1.25rem;
-              line-height: 1.5;
-              color: white;
-              white-space: nowrap;
-              :hover {
-                cursor: pointer;
+            font-size: 1.25rem;
+            line-height: 1.5;
+            color: white;
+            white-space: nowrap;
+            :hover {
+              cursor: pointer;
+            }
+            span {
+              position: relative;
+              &:hover:after {
+                width: 100%;
               }
-              span {
-                position: relative;
-                &:hover:after {
-                  width: 100%;
-                }
-                &::after {
-                  content: "";
-                  display: block;
-                  position: absolute;
-                  left: 0px;
-                  background-color: white;
-                  height: 1px;
-                  margin-top: 2px;
-                  transition: width 0.5s cubic-bezier(0.76, 0, 0.24, 1);
-                  width: 0;
-                }
+              &::after {
+                content: "";
+                display: block;
+                position: absolute;
+                left: 0px;
+                background-color: white;
+                height: 1px;
+                margin-top: 2px;
+                transition: width 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+                width: 0;
               }
             }
+          }
+          .burger__wrapper {
+            @include flex;
           }
         }
       }
@@ -1346,7 +1341,10 @@ export default class Hero extends Vue {
 
   @media (min-width: 1024px) {
     .static__container {
-      grid-template-columns: 30vw auto;
+      width: 80%;
+      margin: 0 auto;
+      grid-template-columns: 0.5fr 1fr;
+      column-gap: $horizontalPadding / 2;
       .burger__container {
         display: none;
       }
@@ -1355,7 +1353,11 @@ export default class Hero extends Vue {
           flex-direction: row;
         }
         .static__nav {
-          display: block;
+          display: flex;
+          justify-content: flex-end;
+          .burger__wrapper {
+            display: flex;
+          }
         }
       }
     }
@@ -1371,6 +1373,16 @@ export default class Hero extends Vue {
           bottom: 1vh;
           max-width: 20vw;
         }
+      }
+    }
+    .static__container .nav__container .contact__details {
+      h2 {
+        a {
+          font-size: 1.5rem;
+        }
+      }
+      a.phone {
+        font-size: 1.75rem;
       }
     }
     @media (max-height: 750px) {
