@@ -69,17 +69,6 @@ const routes: Array<RouteConfig> = [
     }
   },
   {
-    path: "/galeria/:name",
-    name: "GalleryItem",
-    component: () =>
-      import(/* webpackChunkName: "galleryItem" */ "../views/GalleryItem.vue"),
-    props: true,
-    beforeEnter: overlayGuard,
-    meta: {
-      initialNav: true
-    }
-  },
-  {
     path: "/dostawa",
     name: "Delivery",
     component: () =>

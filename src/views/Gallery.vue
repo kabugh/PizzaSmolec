@@ -5,30 +5,22 @@
         Galeria
       </h1>
       <div class="gallery--items__container">
-        <PhotoGallery
-          v-if="galleries.length > 0"
-          :images="galleries"
-          routeComponentName="GalleryItem"
-          :displayImageOnly="false"
-          :zoomedPhotos="false"
-          :displayOverlay="true"
-        />
+        <Instagram />
       </div>
     </div>
   </section>
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-import PhotoGallery from "@/components/PhotoGallery.vue";
+import Instagram from "@/components/Instagram.vue";
 
 @Component({
   components: {
-    PhotoGallery
+    Instagram
   }
 })
 export default class Gallery extends Vue {
   async created() {
-    await this.$store.dispatch("fetchGalleries");
     this.overlayLoading = false;
   }
   get overlayLoading() {
@@ -39,9 +31,6 @@ export default class Gallery extends Vue {
   }
   get loading() {
     return this.$store.getters.loading;
-  }
-  get galleries() {
-    return this.$store.getters.galleries;
   }
 }
 </script>
