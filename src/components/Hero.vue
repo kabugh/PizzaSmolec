@@ -217,6 +217,91 @@ export default class Hero extends Vue {
 
   pizzas: Pizza[] = [
     {
+      title: "Parma",
+      price: 30,
+      image: "parma.webp",
+      alternativeImg: "parma.png",
+      ingredients: [
+        "sos pomidorowy",
+        "prossciutto crudo",
+        "rukola",
+        "pomidorki cherry",
+        "parmezan",
+        "sos balsamiczny"
+      ],
+      movingItems: [
+        {
+          image: "olives.png",
+          className: "olives",
+          isMoving: true,
+          direction: "left",
+          parallaxSpeed: 10
+        },
+        {
+          image: "cheese1.png",
+          className: "cheese1",
+          isMoving: true,
+          direction: "left"
+        },
+        {
+          image: "desk.png",
+          className: "desk",
+          isMoving: false,
+          direction: "bottom"
+        },
+        {
+          image: "pepper1.png",
+          className: "pepper1",
+          isMoving: false,
+          direction: "bottom"
+        },
+        {
+          image: "rocket1.png",
+          className: "rocket1",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "basil3.png",
+          className: "basil3",
+          isMoving: true,
+          direction: "bottom",
+          parallaxSpeed: 10
+        },
+        {
+          image: "basil4.png",
+          className: "basil4",
+          isMoving: true,
+          direction: "bottom",
+          parallaxSpeed: 10
+        },
+        {
+          image: "cheese2.png",
+          className: "cheese2",
+          isMoving: true,
+          direction: "bottom"
+        },
+        {
+          image: "rocket3.png",
+          className: "rocket3",
+          isMoving: true,
+          direction: "right"
+        },
+        {
+          image: "rocket2.png",
+          className: "rocket2",
+          isMoving: true,
+          direction: "right"
+        },
+        {
+          image: "pepper2.png",
+          className: "pepper2",
+          isMoving: true,
+          direction: "right"
+        }
+      ]
+    },
+    {
       title: "Prosciutto e fungi",
       price: 25,
       image: "funghi.webp",
@@ -377,91 +462,6 @@ export default class Hero extends Vue {
           className: "pepper2",
           isMoving: true,
           direction: "top"
-        }
-      ]
-    },
-    {
-      title: "Parma",
-      price: 30,
-      image: "parma.webp",
-      alternativeImg: "parma.png",
-      ingredients: [
-        "sos pomidorowy",
-        "prossciutto crudo",
-        "rukola",
-        "pomidorki cherry",
-        "parmezan",
-        "sos balsamiczny"
-      ],
-      movingItems: [
-        {
-          image: "olives.png",
-          className: "olives",
-          isMoving: true,
-          direction: "left",
-          parallaxSpeed: 10
-        },
-        {
-          image: "cheese1.png",
-          className: "cheese1",
-          isMoving: true,
-          direction: "left"
-        },
-        {
-          image: "desk.png",
-          className: "desk",
-          isMoving: false,
-          direction: "bottom"
-        },
-        {
-          image: "pepper1.png",
-          className: "pepper1",
-          isMoving: false,
-          direction: "bottom"
-        },
-        {
-          image: "rocket1.png",
-          className: "rocket1",
-          isMoving: true,
-          direction: "bottom"
-        },
-        {
-          image: "basil3.png",
-          className: "basil3",
-          isMoving: true,
-          direction: "bottom",
-          parallaxSpeed: 10
-        },
-        {
-          image: "basil4.png",
-          className: "basil4",
-          isMoving: true,
-          direction: "bottom",
-          parallaxSpeed: 10
-        },
-        {
-          image: "cheese2.png",
-          className: "cheese2",
-          isMoving: true,
-          direction: "bottom"
-        },
-        {
-          image: "rocket3.png",
-          className: "rocket3",
-          isMoving: true,
-          direction: "right"
-        },
-        {
-          image: "rocket2.png",
-          className: "rocket2",
-          isMoving: true,
-          direction: "right"
-        },
-        {
-          image: "pepper2.png",
-          className: "pepper2",
-          isMoving: true,
-          direction: "right"
         }
       ]
     }
@@ -1217,7 +1217,7 @@ export default class Hero extends Vue {
           flex-direction: row;
           .navItem {
             @include flex;
-            margin-right: $horizontalPadding / 2;
+            margin-right: $horizontalPadding / 4;
             padding: $verticalPadding / 6 $horizontalPadding / 8;
             background-color: rgba(0, 0, 0, 0.4);
             font-size: 1.25rem;
