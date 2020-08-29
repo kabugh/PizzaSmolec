@@ -3,7 +3,8 @@
     class="navbar"
     :class="{
       hiddenNavbar:
-        (!showNavbar && !isNavOpen) || ($route.path === '/' && !isNavOpen)
+        (!showNavbar && !isNavOpen && !$route.meta.initialNav) ||
+        ($route.path === '/' && !isNavOpen)
     }"
   >
     <div class="back__wrapper" v-if="$route.path !== '/'">

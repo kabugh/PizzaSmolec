@@ -380,6 +380,9 @@ export default class Home extends Vue {
       }
       .image__wrapper {
         grid-row: 1;
+        &.pizzaItem {
+          min-height: 45vh;
+        }
       }
       &:not(.informative__item) {
         .image__wrapper::after {

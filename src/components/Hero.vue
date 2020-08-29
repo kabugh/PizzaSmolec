@@ -59,9 +59,18 @@
         </div>
         <nav class="static__nav">
           <div class="navItem">
-            <button type="button" @click="$router.push('/menu')">
-              Zamów - przejdź do menu
-            </button>
+            <div class="button__container" @click="$router.push('/menu')">
+              <div class="deliveryIcon__wrapper">
+                <img
+                  src="@/assets/images/icons/delivery.png"
+                  class="delivery unselectable"
+                  alt="delivery"
+                />
+              </div>
+              <button type="button">
+                Zamów - przejdź do menu
+              </button>
+            </div>
           </div>
           <div class="burger__wrapper">
             <div
@@ -1244,16 +1253,39 @@ export default class Hero extends Vue {
                 width: 0;
               }
             }
+            .deliveryIcon__wrapper {
+              background-color: white;
+              @include flex;
+              padding: 4px;
 
-            button {
-              background-color: $mainColor;
-              color: $secondaryColor;
-              border: none;
-              padding: 14px 26px;
-              font-size: 1rem;
-              &:hover {
-                background-color: black;
-                color: white;
+              .delivery {
+                width: 64px;
+                height: 64px;
+              }
+            }
+            .button__container {
+              display: grid;
+              grid-template-columns: 0.4fr auto;
+              // max-width: max-content;
+              .price__tag {
+                @include flex;
+                background-color: $invertedColor;
+                color: $brandColor;
+
+                text-align: center;
+                font-weight: 700;
+                font-size: 0.875rem;
+              }
+              button {
+                background-color: $mainColor;
+                color: $secondaryColor;
+                border: none;
+                padding: 14px 26px;
+                font-size: 1rem;
+                &:hover {
+                  background-color: black;
+                  color: white;
+                }
               }
             }
           }
