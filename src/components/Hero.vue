@@ -59,7 +59,9 @@
         </div>
         <nav class="static__nav">
           <div class="navItem">
-            <span @click="$router.push('/menu')">Zamów - przejdź do menu</span>
+            <button type="button" @click="$router.push('/menu')">
+              Zamów - przejdź do menu
+            </button>
           </div>
           <div class="burger__wrapper">
             <div
@@ -218,7 +220,7 @@ export default class Hero extends Vue {
   pizzas: Pizza[] = [
     {
       title: "Parma",
-      price: 30,
+      price: 31,
       image: "parma.webp",
       alternativeImg: "parma.png",
       ingredients: [
@@ -303,7 +305,7 @@ export default class Hero extends Vue {
     },
     {
       title: "Prosciutto e fungi",
-      price: 25,
+      price: 26,
       image: "funghi.webp",
       alternativeImg: "funghi.png",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
@@ -367,7 +369,7 @@ export default class Hero extends Vue {
     },
     {
       title: "Capresse",
-      price: 27,
+      price: 28,
       image: "capresse.webp",
       alternativeImg: "capresse.png",
       ingredients: [
@@ -1118,7 +1120,7 @@ export default class Hero extends Vue {
               font-size: 0.875rem;
               padding: 8px 16px;
               &:hover {
-                background-color: $secondaryColor;
+                background-color: black;
                 color: white;
               }
             }
@@ -1218,8 +1220,6 @@ export default class Hero extends Vue {
           .navItem {
             @include flex;
             margin-right: $horizontalPadding / 4;
-            padding: $verticalPadding / 6 $horizontalPadding / 8;
-            background-color: rgba(0, 0, 0, 0.4);
             font-size: 1.25rem;
             line-height: 1.5;
             color: white;
@@ -1242,6 +1242,18 @@ export default class Hero extends Vue {
                 margin-top: 2px;
                 transition: width 0.5s cubic-bezier(0.76, 0, 0.24, 1);
                 width: 0;
+              }
+            }
+
+            button {
+              background-color: $mainColor;
+              color: $secondaryColor;
+              border: none;
+              padding: 14px 26px;
+              font-size: 1rem;
+              &:hover {
+                background-color: black;
+                color: white;
               }
             }
           }
@@ -1388,6 +1400,65 @@ export default class Hero extends Vue {
     @media (max-height: 750px) {
       .static__container .logo__container {
         height: 12vh;
+      }
+    }
+  }
+
+  @media (min-width: 1280px) and (max-height: 900px) {
+    .hero__container .pizza__container .base {
+      max-height: 110%;
+    }
+  }
+
+  @media (min-width: 1450px) and (max-height: 900px) {
+    .hero__container .pizza__container .base {
+      max-height: 120%;
+    }
+  }
+
+  @media (min-width: 1450px) and (min-height: 1024px) {
+    .hero__container .pizza__container .pizza {
+      max-height: 60%;
+    }
+  }
+
+  @media (min-width: 1650px) and (max-height: 1023px) {
+    .hero__container .pizza__container {
+      .base {
+        max-height: 100%;
+      }
+      .pizza {
+        max-width: 60%;
+        max-height: 70%;
+      }
+    }
+  }
+
+  @media (min-width: 1650px) and (min-height: 1024px) {
+    .hero__container .pizza__container {
+      .base {
+        max-height: 150%;
+      }
+      .pizza {
+        max-width: 65%;
+        max-height: 60%;
+      }
+    }
+  }
+  @media (min-width: 1850px) and (min-height: 1024px) {
+    .hero__container .pizza__container {
+      .pizza {
+        max-width: 60%;
+        max-height: 55%;
+      }
+    }
+  }
+
+  @media (min-width: 2000px) and (min-height: 1200px) {
+    .hero__container .pizza__container {
+      .pizza {
+        max-width: 60%;
+        max-height: 50%;
       }
     }
   }

@@ -2,7 +2,7 @@
   <section class="ourQuality topView">
     <div class="ourQuality__container container">
       <img
-        src="@/assets/images/introduction/pizza.jpg"
+        src="@/assets/images/quality.jpg"
         alt=""
         class="illustration unselectable"
         loading="lazy"
