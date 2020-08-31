@@ -1187,8 +1187,8 @@ export default class Hero extends Vue {
         max-height: 130%;
       }
       .pizza {
-        max-width: 95%;
-        max-height: 95%;
+        max-width: 98%;
+        max-height: 98%;
         margin-top: -1vh;
         z-index: 5;
         transform-origin: center;
