@@ -604,7 +604,7 @@ export default class Hero extends Vue {
     });
 
     const delay = 8;
-    tl.addPause(delay, () => this.changeAnimation());
+    // tl.addPause(delay, () => this.changeAnimation());
   }
 
   changeAnimation() {
@@ -1187,8 +1187,8 @@ export default class Hero extends Vue {
         max-height: 130%;
       }
       .pizza {
-        max-width: 90%;
-        max-height: 90%;
+        max-width: 95%;
+        max-height: 95%;
         margin-top: -1vh;
         z-index: 5;
         transform-origin: center;
@@ -1340,7 +1340,7 @@ export default class Hero extends Vue {
       .pizza__container .pizza {
         max-width: 70%;
         max-height: 80%;
-        padding-right: 2vh;
+        padding-right: 1vh;
       }
     }
   }
@@ -1481,7 +1481,7 @@ export default class Hero extends Vue {
     .hero__container .pizza__container {
       .pizza {
         max-width: 60%;
-        max-height: 55%;
+        max-height: 57.5%;
       }
     }
   }
