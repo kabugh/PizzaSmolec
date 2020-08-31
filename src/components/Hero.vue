@@ -604,7 +604,7 @@ export default class Hero extends Vue {
     });
 
     const delay = 8;
-    tl.addPause(delay, () => this.changeAnimation());
+    // tl.addPause(delay, () => this.changeAnimation());
   }
 
   changeAnimation() {
