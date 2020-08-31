@@ -229,7 +229,7 @@ export default class Hero extends Vue {
   pizzas: Pizza[] = [
     {
       title: "Parma",
-      price: 31,
+      price: 33,
       image: "parma.webp",
       alternativeImg: "parma.png",
       ingredients: [
@@ -314,7 +314,7 @@ export default class Hero extends Vue {
     },
     {
       title: "Prosciutto e fungi",
-      price: 26,
+      price: 28,
       image: "funghi.webp",
       alternativeImg: "funghi.png",
       ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
@@ -378,7 +378,7 @@ export default class Hero extends Vue {
     },
     {
       title: "Capresse",
-      price: 28,
+      price: 29,
       image: "capresse.webp",
       alternativeImg: "capresse.png",
       ingredients: [
@@ -1259,8 +1259,8 @@ export default class Hero extends Vue {
               padding: 4px;
 
               .delivery {
-                width: 64px;
-                height: 64px;
+                width: 56px;
+                height: 56px;
               }
             }
             .button__container {
@@ -1280,7 +1280,7 @@ export default class Hero extends Vue {
                 background-color: $mainColor;
                 color: $secondaryColor;
                 border: none;
-                padding: 14px 26px;
+                padding: 8px 26px;
                 font-size: 1rem;
                 &:hover {
                   background-color: black;
