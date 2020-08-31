@@ -3,7 +3,7 @@
     <div class="instagram__container">
       <div
         data-aos="fade-up"
-        data-aos-delay="300"
+        data-aos-delay="600"
         class="grid"
         id="instafeed"
       ></div>
@@ -13,7 +13,6 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import axios from "axios";
-import Instafeed from "instafeed.js";
 
 @Component
 export default class Instagram extends Vue {
@@ -32,11 +31,9 @@ export default class Instagram extends Vue {
     // eslint-disable-next-line no-undef
     const feed = new Instafeed({
       accessToken: token,
-      limit: 4,
+      limit: 16,
       template:
         '<a href="{{link}}" aria-label="instagram" class="post" target="_blank"><img class="image" alt="{{caption}}" src="{{image}}" /></a>'
-      // template:
-      // '<a href="{{link}}" target="_blank" class="post"><img class="image" src="{{image}} /></a>'
     });
     feed.run();
   }
@@ -54,11 +51,12 @@ export default class Instagram extends Vue {
 .instagram {
   width: 100%;
   min-height: 50vh;
+  overflow: hidden;
   .instagram__container {
     padding: $verticalPadding $horizontalPadding / 4;
     #instafeed {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
       grid-auto-rows: 1fr;
       grid-gap: 3vh;
       &::before {

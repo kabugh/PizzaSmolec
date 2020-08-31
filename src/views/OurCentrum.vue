@@ -21,6 +21,17 @@
             >
               {{ paragraph }}
             </p>
+            <a
+              v-if="item.link"
+              data-aos="fade-up"
+              data-aos-duration="800"
+              data-aos-delay="700"
+              class="outsideLink"
+              :href="item.link"
+              target="_blank"
+            >
+              Sprawdź nasze korty na wirtualnym spacerze w Google Maps.
+            </a>
           </div>
         </div>
         <div class="image__wrapper">
@@ -42,6 +53,7 @@ interface CentrumItem {
   subTitle?: string;
   paragraphs: string[];
   image: string;
+  link?: string;
 }
 
 @Component
@@ -64,7 +76,9 @@ export default class OurCentrum extends Vue {
         "Naszą misją jest, aby każdy czuł się jak u siebie w domu. Rodzina odgrywa niezwykle istotną rolę w życiu każdego człowieka. To wśród najbliższych nabywamy podstawową wiedzę i umiejętności niezbędne do funkcjonowania w rzeczywistości społecznej.",
         "Rodzice i krewni stają się przykładem dla dzieci, które, jak wiadomo nie od dziś, najszybciej uczą się poprzez obserwację i naśladownictwo dorosłych."
       ],
-      image: "centrum1.jpg"
+      image: "centrum1.jpg",
+      link:
+        "https://www.google.com/maps/place/Tenis+Planet/@51.0843931,16.9024075,3a,75y,200h,90t/data=!3m8!1e1!3m6!1sAF1QipPH3XVAa5qKD2k_xu4oAggtiH4eWjSwXgK4QOGE!2e10!3e11!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipPH3XVAa5qKD2k_xu4oAggtiH4eWjSwXgK4QOGE%3Dw224-h298-k-no-pi-0-ya159.24-ro0-fo100!7i9460!8i4730!4m14!1m6!3m5!1s0x470fc0f9e919d151:0x48e8bf5522f9947f!2sPizza+Smolec!8m2!3d51.0841!4d16.9017899!3m6!1s0x470fc1cc75301bf3:0x9bb18effdd36944!8m2!3d51.0841951!4d16.9021956!14m1!1BCgIgARICCAI"
     },
     {
       title: "Tenis i inne sporty to nasza rodzinna pasja",
@@ -126,10 +140,21 @@ export default class OurCentrum extends Vue {
             margin: 2vh 0;
             font-size: 1rem;
           }
-          p {
+          p,
+          a {
             color: #414141;
             font-size: 0.875rem;
             margin: 1vh 0;
+            span {
+              text-decoration: underline;
+              &:hover {
+                cursor: pointer;
+                color: black;
+              }
+            }
+          }
+          a {
+            font-size: 1rem;
           }
         }
       }
@@ -226,33 +251,6 @@ export default class OurCentrum extends Vue {
         left: 0;
         display: block;
       }
-      // image gradients
-      // &:nth-of-type(even) {
-      //   .image__wrapper {
-      //     &::after {
-      //       background: linear-gradient(
-      //         270deg,
-      //         rgba(201, 215, 231, 0),
-      //         rgba(201, 215, 231, 0) 70%,
-      //         rgba(201, 215, 231, 0.96) 95%,
-      //         white
-      //       );
-      //     }
-      //   }
-      // }
-      // &:nth-of-type(odd) {
-      //   .image__wrapper {
-      //     &::after {
-      //       background: linear-gradient(
-      //         90deg,
-      //         rgba(201, 215, 231, 0),
-      //         rgba(201, 215, 231, 0) 70%,
-      //         rgba(201, 215, 231, 0.96) 95%,
-      //         white
-      //       );
-      //     }
-      //   }
-      // }
     }
   }
 }
@@ -267,8 +265,12 @@ export default class OurCentrum extends Vue {
         h2 {
           font-size: 1.5rem;
         }
-        p {
+        p,
+        a {
           font-size: 1rem;
+        }
+        a {
+          font-size: 1.125rem;
         }
       }
     }
@@ -322,7 +324,8 @@ export default class OurCentrum extends Vue {
     h2 {
       font-size: 2.25rem;
     }
-    p {
+    p,
+    a {
       font-size: 1.25rem;
     }
   }

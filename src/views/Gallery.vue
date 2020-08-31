@@ -4,6 +4,12 @@
       <h1 data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
         Galeria
       </h1>
+      <h2 data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+        Zaobserwuj nas na Instagramie
+        <a href="https://www.instagram.com/tenis_planet/" target="_blank"
+          >@tenis_planet</a
+        >
+      </h2>
       <div class="gallery--items__container">
         <Instagram />
       </div>
@@ -41,12 +47,27 @@ export default class Gallery extends Vue {
   color: black;
   min-height: 70vh;
   .gallery__container {
-    padding: $verticalPadding * 2 $horizontalPadding / 2 $verticalPadding
+    padding: $verticalPadding * 3 $horizontalPadding / 2 $verticalPadding
       $horizontalPadding / 2;
     @include flex;
     > h1 {
       font-size: 1.75rem;
       font-weight: 700;
+    }
+    > h2 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-top: $verticalPadding / 2;
+      text-align: center;
+      a {
+        color: black;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+        &:hover {
+          color: $mainColor;
+          cursor: pointer;
+        }
+      }
     }
     .photoGallery .photoGallery__container {
       padding-left: 0;
