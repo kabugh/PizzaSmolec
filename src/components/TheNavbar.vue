@@ -8,8 +8,8 @@
     }"
   >
     <div class="back__wrapper" v-if="$route.path !== '/'">
-      <div class="arrow" @click="$router.go(-1)"></div>
-      <div class="back" @click="$router.go(-1)">Powrót</div>
+      <div class="arrow" @click="$router.push('/')"></div>
+      <div class="back" @click="$router.push('/')">Powrót</div>
     </div>
     <div class="back__wrapper" v-else></div>
     <div class="logo" v-scroll-to="'body'">
