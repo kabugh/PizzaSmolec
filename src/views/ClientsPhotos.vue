@@ -6,10 +6,15 @@
           Podziel się wizytą i wygraj darmową pizzę na koniec miesiąca.
         </h1>
         <p data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-          Wystarczy, ze opublikujesz post na instagramie prezentujący twoją
-          wizytę w Pizza Smolec, a następnie podasz link poniżej. Na koniec
-          miesiąca masz szansę na wylosowanie darmowej pizzy! Informacje o
-          aktualnym losowaniu znajdziesz na naszym facebooku.
+          Wystarczy, ze opublikujesz post na instagramie z hashtagiem
+          <a
+            href="https://www.instagram.com/explore/tags/tenisplanetsmolec/"
+            target="_blank"
+            >#TenisPlanetSmolec</a
+          >
+          prezentujący Twoją wizytę w Pizza Smolec, a następnie podasz link
+          poniżej. Na koniec miesiąca masz szansę na wylosowanie darmowej pizzy!
+          Informacje o aktualnym losowaniu znajdziesz na naszym facebooku.
         </p>
         <form
           @submit.prevent="addPost"
@@ -158,6 +163,11 @@ export default class ClientsPhotos extends Vue {
       }
       p {
         margin: $verticalPadding / 2 0;
+        a {
+          font-weight: bold;
+          text-decoration: none;
+          color: black;
+        }
       }
       form {
         width: 100%;

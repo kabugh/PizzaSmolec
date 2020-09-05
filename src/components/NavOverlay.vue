@@ -45,6 +45,10 @@ export default class NavOverlay extends Vue {
       link: "/menu"
     },
     {
+      title: "Klienci",
+      link: "/klienci"
+    },
+    {
       title: "Nasza jakość",
       link: "/nasza-jakosc"
     },
