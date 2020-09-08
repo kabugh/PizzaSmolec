@@ -52,7 +52,7 @@
                   target="_blank"
                 >
                   <img
-                    src="@/assets/images/skubacz1.png"
+                    src="@/assets/images/skubacz.png"
                     alt="icon"
                     class="unselectable"
                   />
@@ -202,12 +202,11 @@ export default class Home extends Vue {
       title: "Nasze menu na dowóz",
       subTitle: "Poznaj nasze smaki i zostań z nami na stałe.",
       paragraphs: [
-        "Z poszanowaniem dla Państwa, w naszym menu na dowóz, które proponujemy Państwu, poza pizzą znalazły się tylko wyselekcjonowane dania, które jesteśmy Państwu dostarczyć w tak krótkim czasie aby nie utraciły one swojego smaku i aromatu. Nie zależy nam na ilości sprzedanych „placków” pizzy, makaronów czy innych dań. Dla nas najważniejsza jest jakość i Państwa zadowolenie. Nasi kucharze i pizzaiolo są specjalistami w swym fachu i chcemy aby ich praca nie szła na marne. Mamy nadzieję, że będziecie mogli docenić ich kunszt.",
-        "Ze swojej strony prosimy o wyrozumiałość w sytuacjach losowych, gdyż na pewne jak  korki czy inne zdarzenia drogowe nie mamy wpływu.",
-        "Jednak prosimy pamiętać iż żadna potrawa w dostawie nie będzie tak smakować jak ta podana na miejscu. Zapraszamy więc serdecznie."
+        "Z poszanowaniem dla Państwa, w naszym menu na dowóz, poza pizzą znalazły się tylko wyselekcjonowane dania, które jesteśmy Państwu dostarczyć w tak krótkim czasie aby nie utraciły one swojego smaku i aromatu. Nie zależy nam na ilości, najważniejsza jest jakość i Państwa zadowolenie. Nasi kucharze i pizzaiolo są specjalistami w swym fachu i chcemy aby ich praca nie szła na marne. Mamy nadzieję, że będziecie mogli docenić ich kunszt.",
+        "Ze swojej strony prosimy o wyrozumiałość w sytuacjach losowych, gdyż na pewne jak korki czy inne zdarzenia drogowe nie mamy wpływu. Prosimy pamiętać iż żadna potrawa w dostawie nie będzie tak smakować jak ta podana na miejscu. Zapraszamy więc serdecznie."
       ],
       image: "slide3.jpg",
-      backgroundColor: "#cbba9e"
+      backgroundColor: "white"
     }
   ];
 
@@ -358,6 +357,9 @@ export default class Home extends Vue {
                   height: auto;
                   max-width: 100%;
                   max-height: 100%;
+                }
+                &:last-of-type {
+                  opacity: 0.75;
                 }
               }
             }
@@ -550,17 +552,17 @@ export default class Home extends Vue {
               );
             }
             &.delivery::after {
-              background: rgb(203, 186, 158);
+              background: rgb(255, 255, 255);
               background: -webkit-linear-gradient(
-                90deg,
-                rgba(203, 186, 158, 1) 0%,
-                rgba(255, 255, 255, 0) 100%
+                270deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 1) 100%
               );
-              background: rgb(203, 186, 158);
+
               background: linear-gradient(
-                90deg,
-                rgba(203, 186, 158, 1) 0%,
-                rgba(255, 255, 255, 0) 100%
+                270deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 1) 100%
               );
             }
           }
@@ -612,12 +614,12 @@ export default class Home extends Vue {
               background: -webkit-linear-gradient(
                 90deg,
                 rgba(255, 255, 255, 0) 0%,
-                rgba(203, 186, 158, 1) 100%
+                rgba(255, 255, 255, 1) 100%
               );
               background: linear-gradient(
                 90deg,
                 rgba(255, 255, 255, 0) 0%,
-                rgba(203, 186, 158, 1) 100%
+                rgba(255, 255, 255, 1) 100%
               );
             }
           }
