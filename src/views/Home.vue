@@ -35,6 +35,44 @@
                   />
                 </a>
               </div>
+              <p>Zobacz opinie o nas</p>
+              <div class="opinions__container">
+                <a
+                  href="https://www.pyszne.pl/menu/tenis-planet#opinie"
+                  target="_blank"
+                >
+                  <img
+                    src="@/assets/images/pyszne.png"
+                    alt="icon"
+                    class="unselectable"
+                  />
+                </a>
+                <a
+                  href="https://www.skubacz.pl/restauracja/tenis-planet-restauracja"
+                  target="_blank"
+                >
+                  <img
+                    src="@/assets/images/skubacz1.png"
+                    alt="icon"
+                    class="unselectable"
+                  />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="introduction__item clients" v-if="displayOnMobile">
+          <div class="description__container pizzaOfTheMonth">
+            <div class="description__wrapper">
+              <h1>Zdjęcia - jak jemy w Smolcu?</h1>
+              <h2>
+                Podziel się postem i zgarnij darmową pizzę
+              </h2>
+              <div class="button__container">
+                <button type="button" @click="$router.push('/klienci')">
+                  Zobacz więcej
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -115,6 +153,11 @@ export default class Home extends Vue {
     this.overlayLoading = false;
   }
 
+  get displayOnMobile() {
+    const mq = window.matchMedia("(max-width: 450px)");
+    return mq.matches;
+  }
+
   socialsItems = [
     {
       icon: "ig_black.png",
@@ -152,7 +195,7 @@ export default class Home extends Vue {
         "Zapraszamy do zamawiania naszej pizzy w dostawie, a w ofercie stacjonarnej również menu śniadań, lunchy i orzeźwiających selekcjonowanych piw."
       ],
       image: "slide2.jpg",
-      backgroundColor: "black"
+      backgroundColor: "#454545"
     },
     {
       name: "delivery",
@@ -212,7 +255,7 @@ export default class Home extends Vue {
         min-height: 30vh;
         display: grid;
         grid-template-columns: 1fr;
-        grid-template-rows: 0.4fr auto;
+        grid-template-rows: 0.7fr auto;
         justify-content: center;
         align-items: center;
         .description__container {
@@ -238,6 +281,9 @@ export default class Home extends Vue {
               color: #414141;
               font-size: 0.875rem;
               margin: 1vh 0;
+              &:last-of-type {
+                margin-top: 4vh;
+              }
             }
             .button__container {
               @include flex;
@@ -261,7 +307,8 @@ export default class Home extends Vue {
                 }
               }
             }
-            .socials__container {
+            .socials__container,
+            .opinions__container {
               @include flex;
               flex-direction: row;
               margin-top: $verticalPadding / 2;
@@ -269,13 +316,8 @@ export default class Home extends Vue {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                border-radius: 50%;
-                padding: 1vh;
-                transition: background-color 0.2s linear 0s;
                 margin: 0 10px;
-                &:hover {
-                  background-color: rgba(0, 0, 0, 0.1);
-                }
+                padding: 1vh;
                 &:first-of-type {
                   margin-left: -1vh;
                 }
@@ -289,6 +331,36 @@ export default class Home extends Vue {
                 }
               }
             }
+            .socials__container > a {
+              border-radius: 50%;
+              transition: background-color 0.2s linear 0s;
+              &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+              }
+            }
+            .opinions__container {
+              flex-direction: column;
+              padding: 0 $horizontalPadding / 8 $verticalPadding / 4
+                $horizontalPadding / 8;
+              display: grid;
+              grid-template-rows: repeat(2, auto);
+              row-gap: $verticalPadding / 4;
+              border-radius: auto;
+              transition: none;
+              &:hover {
+                background-color: transparent !important;
+              }
+              > a {
+                max-width: 60vw;
+                margin: 0 auto !important;
+                img {
+                  width: auto;
+                  height: auto;
+                  max-width: 100%;
+                  max-height: 100%;
+                }
+              }
+            }
           }
           &.location {
             color: white;
@@ -297,15 +369,42 @@ export default class Home extends Vue {
             }
           }
           &.pizzaOfTheMonth {
-            background-color: #575757;
+            background-color: #454545;
             color: white;
             p {
               color: white;
             }
           }
         }
-        &.greeting .description__container {
-          text-align: center;
+        &.greeting {
+          .description__container {
+            text-align: center;
+          }
+        }
+        &.clients {
+          min-height: auto;
+          .description__container .description__wrapper {
+            @include flex;
+            h1 {
+              font-size: 1.25rem;
+            }
+            h2 {
+              font-size: 0.875rem;
+            }
+            @media (min-width: 360px) {
+              h1 {
+                font-size: 1.5rem;
+              }
+              h2 {
+                font-size: 1rem;
+              }
+            }
+          }
+        }
+        @media (min-width: 450px) {
+          &.clients {
+            display: none;
+          }
         }
         .image__wrapper {
           grid-row: 1;
@@ -341,6 +440,18 @@ export default class Home extends Vue {
       min-height: auto;
       &.greeting .description__container {
         text-align: inherit;
+        .description__wrapper .opinions__container {
+          padding: 0;
+          grid-template-columns: repeat(2, 1fr);
+          grid-template-rows: 1fr;
+          column-gap: $horizontalPadding / 8;
+          max-height: 20vh;
+          justify-content: flex-start;
+          > a {
+            justify-content: flex-start;
+            max-width: 40vw;
+          }
+        }
       }
       &:nth-of-type(odd) {
         .description__container {
@@ -413,28 +524,28 @@ export default class Home extends Vue {
               );
             }
             &.pizzaItem::after {
-              background-image: #575757;
+              background-image: #454545;
               background: -webkit-linear-gradient(
-                270deg,
-                rgba(87, 87, 87, 1) 0%,
+                90deg,
+                rgba(69, 69, 69, 1) 0%,
                 rgba(255, 255, 255, 0) 20%
               );
               background: linear-gradient(
-                270deg,
-                rgba(87, 87, 87, 1) 0%,
+                90deg,
+                rgba(69, 69, 69, 1) 0%,
                 rgba(255, 255, 255, 0) 20%
               );
             }
             &.location::after {
-              background: rgb(0, 0, 0);
+              background-image: #454545;
               background: -webkit-linear-gradient(
                 90deg,
-                rgba(0, 0, 0, 1) 0%,
+                rgba(69, 69, 69, 1) 0%,
                 rgba(255, 255, 255, 0) 100%
               );
               background: linear-gradient(
                 90deg,
-                rgba(0, 0, 0, 1) 0%,
+                rgba(69, 69, 69, 1) 0%,
                 rgba(255, 255, 255, 0) 100%
               );
             }
@@ -471,40 +582,40 @@ export default class Home extends Vue {
               );
             }
             &.pizzaItem::after {
-              background: rgb(87, 87, 87);
+              background: #454545;
               background: -webkit-linear-gradient(
                 270deg,
-                rgba(87, 87, 87, 1) 0%,
+                rgba(69, 69, 69, 1) 0%,
                 rgba(255, 255, 255, 0) 20%
               );
               background: linear-gradient(
                 270deg,
-                rgba(87, 87, 87, 1) 0%,
+                rgba(69, 69, 69, 1) 0%,
                 rgba(255, 255, 255, 0) 20%
               );
             }
             &.location::after {
-              background: rgb(0, 0, 0);
+              background: #454545;
               background: -webkit-linear-gradient(
                 270deg,
-                rgba(0, 0, 0, 1) 0%,
-                rgba(255, 255, 255, 0) 100%
+                rgba(69, 69, 69, 1) 0%,
+                rgba(255, 255, 255, 0) 20%
               );
               background: linear-gradient(
                 270deg,
-                rgba(0, 0, 0, 1) 0%,
-                rgba(255, 255, 255, 0) 100%
+                rgba(69, 69, 69, 1) 0%,
+                rgba(255, 255, 255, 0) 20%
               );
             }
             &.delivery::after {
               background: rgb(255, 255, 255);
               background: -webkit-linear-gradient(
-                270deg,
+                90deg,
                 rgba(255, 255, 255, 0) 0%,
                 rgba(203, 186, 158, 1) 100%
               );
               background: linear-gradient(
-                270deg,
+                90deg,
                 rgba(255, 255, 255, 0) 0%,
                 rgba(203, 186, 158, 1) 100%
               );
@@ -520,6 +631,11 @@ export default class Home extends Vue {
         .description__wrapper {
           padding-top: $verticalPadding;
           padding-bottom: $verticalPadding;
+          .opinions__container {
+            > a {
+              max-width: 30vw;
+            }
+          }
         }
       }
     }
@@ -578,6 +694,12 @@ export default class Home extends Vue {
             font-size: 1.75rem;
           }
         }
+      }
+      &.greeting
+        .description__container
+        .description__wrapper
+        .opinions__container {
+        grid-template-columns: repeat(2, 15vw);
       }
     }
   }

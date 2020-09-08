@@ -12,7 +12,7 @@
       <div class="back" @click="$router.push('/')">Powrót</div>
     </div>
     <div class="back__wrapper" v-else></div>
-    <div class="logo" v-scroll-to="'body'">
+    <div class="logo" @click="$router.push('/')">
       <img src="@/assets/images/logo_white.png" alt="logo" />
     </div>
     <div class="burger__wrapper">
