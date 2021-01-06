@@ -10,7 +10,7 @@
   "dependencies": {
     "@types/vuelidate": "^0.7.13",
     "aos": "^2.3.4",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "contentful": "^7.14.6",
     "core-js": "^3.6.5",
     "firebase": "^7.19.0",
