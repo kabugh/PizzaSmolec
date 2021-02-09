@@ -54,7 +54,7 @@
           >
         </div>
         <div class="copyrights__container">
-          <p>&copy; 2020 Copyright Pizza Smolec. Wszelkie prawa zastrzeżone.</p>
+          <p>&copy; 2021 Copyright Pizza Smolec. Wszelkie prawa zastrzeżone.</p>
         </div>
       </div>
     </div>

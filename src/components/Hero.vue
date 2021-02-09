@@ -233,12 +233,12 @@ export default class Hero extends Vue {
       image: "parma.webp",
       alternativeImg: "parma.png",
       ingredients: [
-        "sos pomidorowy",
+        "pomidory San Marzano D.O.P.",
         "prossciutto crudo",
         "rukola",
         "pomidorki cherry",
-        "parmezan",
-        "sos balsamiczny"
+        "sos balsamiczny",
+        "parmezan D.O.P."
       ],
       movingItems: [
         {
@@ -313,11 +313,16 @@ export default class Hero extends Vue {
       ]
     },
     {
-      title: "Prosciutto e fungi",
+      title: "Prosciutto cotto e fungi",
       price: 28,
       image: "funghi.webp",
       alternativeImg: "funghi.png",
-      ingredients: ["sos pomidorowy", "mozzarella", "szynka", "pieczarki"],
+      ingredients: [
+        "pomidory San Marzano D.O.P.",
+        "mozzarella",
+        "szynka",
+        "pieczarki"
+      ],
       movingItems: [
         {
           image: "champ1.png",
@@ -378,11 +383,11 @@ export default class Hero extends Vue {
     },
     {
       title: "Capresse",
-      price: 29,
+      price: 30,
       image: "capresse.webp",
       alternativeImg: "capresse.png",
       ingredients: [
-        "sos pomidorowy",
+        "pomidory San Marzano D.O.P.",
         "świeży pomidor malinowy",
         "świeża mozzarella",
         "czarne oliwki",

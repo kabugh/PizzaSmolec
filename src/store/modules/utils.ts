@@ -8,7 +8,7 @@ const state = {
   socialsItems: [
     {
       icon: "ig.png",
-      link: "https://www.instagram.com/tenis_planet/"
+      link: "https://www.instagram.com/tenisplanetsmolec/"
     },
     {
       icon: "fb.png",

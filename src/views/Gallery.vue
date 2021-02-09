@@ -6,8 +6,8 @@
       </h1>
       <h2 data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
         Zaobserwuj nas na Instagramie
-        <a href="https://www.instagram.com/tenis_planet/" target="_blank"
-          >@tenis_planet</a
+        <a href="https://www.instagram.com/tenisplanetsmolec/" target="_blank"
+          >@tenisplanetsmolec</a
         >
       </h2>
       <div class="gallery--items__container">

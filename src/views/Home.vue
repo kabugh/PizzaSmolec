@@ -161,7 +161,7 @@ export default class Home extends Vue {
   socialsItems = [
     {
       icon: "ig_black.png",
-      link: "https://www.instagram.com/tenis_planet/"
+      link: "https://www.instagram.com/tenisplanetsmolec/"
     },
     {
       icon: "fb_black.png",
